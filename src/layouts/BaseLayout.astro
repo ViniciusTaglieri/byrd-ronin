@@ -63,7 +63,7 @@ const schemaOrg = JSON.stringify({
     <title>{title}</title>
 
     <!-- Schema.org -->
-    <script type="application/ld+json" set:html={schemaOrg} />
+    <script type="application/ld+json" is:inline set:html={schemaOrg} />
   </head>
   <body>
     <slot />

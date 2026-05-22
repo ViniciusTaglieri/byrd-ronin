@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { UpgradeIcon, EnemyIcon, ChaosIcon } from "./FeatureIcons";
 import { SwordSlash } from "./SwordSlash";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const features = [
+const features: Array<{ Icon: () => React.ReactElement; title: string; text: string }> = [
   {
     Icon: UpgradeIcon,
     title: "Upgrades",
@@ -47,7 +47,7 @@ function FeatureCard({
   title,
   text,
 }: {
-  Icon: () => JSX.Element;
+  Icon: () => React.ReactElement;
   title: string;
   text: string;
 }) {

@@ -413,16 +413,25 @@ p {
   gap: 8px;
 }
 
-.tag-list span {
+.tag-list span,
+.status-tag {
+  display: inline-block;
   padding: 8px 10px;
   border: 1px solid rgba(248, 250, 252, 0.22);
   border-radius: 4px;
   color: #eff8ff;
   background: rgba(5, 5, 5, 0.35);
   font-weight: 800;
+  transition: border-color 160ms ease, background 160ms ease;
 }
 
-dl {
+.status-tag:hover {
+  border-color: rgba(73, 194, 242, 0.5);
+  background: rgba(73, 194, 242, 0.08);
+}
+
+dl,
+.status-dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -438,6 +447,13 @@ dd {
   margin: 4px 0 0;
   color: white;
   font-weight: 800;
+}
+
+/* Alias da section-copy dentro do card */
+.status-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-heading {
@@ -787,9 +803,13 @@ dd {
   }
 
   dl,
-  .feature-grid,
-  .gameplay-grid {
+  .status-dl,
+  .feature-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gameplay-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .trailer-caption {
@@ -808,5 +828,31 @@ dd {
   .play-button::after {
     top: 17px;
     left: 27px;
+  }
+
+  /* Hero: personagem fica atrás do texto no mobile */
+  .hero-character img {
+    opacity: 0.35;
+  }
+
+  /* Mobile menu posicionamento */
+  .mobile-menu {
+    top: 88px;
+  }
+
+  /* Ajustes de botão fullwidth em CTAs mobile */
+  .hero-actions a,
+  .hero-actions button,
+  .status-meta a {
+    justify-content: center;
+  }
+}
+
+/* prefers-reduced-motion: desabilitar animações pesadas */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

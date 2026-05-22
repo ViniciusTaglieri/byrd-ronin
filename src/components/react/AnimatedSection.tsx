@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { ReactNode, ElementType } from "react";
 
 type Variant = "fadeUp" | "fadeIn" | "scaleIn" | "slideLeft";
 
@@ -10,7 +10,7 @@ interface Props {
   duration?: number;
   className?: string;
   amount?: number;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: ElementType;
 }
 
 const variants = {
@@ -41,7 +41,7 @@ export function AnimatedSection({
   amount = 0.2,
   tag = "div",
 }: Props) {
-  const MotionTag = motion[tag as keyof typeof motion] as typeof motion.div;
+  const MotionTag = motion.create(tag as ElementType);
 
   return (
     <MotionTag
@@ -68,7 +68,7 @@ interface StaggerProps {
   delayChildren?: number;
   className?: string;
   amount?: number;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: ElementType;
 }
 
 export function StaggerContainer({
@@ -79,7 +79,7 @@ export function StaggerContainer({
   amount = 0.15,
   tag = "div",
 }: StaggerProps) {
-  const MotionTag = motion[tag as keyof typeof motion] as typeof motion.div;
+  const MotionTag = motion.create(tag as ElementType);
 
   return (
     <MotionTag
@@ -107,7 +107,7 @@ interface StaggerItemProps {
   children: ReactNode;
   variant?: Variant;
   className?: string;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: ElementType;
 }
 
 export function StaggerItem({
@@ -116,7 +116,7 @@ export function StaggerItem({
   className,
   tag = "div",
 }: StaggerItemProps) {
-  const MotionTag = motion[tag as keyof typeof motion] as typeof motion.div;
+  const MotionTag = motion.create(tag as ElementType);
 
   return (
     <MotionTag
