@@ -2,12 +2,21 @@
 import { GAME } from "../consts";
 import { SteamButtonAnimated } from "./react/SteamButtonAnimated";
 import { StatusAnimations } from "./react/StatusAnimations";
+import { BambooDecor } from "./react/BambooDecor";
 ---
 
 <section id="status" class="status-section">
   <div class="container">
     <StatusAnimations client:visible>
       <div class="status-card">
+        <!-- Decoração de bambu no canto direito -->
+        <BambooDecor
+          side="right"
+          opacity={0.10}
+          style={{ position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)" }}
+          client:load
+        />
+
         <div class="status-copy">
           <p class="section-kicker">Available on Steam</p>
           <h2>Fast cuts, upgrades and bamboo-fueled chaos.</h2>
@@ -41,7 +50,7 @@ import { StatusAnimations } from "./react/StatusAnimations";
           </dl>
 
           <SteamButtonAnimated
-            label="Abrir na Steam"
+            label="JOGAR AGORA"
             event="steam_cta_strip_click"
             client:visible
           />
