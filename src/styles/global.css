@@ -226,6 +226,12 @@ a {
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
+/* Shimmer requer position relative */
+.steam-button--animated {
+  position: relative;
+  overflow: hidden;
+}
+
 .steam-button.primary {
   color: white;
   background: linear-gradient(180deg, #ff3b2e, var(--red));

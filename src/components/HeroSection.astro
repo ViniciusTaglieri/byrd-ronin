@@ -1,26 +1,19 @@
 ---
-import SteamButton from "./SteamButton.astro";
+import { HeroCopy, HeroCharacter, HeroParticles } from "./react/HeroAnimations";
 ---
 
 <section id="top" class="hero-section">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-shade" aria-hidden="true"></div>
+
+  <!-- Partículas pixel (client:load pois é above-the-fold) -->
+  <HeroParticles client:load />
+
   <div class="container hero-grid">
-    <div class="hero-copy">
-      <img class="hero-logo" src="/logo.png" alt="Byrd Ronin" width="460" height="258" />
-      <p class="availability">Available on Steam</p>
-      <h1>Slice Through Chaos. Become the Ronin.</h1>
-      <p class="hero-text">
-        Byrd Ronin is a fast-paced action roguelite where every cut, upgrade and enemy wave pushes your run deeper into bamboo-fueled chaos.
-      </p>
-      <div class="hero-actions">
-        <SteamButton event="steam_cta_hero_click" />
-        <a class="ghost-button" href="#trailer" data-event="trailer_play_click">Watch Trailer</a>
-      </div>
-      <p class="hero-proof">Action roguelite bamboo slasher - precise combat, fast runs, escalating pressure.</p>
-    </div>
-    <div class="hero-character" aria-hidden="true">
-      <img src="/personagem.png" alt="" width="1536" height="864" />
-    </div>
+    <!-- Copy com animações de entrada staggeradas -->
+    <HeroCopy client:load />
+
+    <!-- Personagem flutuante -->
+    <HeroCharacter client:load />
   </div>
 </section>
