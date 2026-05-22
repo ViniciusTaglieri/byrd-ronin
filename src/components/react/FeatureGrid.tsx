@@ -1,151 +1,100 @@
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { UpgradeIcon, EnemyIcon, ChaosIcon } from "./FeatureIcons";
-import { SwordSlash } from "./SwordSlash";
-import { BambooDecor } from "./BambooDecor";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const features: Array<{ Icon: () => React.ReactElement; title: string; text: string }> = [
+const features: Array<{
+  Icon: () => React.ReactElement;
+  title: string;
+  text: string;
+  iconColor: string;
+}> = [
   {
     Icon: UpgradeIcon,
     title: "Upgrades",
     text: "Monte sua run com upgrades que mudam como você corta, sobrevive e domina cada onda.",
+    iconColor: "text-gold",
   },
   {
     Icon: EnemyIcon,
     title: "Inimigos",
     text: "Enfrente inimigos agressivos que forçam movimento, timing e decisões rápidas.",
+    iconColor: "text-blue-light",
   },
   {
     Icon: ChaosIcon,
     title: "Caos",
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
+    iconColor: "text-red",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.15,
-    },
-  },
-};
+function BambooDivider() {
+  return (
+    <div className="flex items-center gap-4 my-8" aria-hidden="true">
+      <div className="flex-1 border-t border-bamboo/20" />
+      <div className="w-5 h-5 rounded-full bg-bamboo/20 border-2 border-bamboo/40 flex-none" />
+      <div className="flex-1 border-t border-bamboo/20" />
+    </div>
+  );
+}
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease },
-  },
-};
-
-function FeatureCard({
+function FeatureRow({
   Icon,
   title,
   text,
+  iconColor,
   index,
-}: {
-  Icon: () => React.ReactElement;
-  title: string;
-  text: string;
-  index: number;
-}) {
+}: (typeof features)[number] & { index: number }) {
   const isEven = index % 2 === 1;
 
   return (
     <motion.article
-      className={[
-        "border border-bamboo/20 rounded-lg bg-[rgba(13,26,15,0.5)] min-h-[310px] p-[26px]",
-        "lg:grid lg:gap-8 lg:items-start lg:min-h-0 lg:p-8",
-        isEven ? "lg:grid-cols-[1fr_auto]" : "lg:grid-cols-[auto_1fr]",
-      ].join(" ")}
-      variants={cardVariants}
+      className="bg-ink rounded-2xl overflow-hidden shadow-xl flex flex-col lg:flex-row"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.55, ease }}
       whileHover={{
         y: -4,
-        borderColor: "rgba(107,143,94,0.55)",
-        boxShadow: "4px 4px 0 rgba(107,143,94,0.45), 0 24px 48px rgba(0,0,0,0.4)",
+        boxShadow: "4px 4px 0 rgba(107,143,94,0.5), 0 32px 60px rgba(0,0,0,0.35)",
         transition: { duration: 0.2 },
       }}
     >
-      <motion.span
-        className={[
-          "inline-grid w-20 h-20 place-items-center mb-7 lg:mb-0 border border-bamboo/[0.35] rounded-lg text-gold bg-bamboo/[0.15]",
-          isEven ? "lg:order-2" : "",
-        ].join(" ")}
-        whileHover={{
-          rotate: [-5, 5, -3, 3, 0],
-          scale: 1.1,
-          transition: { duration: 0.4 },
-        }}
+      {/* Bloco ícone */}
+      <div
+        className={`bg-bamboo/10 p-12 flex items-center justify-center flex-none lg:w-80 ${isEven ? "lg:order-2" : "lg:order-1"}`}
       >
-        <Icon />
-      </motion.span>
-      <div className="flex flex-col gap-2.5">
-        <h3 className="mb-[14px] tracking-[0.04em]">{title}</h3>
-        <p className="text-muted text-[17px] m-0">{text}</p>
+        <motion.span
+          className={`flex items-center justify-center w-24 h-24 ${iconColor}`}
+          whileHover={{ scale: 1.12, rotate: 5 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Icon />
+        </motion.span>
+      </div>
+
+      {/* Bloco texto */}
+      <div
+        className={`p-10 flex flex-col justify-center gap-4 flex-1 ${isEven ? "lg:order-1" : "lg:order-2"}`}
+      >
+        <h3 className="font-display text-3xl text-white">{title}</h3>
+        <p className="text-muted text-base leading-relaxed">{text}</p>
       </div>
     </motion.article>
   );
 }
 
 export function FeatureGrid() {
-  const [slashActive, setSlashActive] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-
-  useEffect(() => {
-    if (hasTriggered) return;
-    const section = document.getElementById("features");
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasTriggered) {
-          setSlashActive(true);
-          setHasTriggered(true);
-          setTimeout(() => setSlashActive(false), 700);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [hasTriggered]);
-
   return (
-    <>
-      <SwordSlash trigger={slashActive} variant="horizontal" />
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "32px",
-          opacity: 0.15,
-        }}
-      >
-        <BambooDecor
-          side="left"
-          opacity={1}
-          style={{ transform: "rotate(90deg)", height: "56px" }}
-        />
-      </div>
-
-      <motion.div
-        className="grid grid-cols-3 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 gap-[22px] lg:grid-cols-1 lg:gap-8"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-      >
-        {features.map((f, i) => (
-          <FeatureCard key={f.title} {...f} index={i} />
-        ))}
-      </motion.div>
-    </>
+    <div className="flex flex-col">
+      {features.map((feature, i) => (
+        <React.Fragment key={feature.title}>
+          <FeatureRow {...feature} index={i} />
+          {i < features.length - 1 && <BambooDivider />}
+        </React.Fragment>
+      ))}
+    </div>
   );
 }

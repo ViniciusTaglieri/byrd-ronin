@@ -4,14 +4,16 @@ import { FeatureGrid } from "./react/FeatureGrid";
 
 <section
   id="features"
-  class="section-pad [background:linear-gradient(180deg,#091c2c,#050505)]"
+  class="bg-white py-24"
 >
-  <div class="w-[min(1160px,calc(100%_-_40px))] mx-auto">
-    <div class="max-w-[760px] mb-[42px]">
-      <p class="mb-3.5 text-blue-light font-display text-xl uppercase">
+  <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
+    <div class="max-w-2xl mb-14">
+      <p class="mb-3.5 text-bamboo font-display text-xl uppercase">
         Features
       </p>
-      <h2>Cada run pede timing mais afiado.</h2>
+      <h2 class="font-display text-4xl md:text-6xl xl:text-7xl text-ink leading-tight">
+        Cada run pede timing mais afiado.
+      </h2>
     </div>
     <FeatureGrid client:visible />
   </div>
