@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { UpgradeIcon, EnemyIcon, ChaosIcon } from "./FeatureIcons";
 import { SwordSlash } from "./SwordSlash";
+import { BambooDecor } from "./BambooDecor";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -53,13 +54,12 @@ function FeatureCard({
 }) {
   return (
     <motion.article
-      className="feature-card"
+      className="feature-card feature-card--alt"
       variants={cardVariants}
       whileHover={{
-        y: -6,
-        borderColor: "rgba(73,194,242,0.7)",
-        boxShadow:
-          "8px 8px 0 rgba(73,194,242,0.55), 0 24px 48px rgba(0,0,0,0.4)",
+        y: -4,
+        borderColor: "rgba(107,143,94,0.55)",
+        boxShadow: "4px 4px 0 rgba(107,143,94,0.45), 0 24px 48px rgba(0,0,0,0.4)",
         transition: { duration: 0.2 },
       }}
     >
@@ -73,8 +73,10 @@ function FeatureCard({
       >
         <Icon />
       </motion.span>
-      <h3>{title}</h3>
-      <p>{text}</p>
+      <div className="feature-card-body">
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </div>
     </motion.article>
   );
 }
@@ -83,7 +85,6 @@ export function FeatureGrid() {
   const [slashActive, setSlashActive] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
 
-  // Trigger do sword slash ao entrar em view pela primeira vez
   useEffect(() => {
     if (hasTriggered) return;
     const section = document.getElementById("features");
@@ -108,8 +109,12 @@ export function FeatureGrid() {
     <>
       <SwordSlash trigger={slashActive} variant="horizontal" />
 
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "32px", opacity: 0.15 }}>
+        <BambooDecor side="left" opacity={1} style={{ transform: "rotate(90deg)", height: "56px" }} />
+      </div>
+
       <motion.div
-        className="feature-grid"
+        className="feature-grid feature-grid--alt"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
