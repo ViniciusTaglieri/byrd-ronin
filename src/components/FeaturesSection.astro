@@ -1,37 +1,14 @@
 ---
-const features = [
-  {
-    icon: "UP",
-    title: "Upgrades",
-    text: "Build your run with upgrades that change how you slice, survive and dominate each wave.",
-  },
-  {
-    icon: "EN",
-    title: "Enemies",
-    text: "Face aggressive enemies that force movement, timing and fast decisions.",
-  },
-  {
-    icon: "CH",
-    title: "Chaos",
-    text: "Cut through bamboo, dodge pressure and keep momentum as the screen turns into controlled chaos.",
-  },
-];
+import { FeatureGrid } from "./react/FeatureGrid";
 ---
 
 <section id="features" class="features-section section-pad">
   <div class="container">
     <div class="section-heading">
       <p class="section-kicker">Features</p>
-      <h2>Every run asks for sharper timing.</h2>
+      <h2>Cada run pede timing mais afiado.</h2>
     </div>
-    <div class="feature-grid">
-      {features.map((feature) => (
-        <article class="feature-card">
-          <span class="feature-icon">{feature.icon}</span>
-          <h3>{feature.title}</h3>
-          <p>{feature.text}</p>
-        </article>
-      ))}
-    </div>
+
+    <FeatureGrid client:visible />
   </div>
 </section>

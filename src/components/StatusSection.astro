@@ -1,29 +1,52 @@
 ---
-import SteamButton from "./SteamButton.astro";
+import { GAME, STEAM_URL } from "../consts";
+import { SteamButtonAnimated } from "./react/SteamButtonAnimated";
+import { StatusAnimations } from "./react/StatusAnimations";
 ---
 
 <section id="status" class="status-section">
-  <div class="container status-card">
-    <div>
-      <p class="section-kicker">Available on Steam</p>
-      <h2>Fast cuts, upgrades and bamboo-fueled chaos.</h2>
-      <p>
-        Byrd Ronin mistura acao 2D intensa com controles precisos e ritmo acelerado. Avance destruindo tudo ate alcancar a cerejeira que guarda seu juramento.
-      </p>
-    </div>
-    <div class="status-meta">
-      <div class="tag-list" aria-label="Steam tags">
-        <span>Action Roguelite</span>
-        <span>Hack and Slash</span>
-        <span>Difícil</span>
-        <span>2D</span>
-        <span>Um jogador</span>
+  <div class="container">
+    <StatusAnimations client:visible>
+      <div class="status-card">
+        <div class="status-copy">
+          <p class="section-kicker">Available on Steam</p>
+          <h2>Fast cuts, upgrades and bamboo-fueled chaos.</h2>
+          <p>{GAME.descriptionShort}</p>
+        </div>
+
+        <div class="status-meta">
+          <div class="tag-list" aria-label="Steam tags">
+            {GAME.tags.map((tag) => (
+              <span class="status-tag">{tag}</span>
+            ))}
+          </div>
+
+          <dl class="status-dl">
+            <div>
+              <dt>Desenvolvedor</dt>
+              <dd>{GAME.developer}</dd>
+            </div>
+            <div>
+              <dt>Publisher</dt>
+              <dd>{GAME.publisher}</dd>
+            </div>
+            <div>
+              <dt>Lançamento</dt>
+              <dd>{GAME.releaseDate}</dd>
+            </div>
+            <div>
+              <dt>Preço</dt>
+              <dd>{GAME.price}</dd>
+            </div>
+          </dl>
+
+          <SteamButtonAnimated
+            label="Abrir na Steam"
+            event="steam_cta_strip_click"
+            client:visible
+          />
+        </div>
       </div>
-      <dl>
-        <div><dt>Studio</dt><dd>RDB's Studio</dd></div>
-        <div><dt>Release</dt><dd>8/abr./2026</dd></div>
-      </dl>
-      <SteamButton label="Open Steam Page" event="steam_cta_strip_click" />
-    </div>
+    </StatusAnimations>
   </div>
 </section>

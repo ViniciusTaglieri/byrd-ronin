@@ -583,7 +583,8 @@ dd {
   transform: scale(1.06);
 }
 
-.gameplay-thumb span {
+.gameplay-thumb span,
+.gameplay-label {
   position: absolute;
   top: 12px;
   left: 12px;

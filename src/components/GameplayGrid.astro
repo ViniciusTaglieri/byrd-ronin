@@ -1,28 +1,14 @@
 ---
-const clips = [
-  "Slash bamboo at full speed",
-  "Survive enemy pressure",
-  "Chain upgrades into stronger runs",
-  "Master the chaos",
-];
+import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
 <section id="gameplay" class="gameplay-section section-pad">
   <div class="container">
     <div class="section-heading centered">
-      <p class="section-kicker">See the Action</p>
-      <h2>Short gameplay beats built for quick decisions.</h2>
+      <p class="section-kicker">Veja a Ação</p>
+      <h2>Beats de gameplay para decisões rápidas.</h2>
     </div>
-    <div class="gameplay-grid">
-      {clips.map((clip, index) => (
-        <figure class="gameplay-card">
-          <div class="gameplay-thumb">
-            <img src={index % 2 === 0 ? "/page_bg_raw_gpt.png" : "/personagem.png"} alt="" width="836" height="470" loading="lazy" />
-            <span>{index + 1}</span>
-          </div>
-          <figcaption>{clip}</figcaption>
-        </figure>
-      ))}
-    </div>
+
+    <GameplayGridClient client:visible />
   </div>
 </section>
