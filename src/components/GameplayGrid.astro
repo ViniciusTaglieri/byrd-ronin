@@ -3,9 +3,11 @@ import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
 <section id="gameplay" class="section-pad bg-[#070b10]">
-  <div class="container">
+  <div class="w-[min(1160px,calc(100%_-_40px))] mx-auto">
     <div class="max-w-[760px] mx-auto text-center mb-[42px]">
-      <p class="section-kicker">Veja a Ação</p>
+      <p class="mb-3.5 text-blue-light font-display text-xl uppercase">
+        Veja a Ação
+      </p>
       <h2>Beats de gameplay para decisões rápidas.</h2>
     </div>
     <GameplayGridClient client:visible />

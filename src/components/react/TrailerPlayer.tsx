@@ -67,7 +67,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
 
               {youtubeId && (
                 <motion.button
-                  className="play-button"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88px] h-[88px] flex items-center justify-center border-4 border-white rounded-full bg-red shadow-[0_12px_0_#870707] cursor-pointer"
                   aria-label="Assistir trailer completo no YouTube"
                   onClick={() => setPlaying(true)}
                   animate={{ scale: [1, 1.1, 1] }}
@@ -81,10 +81,21 @@ export function TrailerPlayer({ youtubeId }: Props) {
                     backgroundColor: "#bfb52c",
                   }}
                   whileTap={{ scale: 0.9 }}
-                />
+                >
+                  <svg
+                    width="26"
+                    height="36"
+                    viewBox="0 0 26 36"
+                    fill="white"
+                    aria-hidden="true"
+                    style={{ marginLeft: "4px" }}
+                  >
+                    <polygon points="0,0 26,18 0,36" />
+                  </svg>
+                </motion.button>
               )}
 
-              <span className="trailer-caption">
+              <span className="absolute right-[18px] bottom-[18px] left-[18px] px-[14px] py-3 border border-white/[0.24] rounded-md text-white bg-black/[0.74] font-extrabold">
                 {youtubeId
                   ? "Clique para assistir o trailer completo"
                   : "Trailer de gameplay — Byrd Ronin"}

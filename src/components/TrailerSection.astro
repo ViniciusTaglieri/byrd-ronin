@@ -7,7 +7,7 @@ import { YOUTUBE_TRAILER_ID } from "../consts";
 <section id="trailer" class="relative section-pad bg-[#070b10]">
   <SectionWave position="top" color="#070b10" client:load />
 
-  <div class="container">
+  <div class="w-[min(1160px,calc(100%_-_40px))] mx-auto">
     <div
       class="grid grid-cols-[1.5fr_1fr] max-[980px]:grid-cols-1 gap-12 items-center"
     >
@@ -16,7 +16,9 @@ import { YOUTUBE_TRAILER_ID } from "../consts";
       </div>
 
       <div class="flex flex-col gap-5">
-        <p class="section-kicker">Assista ao Trailer</p>
+        <p class="mb-3.5 text-blue-light font-display text-xl uppercase">
+          Assista ao Trailer
+        </p>
         <h2 class="text-[clamp(32px,3.5vw,52px)]">
           Veja o ritmo da lâmina antes da sua primeira run.
         </h2>
@@ -28,7 +30,10 @@ import { YOUTUBE_TRAILER_ID } from "../consts";
           Em Byrd Ronin cada run tem seu próprio ritmo. O trailer captura o
           fluxo de combate que você vai dominar, run após run.
         </p>
-        <a class="ghost-button self-start" href="#gameplay">
+        <a
+          class="inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] hover:-translate-y-0.5 self-start"
+          href="#gameplay"
+        >
           Ver mais gameplay →
         </a>
       </div>

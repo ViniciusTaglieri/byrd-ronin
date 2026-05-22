@@ -6,7 +6,7 @@ import { BambooDecor } from "./react/BambooDecor";
 ---
 
 <section id="status" class="relative z-[5] -mt-[72px]">
-  <div class="container">
+  <div class="w-[min(1160px,calc(100%_-_40px))] mx-auto">
     <StatusAnimations client:visible>
       <div
         class="relative grid grid-cols-[1fr_0.92fr] max-[980px]:grid-cols-1 gap-[34px] p-[30px] max-[640px]:p-[22px] border border-bamboo/[0.35] rounded-2xl bg-gradient-to-br from-[rgba(13,26,15,0.97)] to-[rgba(11,18,16,0.97)] shadow-[4px_4px_0_rgba(107,143,94,0.45),0_32px_80px_rgba(0,0,0,0.5)] max-[640px]:shadow-[5px_5px_0_rgba(191,181,44,0.85)] overflow-hidden"
@@ -19,7 +19,9 @@ import { BambooDecor } from "./react/BambooDecor";
         />
 
         <div class="flex flex-col justify-center">
-          <p class="section-kicker">Available on Steam</p>
+          <p class="mb-3.5 text-blue-light font-display text-xl uppercase">
+            Available on Steam
+          </p>
           <h2>Fast cuts, upgrades and bamboo-fueled chaos.</h2>
           <p>{GAME.descriptionShort}</p>
         </div>

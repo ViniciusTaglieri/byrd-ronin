@@ -44,7 +44,7 @@ export function FinalCTAClient() {
     >
       <PixelParticles count={20} colors={["#bfb52c", "#6b8f5e", "#f8fafc"]} />
 
-      <div className="container relative z-[2]">
+      <div className="w-[min(1160px,calc(100%_-_40px))] mx-auto relative z-[2]">
         <div className="relative z-[2] grid grid-cols-2 max-[768px]:grid-cols-1 border border-bamboo/25 rounded-2xl overflow-hidden shadow-[4px_4px_0_rgba(107,143,94,0.3),0_40px_80px_rgba(0,0,0,0.6)]">
           {/* Left: background image with parallax */}
           <motion.div

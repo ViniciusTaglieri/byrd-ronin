@@ -89,8 +89,16 @@ export function NavbarClient() {
           aria-label="Main navigation"
         >
           {NAV_LINKS.map(({ href, label }) => (
-            <a key={href} href={href} className="nav-link">
+            <a
+              key={href}
+              href={href}
+              className="relative pb-0.5 text-[#dceefe] transition-colors duration-[160ms] hover:text-blue-light group"
+            >
               {label}
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-0.5 left-0 w-full h-[2px] bg-blue-light scale-x-0 origin-left transition-transform duration-[220ms] group-hover:scale-x-100"
+              />
             </a>
           ))}
         </nav>

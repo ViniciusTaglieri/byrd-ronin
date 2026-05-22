@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
+import { cva, type VariantProps } from "class-variance-authority";
 import { STEAM_URL } from "../../consts";
 import { SteamIcon } from "./SteamIcon";
 
-interface Props {
+const buttonVariants = cva(
+  "inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-transparent rounded-md font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] relative overflow-hidden",
+  {
+    variants: {
+      variant: {
+        primary:
+          "text-white bg-gradient-to-b from-[#ff3b2e] to-red shadow-[0_8px_0_#870707,0_18px_36px_rgba(242,19,19,0.32)]",
+        secondary: "text-black bg-gold",
+      },
+    },
+    defaultVariants: { variant: "primary" },
+  }
+);
+
+interface Props extends VariantProps<typeof buttonVariants> {
   label?: string;
-  variant?: "primary" | "secondary";
   event?: string;
   className?: string;
 }
@@ -23,7 +37,7 @@ export function SteamButtonAnimated({
       target="_blank"
       rel="noreferrer"
       data-event={event}
-      className={["steam-button", variant, "steam-button--animated", className]
+      className={[buttonVariants({ variant }), className]
         .filter(Boolean)
         .join(" ")}
       initial="rest"
@@ -48,9 +62,7 @@ export function SteamButtonAnimated({
         tap: {
           scale: 0.97,
           y: 3,
-          boxShadow: isPrimary
-            ? "0 4px 0 #870707"
-            : "0 3px 0 #7a740d",
+          boxShadow: isPrimary ? "0 4px 0 #870707" : "0 3px 0 #7a740d",
           transition: { duration: 0.08 },
         },
       }}

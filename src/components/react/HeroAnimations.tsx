@@ -31,15 +31,18 @@ export function HeroCopy() {
       initial="hidden"
       animate="visible"
     >
-      <motion.p variants={itemVariants} className="section-kicker">
+      <motion.p
+        variants={itemVariants}
+        className="mb-3.5 text-blue-light font-display text-xl uppercase"
+      >
         Available on Steam
       </motion.p>
 
       <motion.h1 variants={itemVariants}>
         Slice Through{" "}
-        <em className="hero-keyword">Chaos.</em>
+        <em className="text-gold italic">Chaos.</em>
         {" "}Become the{" "}
-        <em className="hero-keyword">Ronin.</em>
+        <em className="text-gold italic">Ronin.</em>
       </motion.h1>
 
       <motion.p
@@ -61,7 +64,7 @@ export function HeroCopy() {
           className="max-[640px]:w-full"
         />
         <motion.a
-          className="ghost-button max-[640px]:w-full max-[640px]:justify-center"
+          className="inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
           href="#trailer"
           data-event="trailer_play_click"
           whileHover={{ scale: 1.03, borderColor: "rgba(73,194,242,0.7)" }}
