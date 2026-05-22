@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { GAMEPLAY_CLIPS } from "../../consts";
+import { GAMEPLAY_CLIPS, type GameplayClip } from "../../consts";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Ratio nativo dos arquivos: 1170×658 = 585:329
 const VIDEO_RATIO = "585 / 329";
 
 const containerVariants = {
@@ -17,33 +16,26 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 32, scale: 0.96 },
+  hidden: { opacity: 0, y: 32, scale: 0.96, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
+    filter: "blur(0px)",
     transition: { duration: 0.55, ease },
   },
 };
 
-function GameplayCard({
-  src,
-  caption,
-  label,
-}: {
-  src: string;
-  caption: string;
-  label: string;
-}) {
+function GameplayCard({ src, title, context }: GameplayClip) {
   return (
     <motion.figure
       className="gameplay-card"
       variants={cardVariants}
       whileHover={{
         scale: 1.02,
-        borderColor: "rgba(73,194,242,0.7)",
+        borderColor: "rgba(107,143,94,0.55)",
         boxShadow:
-          "8px 8px 0 rgba(73,194,242,0.5), 0 24px 48px rgba(0,0,0,0.55)",
+          "4px 4px 0 rgba(107,143,94,0.45), 0 24px 48px rgba(0,0,0,0.55)",
         transition: { duration: 0.22 },
       }}
       style={{ margin: 0 }}
@@ -51,7 +43,6 @@ function GameplayCard({
       <div
         className="gameplay-thumb"
         style={{
-          /* Preserva o aspect ratio original do arquivo — sem corte */
           aspectRatio: VIDEO_RATIO,
           position: "relative",
           overflow: "hidden",
@@ -65,7 +56,6 @@ function GameplayCard({
           loop
           playsInline
           style={{
-            /* Ocupa 100% do container, preserva proporção, sem crop */
             width: "100%",
             height: "100%",
             objectFit: "contain",
@@ -74,12 +64,13 @@ function GameplayCard({
             filter: "saturate(1.1) brightness(0.9)",
           }}
         />
-
-        {/* Badge de número */}
-        <span className="gameplay-label">{label}</span>
+        <div className="gameplay-thumb-overlay" aria-hidden="true" />
       </div>
 
-      <figcaption className="gameplay-card-caption">{caption}</figcaption>
+      <figcaption className="gameplay-card-caption">
+        <span className="gameplay-caption-title">{title}</span>
+        <span className="gameplay-caption-context">{context}</span>
+      </figcaption>
     </motion.figure>
   );
 }
@@ -94,7 +85,7 @@ export function GameplayGridClient() {
       viewport={{ once: true, amount: 0.1 }}
     >
       {GAMEPLAY_CLIPS.map((clip) => (
-        <GameplayCard key={clip.label} {...clip} />
+        <GameplayCard key={clip.src} {...clip} />
       ))}
     </motion.div>
   );

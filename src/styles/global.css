@@ -695,53 +695,46 @@ dd {
   }
 }
 
-.gameplay-grid {
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .gameplay-card {
   overflow: hidden;
   margin: 0;
+  border: 1px solid rgba(107, 143, 94, 0.25);
+  border-radius: 8px;
+  background: rgba(13, 26, 15, 0.50);
 }
 
 .gameplay-thumb {
   position: relative;
-  /* aspect-ratio definido inline via React (preserva proporção do arquivo) */
   overflow: hidden;
   background: var(--panel);
 }
 
-/* Figcaption da gameplay */
+.gameplay-thumb-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 48%;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.70) 0%, transparent 100%);
+  pointer-events: none;
+}
+
 .gameplay-card-caption {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+}
+
+.gameplay-caption-title {
   color: white;
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3;
 }
 
-.gameplay-thumb span,
-.gameplay-label {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 2px solid white;
-  border-radius: 4px;
-  color: white;
-  background: var(--red);
-  font-family: var(--font-display);
-}
-
-.gameplay-card figcaption {
-  min-height: 82px;
-  padding: 16px;
-  color: white;
-  font-family: var(--font-display);
-  font-size: 20px;
+.gameplay-caption-context {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .final-cta {

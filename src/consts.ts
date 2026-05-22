@@ -23,16 +23,22 @@ export const GAME = {
     "O combate em Byrd Ronin é rápido, agressivo e recompensador. Saber o momento certo de atacar e contra-atacar é a única constante. Evolua a cada run, desbloqueando itens e habilidades — domine o fluxo de combate e encare o caos.",
 } as const;
 
+export interface GameplayClip {
+  src: string;
+  title: string;
+  context: string;
+}
+
 // Vídeos nativos: 1170×658px (ratio 585:329 ≈ 16:9)
-export const GAMEPLAY_CLIPS = [
+export const GAMEPLAY_CLIPS: GameplayClip[] = [
   {
     src: "/gameplay1.webm",
-    caption: "Slash bamboo at full speed",
-    label: "01",
+    title: "Cortes em alta velocidade",
+    context: "Cada swing elimina bambus e inimigos ao mesmo tempo — o ritmo não para.",
   },
   {
     src: "/gameplay2.webm",
-    caption: "Survive enemy pressure",
-    label: "02",
+    title: "Sobrevivendo à pressão inimiga",
+    context: "Inimigos avançam de todos os lados. Timing e posicionamento são tudo.",
   },
-] as const;
+];
