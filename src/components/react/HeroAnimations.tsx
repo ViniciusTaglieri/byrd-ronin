@@ -4,7 +4,6 @@ import { SteamButtonAnimated } from "./SteamButtonAnimated";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Variante de entrada staggerada para o copy
 const copyVariants = {
   hidden: {},
   visible: {
@@ -24,15 +23,6 @@ const itemVariants = {
   },
 };
 
-const logoVariants = {
-  hidden: { opacity: 0, scale: 0.82 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.65, ease },
-  },
-};
-
 export function HeroCopy() {
   return (
     <motion.div
@@ -41,33 +31,22 @@ export function HeroCopy() {
       initial="hidden"
       animate="visible"
     >
-      {/* Logo */}
-      <motion.img
-        variants={logoVariants}
-        className="hero-logo"
-        src="/logo.png"
-        alt="Byrd Ronin"
-        width="460"
-        height="258"
-      />
-
-      {/* Kicker */}
       <motion.p variants={itemVariants} className="availability">
         Available on Steam
       </motion.p>
 
-      {/* H1 */}
       <motion.h1 variants={itemVariants}>
-        Slice Through Chaos.<br />Become the Ronin.
+        Slice Through{" "}
+        <em className="hero-keyword">Chaos.</em>
+        {" "}Become the{" "}
+        <em className="hero-keyword">Ronin.</em>
       </motion.h1>
 
-      {/* Descrição */}
       <motion.p variants={itemVariants} className="hero-text">
         Byrd Ronin é um action roguelite onde cada corte, upgrade e onda de
         inimigos empurra sua run mais fundo no caos de bambu.
       </motion.p>
 
-      {/* Botões */}
       <motion.div variants={itemVariants} className="hero-actions">
         <SteamButtonAnimated
           label="JOGAR AGORA"
@@ -85,12 +64,6 @@ export function HeroCopy() {
           Assistir Trailer
         </motion.a>
       </motion.div>
-
-      {/* Proof */}
-      <motion.p variants={itemVariants} className="hero-proof">
-        Action roguelite bamboo slasher — combate preciso, runs rápidas,
-        pressão crescente.
-      </motion.p>
     </motion.div>
   );
 }
@@ -121,9 +94,5 @@ export function HeroCharacter() {
 }
 
 export function HeroParticles() {
-  return (
-    <PixelParticles
-      colors={["#49c2f2", "#bfb52c", "#f8fafc"]}
-    />
-  );
+  return <PixelParticles colors={["#49c2f2", "#bfb52c", "#f8fafc"]} />;
 }

@@ -373,8 +373,21 @@ p {
 
 .hero-text {
   max-width: 610px;
-  color: #eff8ff;
-  font-size: 21px;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.hero-keyword {
+  color: var(--gold);
+  font-style: italic;
+}
+
+@media (min-width: 981px) {
+  .hero-copy {
+    max-height: 45vh;
+    overflow: visible;
+  }
 }
 
 .hero-actions {

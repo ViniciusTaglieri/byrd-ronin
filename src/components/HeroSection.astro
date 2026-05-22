@@ -1,19 +1,24 @@
 ---
 import { HeroCopy, HeroCharacter, HeroParticles } from "./react/HeroAnimations";
+import { FallingLeaves } from "./react/FallingLeaves";
+import { SectionWave } from "./react/SectionWave";
 ---
 
 <section id="top" class="hero-section">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-shade" aria-hidden="true"></div>
 
-  <!-- Partículas pixel (client:load pois é above-the-fold) -->
+  <!-- Partículas pixel (above-the-fold) -->
   <HeroParticles client:load />
 
-  <div class="container hero-grid">
-    <!-- Copy com animações de entrada staggeradas -->
-    <HeroCopy client:load />
+  <!-- Folhas caindo (ambient) -->
+  <FallingLeaves mode="ambient" count={12} client:load />
 
-    <!-- Personagem flutuante -->
+  <div class="container hero-grid">
+    <HeroCopy client:load />
     <HeroCharacter client:load />
   </div>
+
+  <!-- Wave de transição para StatusSection -->
+  <SectionWave position="bottom" color="#0b1210" client:load />
 </section>
