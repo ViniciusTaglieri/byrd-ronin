@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
 import { SwordSlash } from "./SwordSlash";
+import { BambooDecor } from "./BambooDecor";
 
 const NAV_LINKS = [
   { href: "#status", label: "Status" },
@@ -21,7 +22,6 @@ export function NavbarClient() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Fechar menu ao clicar fora
   useEffect(() => {
     if (!menuOpen) return;
     const close = (e: MouseEvent) => {
@@ -51,11 +51,9 @@ export function NavbarClient() {
       <motion.header
         className="navbar"
         style={{
-          background: scrolled
-            ? "rgba(5,5,5,0.96)"
-            : "rgba(5,5,5,0.78)",
+          background: scrolled ? "rgba(11,18,16,0.99)" : undefined,
           boxShadow: scrolled
-            ? "0 4px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(73,194,242,0.08)"
+            ? "0 4px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(107,143,94,0.12)"
             : "0 24px 60px rgba(0,0,0,0.4)",
           transition: "background 300ms ease, box-shadow 300ms ease",
         }}
@@ -63,12 +61,21 @@ export function NavbarClient() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Logo */}
+        <BambooDecor
+          side="left"
+          opacity={0.18}
+          style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)" }}
+        />
+        <BambooDecor
+          side="right"
+          opacity={0.18}
+          style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}
+        />
+
         <a className="brand" href="#top" aria-label="Byrd Ronin home">
           <img src="/logo.png" alt="Byrd Ronin" width="192" height="108" />
         </a>
 
-        {/* Desktop nav links */}
         <nav className="nav-links" aria-label="Main navigation">
           {NAV_LINKS.map(({ href, label }) => (
             <a key={href} href={href} className="nav-link">
@@ -77,7 +84,6 @@ export function NavbarClient() {
           ))}
         </nav>
 
-        {/* Desktop CTA + Mobile hamburguer */}
         <div className="navbar-right">
           <SteamButtonAnimated
             label="JOGAR AGORA"
@@ -90,7 +96,6 @@ export function NavbarClient() {
             aria-expanded={menuOpen}
             onClick={handleMenuToggle}
           >
-            {/* Ícone katana pixel */}
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
               <motion.rect
                 x="4" y="7" width="20" height="2.5" rx="1" fill="currentColor"
@@ -114,7 +119,6 @@ export function NavbarClient() {
         </div>
       </motion.header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
