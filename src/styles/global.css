@@ -517,9 +517,20 @@ dd {
   text-align: center;
 }
 
-.trailer-section,
+.trailer-section {
+  position: relative;
+  background: #070b10;
+}
+
 .gameplay-section {
   background: #070b10;
+}
+
+.trailer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+  align-items: center;
 }
 
 .trailer-frame {
@@ -527,13 +538,36 @@ dd {
   width: 100%;
   overflow: hidden;
   padding: 0;
-  border: 4px solid var(--blue-light);
+  border: 1px solid rgba(107, 143, 94, 0.35);
   border-radius: 8px;
   background: var(--black);
   box-shadow:
-    10px 10px 0 rgba(191, 181, 44, 0.9),
+    4px 4px 0 rgba(191, 181, 44, 0.50),
     0 32px 80px rgba(0, 0, 0, 0.48);
   cursor: pointer;
+}
+
+.trailer-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trailer-copy h2 {
+  font-size: clamp(32px, 3.5vw, 52px);
+}
+
+.trailer-copy p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .trailer-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .trailer-frame img {
