@@ -16,6 +16,10 @@ export default {
         bamboo:       "#6b8f5e",
         earth:        "#8b6f47",
         mist:         "rgba(180,210,180,0.08)",
+        scarlet:      "#ff3b2e",
+        cream:        "#f4f9f4",
+        sky:          "#eaf4fb",
+        forest:       "#0d1a0f",
       },
       fontFamily: {
         display: ['"Pixelify Sans"', "system-ui", "sans-serif"],
