@@ -11,6 +11,9 @@
   --color-red: #f21313;
   --color-white: #f8fafc;
   --color-muted: #b8cadb;
+  --color-bamboo: #6b8f5e;
+  --color-earth:  #8b6f47;
+  --color-mist:   rgba(180, 210, 180, 0.08);
 
   --font-display: "Pixelify Sans", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -27,6 +30,9 @@
   --panel: #18181b;
   --white: #f8fafc;
   --muted: #b8cadb;
+  --bamboo: #6b8f5e;
+  --earth:  #8b6f47;
+  --mist:   rgba(180, 210, 180, 0.08);
   --border: rgba(248, 250, 252, 0.18);
   --font-display: "Pixelify Sans", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
