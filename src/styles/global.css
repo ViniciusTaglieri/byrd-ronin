@@ -1,3 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #050505;
+  --color-ink: #0b1220;
+  --color-panel: #18181b;
+  --color-blue-deep: #0367a6;
+  --color-blue: #0788d9;
+  --color-blue-light: #49c2f2;
+  --color-gold: #bfb52c;
+  --color-red: #f21313;
+  --color-white: #f8fafc;
+  --color-muted: #b8cadb;
+
+  --font-display: "Pixelify Sans", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
 :root {
   --blue-deep: #0367a6;
   --blue: #0788d9;
