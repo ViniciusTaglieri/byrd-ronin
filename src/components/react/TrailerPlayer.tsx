@@ -18,7 +18,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
       transition={{ duration: 0.6, delay: 0.15, ease }}
     >
       <motion.div
-        className="relative w-full overflow-hidden border border-bamboo/[0.35] rounded-lg bg-black shadow-[4px_4px_0_rgba(191,181,44,0.5),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
+        className="relative w-full overflow-hidden border border-bamboo/35 rounded-xl bg-black shadow-[4px_4px_0_rgba(191,181,44,0.5),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
         whileHover={{
           boxShadow:
             "10px 10px 0 rgba(191,181,44,0.9), 0 0 32px rgba(73,194,242,0.35), 0 32px 80px rgba(0,0,0,0.5)",
@@ -67,19 +67,12 @@ export function TrailerPlayer({ youtubeId }: Props) {
 
               {youtubeId && (
                 <motion.button
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88px] h-[88px] flex items-center justify-center border-4 border-white rounded-full bg-red shadow-[0_12px_0_#870707] cursor-pointer"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-22 h-22 flex items-center justify-center border-4 border-white rounded-full bg-red shadow-[0_12px_0_#870707] cursor-pointer"
                   aria-label="Assistir trailer completo no YouTube"
                   onClick={() => setPlaying(true)}
                   animate={{ scale: [1, 1.1, 1] }}
-                  transition={{
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  whileHover={{
-                    scale: 1.2,
-                    backgroundColor: "#bfb52c",
-                  }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  whileHover={{ scale: 1.2, backgroundColor: "#bfb52c" }}
                   whileTap={{ scale: 0.9 }}
                 >
                   <svg
@@ -95,7 +88,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
                 </motion.button>
               )}
 
-              <span className="absolute right-[18px] bottom-[18px] left-[18px] px-[14px] py-3 border border-white/[0.24] rounded-md text-white bg-black/[0.74] font-extrabold">
+              <span className="absolute right-4.5 bottom-4.5 left-4.5 px-3.5 py-3 border border-white/25 rounded-lg text-white bg-black/75 font-extrabold">
                 {youtubeId
                   ? "Clique para assistir o trailer completo"
                   : "Trailer de gameplay — Byrd Ronin"}
