@@ -23,6 +23,7 @@ export const GAME = {
     "O combate em Byrd Ronin é rápido, agressivo e recompensador. Saber o momento certo de atacar e contra-atacar é a única constante. Evolua a cada run, desbloqueando itens e habilidades — domine o fluxo de combate e encare o caos.",
 } as const;
 
+// Vídeos nativos: 1170×658px (ratio 585:329 ≈ 16:9)
 export const GAMEPLAY_CLIPS = [
   {
     src: "/gameplay1.webm",
@@ -33,15 +34,5 @@ export const GAMEPLAY_CLIPS = [
     src: "/gameplay2.webm",
     caption: "Survive enemy pressure",
     label: "02",
-  },
-  {
-    src: "/gameplay1.webm",
-    caption: "Chain upgrades into stronger runs",
-    label: "03",
-  },
-  {
-    src: "/gameplay2.webm",
-    caption: "Master the chaos",
-    label: "04",
   },
 ] as const;
