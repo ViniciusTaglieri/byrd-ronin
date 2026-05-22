@@ -4,29 +4,31 @@ import { SectionWave } from "./react/SectionWave";
 import { YOUTUBE_TRAILER_ID } from "../consts";
 ---
 
-<section id="trailer" class="trailer-section section-pad" style="position: relative;">
+<section id="trailer" class="relative section-pad bg-[#070b10]">
   <SectionWave position="top" color="#070b10" client:load />
 
   <div class="container">
-    <div class="trailer-grid">
-      <!-- Coluna esquerda: player -->
+    <div
+      class="grid grid-cols-[1.5fr_1fr] max-[980px]:grid-cols-1 gap-12 items-center"
+    >
       <div>
         <TrailerPlayer youtubeId={YOUTUBE_TRAILER_ID} client:visible />
       </div>
 
-      <!-- Coluna direita: texto -->
-      <div class="trailer-copy">
+      <div class="flex flex-col gap-5">
         <p class="section-kicker">Assista ao Trailer</p>
-        <h2>Veja o ritmo da lâmina antes da sua primeira run.</h2>
-        <p>
+        <h2 class="text-[clamp(32px,3.5vw,52px)]">
+          Veja o ritmo da lâmina antes da sua primeira run.
+        </h2>
+        <p class="text-muted text-[17px] leading-[1.7] m-0">
           Cortes rápidos, pressure constante de inimigos e um sistema de
           upgrades que muda tudo a cada rodada — é isso que o trailer mostra.
         </p>
-        <p>
+        <p class="text-muted text-[17px] leading-[1.7] m-0">
           Em Byrd Ronin cada run tem seu próprio ritmo. O trailer captura o
           fluxo de combate que você vai dominar, run após run.
         </p>
-        <a class="ghost-button" href="#gameplay" style="align-self: flex-start;">
+        <a class="ghost-button self-start" href="#gameplay">
           Ver mais gameplay →
         </a>
       </div>

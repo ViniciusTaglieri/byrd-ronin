@@ -1,8 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { FallingLeaves } from "./FallingLeaves";
 import { PixelParticles } from "./PixelParticles";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
-import { FallingLeaves } from "./FallingLeaves";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -40,25 +40,30 @@ export function FinalCTAClient() {
   return (
     <motion.section
       ref={ref}
-      className="final-cta"
-      style={{ position: "relative", overflow: "hidden" }}
+      className="relative overflow-hidden py-[80px]"
     >
       <PixelParticles count={20} colors={["#bfb52c", "#6b8f5e", "#f8fafc"]} />
 
-      <div className="container" style={{ position: "relative", zIndex: 2 }}>
-        <div className="final-cta-container">
+      <div className="container relative z-[2]">
+        <div className="relative z-[2] grid grid-cols-2 max-[768px]:grid-cols-1 border border-bamboo/25 rounded-2xl overflow-hidden shadow-[4px_4px_0_rgba(107,143,94,0.3),0_40px_80px_rgba(0,0,0,0.6)]">
           {/* Left: background image with parallax */}
           <motion.div
-            className="final-cta-image"
-            style={{ y: bgY }}
+            className="bg-cover bg-center min-h-[360px] max-[768px]:min-h-[200px]"
+            style={{
+              backgroundImage: "url('/final_cta_background 1.png')",
+              y: bgY,
+            }}
             aria-hidden="true"
           />
 
           {/* Right: content */}
-          <div className="final-cta-content" style={{ position: "relative", overflow: "hidden" }}>
+          <div
+            className="relative overflow-hidden flex flex-col justify-center gap-6 px-12 py-12 max-[768px]:px-6 max-[768px]:py-8 bg-gradient-to-br from-[rgba(13,26,15,0.98)] to-[rgba(11,18,16,0.96)]"
+          >
             <FallingLeaves mode="section" count={10} />
 
             <motion.h2
+              className="text-[clamp(32px,3.5vw,52px)] leading-none"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
@@ -68,6 +73,7 @@ export function FinalCTAClient() {
             </motion.h2>
 
             <motion.p
+              className="m-0"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}

@@ -29,7 +29,7 @@ const cardVariants = {
 function GameplayCard({ src, title, context }: GameplayClip) {
   return (
     <motion.figure
-      className="gameplay-card"
+      className="overflow-hidden m-0 border border-bamboo/25 rounded-lg bg-[rgba(13,26,15,0.5)]"
       variants={cardVariants}
       whileHover={{
         scale: 1.02,
@@ -38,16 +38,10 @@ function GameplayCard({ src, title, context }: GameplayClip) {
           "4px 4px 0 rgba(107,143,94,0.45), 0 24px 48px rgba(0,0,0,0.55)",
         transition: { duration: 0.22 },
       }}
-      style={{ margin: 0 }}
     >
       <div
-        className="gameplay-thumb"
-        style={{
-          aspectRatio: VIDEO_RATIO,
-          position: "relative",
-          overflow: "hidden",
-          background: "var(--panel)",
-        }}
+        className="relative overflow-hidden bg-panel"
+        style={{ aspectRatio: VIDEO_RATIO }}
       >
         <video
           src={src}
@@ -64,12 +58,17 @@ function GameplayCard({ src, title, context }: GameplayClip) {
             filter: "saturate(1.1) brightness(0.9)",
           }}
         />
-        <div className="gameplay-thumb-overlay" aria-hidden="true" />
+        <div
+          className="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
+          aria-hidden="true"
+        />
       </div>
 
-      <figcaption className="gameplay-card-caption">
-        <span className="gameplay-caption-title">{title}</span>
-        <span className="gameplay-caption-context">{context}</span>
+      <figcaption className="flex flex-col gap-1 px-4 py-[14px]">
+        <span className="text-white font-display text-[18px] leading-[1.3]">
+          {title}
+        </span>
+        <span className="text-muted text-[14px] leading-[1.5]">{context}</span>
       </figcaption>
     </motion.figure>
   );
@@ -78,7 +77,7 @@ function GameplayCard({ src, title, context }: GameplayClip) {
 export function GameplayGridClient() {
   return (
     <motion.div
-      className="gameplay-grid gameplay-grid--2col"
+      className="grid grid-cols-2 max-[640px]:grid-cols-1 gap-7"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

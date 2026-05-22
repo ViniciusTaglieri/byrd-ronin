@@ -18,7 +18,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
       transition={{ duration: 0.6, delay: 0.15, ease }}
     >
       <motion.div
-        className="trailer-frame"
+        className="relative w-full overflow-hidden border border-bamboo/[0.35] rounded-lg bg-black shadow-[4px_4px_0_rgba(191,181,44,0.5),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
         whileHover={{
           boxShadow:
             "10px 10px 0 rgba(191,181,44,0.9), 0 0 32px rgba(73,194,242,0.35), 0 32px 80px rgba(0,0,0,0.5)",
@@ -27,7 +27,6 @@ export function TrailerPlayer({ youtubeId }: Props) {
       >
         <AnimatePresence mode="wait">
           {playing && youtubeId ? (
-            /* YouTube embed */
             <motion.iframe
               key="youtube"
               src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
@@ -45,7 +44,6 @@ export function TrailerPlayer({ youtubeId }: Props) {
               transition={{ duration: 0.3 }}
             />
           ) : (
-            /* Vídeo local / thumbnail */
             <motion.div
               key="thumb"
               style={{ position: "relative", cursor: "pointer" }}
@@ -67,7 +65,6 @@ export function TrailerPlayer({ youtubeId }: Props) {
                 }}
               />
 
-              {/* Play button com pulse */}
               {youtubeId && (
                 <motion.button
                   className="play-button"
@@ -87,7 +84,6 @@ export function TrailerPlayer({ youtubeId }: Props) {
                 />
               )}
 
-              {/* Legenda */}
               <span className="trailer-caption">
                 {youtubeId
                   ? "Clique para assistir o trailer completo"

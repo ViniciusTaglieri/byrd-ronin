@@ -2,13 +2,15 @@
 import { FeatureGrid } from "./react/FeatureGrid";
 ---
 
-<section id="features" class="features-section section-pad">
+<section
+  id="features"
+  class="section-pad [background:linear-gradient(180deg,#091c2c,#050505)]"
+>
   <div class="container">
-    <div class="section-heading">
+    <div class="max-w-[760px] mb-[42px]">
       <p class="section-kicker">Features</p>
       <h2>Cada run pede timing mais afiado.</h2>
     </div>
-
     <FeatureGrid client:visible />
   </div>
 </section>

@@ -4,21 +4,28 @@ import { FallingLeaves } from "./react/FallingLeaves";
 import { SectionWave } from "./react/SectionWave";
 ---
 
-<section id="top" class="hero-section">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-shade" aria-hidden="true"></div>
+<section
+  id="top"
+  class="relative min-h-[760px] overflow-hidden pt-[142px] pb-[70px] max-[980px]:min-h-0 max-[980px]:pt-[124px]"
+>
+  <div
+    class="absolute inset-0 bg-[url('/page_bg_raw_gpt.png')] bg-center bg-cover"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-0 [background:linear-gradient(90deg,rgba(5,5,5,0.92)_0%,rgba(5,5,5,0.68)_42%,rgba(5,5,5,0.2)_100%),linear-gradient(180deg,rgba(5,5,5,0.2)_0%,rgba(5,5,5,0.88)_100%)]"
+    aria-hidden="true"
+  ></div>
 
-  <!-- Partículas pixel (above-the-fold) -->
   <HeroParticles client:load />
-
-  <!-- Folhas caindo (ambient) -->
   <FallingLeaves mode="ambient" count={12} client:load />
 
-  <div class="container hero-grid">
+  <div
+    class="container relative grid grid-cols-[minmax(0,1fr)_minmax(340px,0.9fr)] max-[980px]:grid-cols-1 items-center gap-[22px]"
+  >
     <HeroCopy client:load />
     <HeroCharacter client:load />
   </div>
 
-  <!-- Wave de transição para StatusSection -->
   <SectionWave position="bottom" color="#0b1210" client:load />
 </section>

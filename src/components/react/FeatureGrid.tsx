@@ -47,14 +47,22 @@ function FeatureCard({
   Icon,
   title,
   text,
+  index,
 }: {
   Icon: () => React.ReactElement;
   title: string;
   text: string;
+  index: number;
 }) {
+  const isEven = index % 2 === 1;
+
   return (
     <motion.article
-      className="feature-card feature-card--alt"
+      className={[
+        "border border-bamboo/20 rounded-lg bg-[rgba(13,26,15,0.5)] min-h-[310px] p-[26px]",
+        "lg:grid lg:gap-8 lg:items-start lg:min-h-0 lg:p-8",
+        isEven ? "lg:grid-cols-[1fr_auto]" : "lg:grid-cols-[auto_1fr]",
+      ].join(" ")}
       variants={cardVariants}
       whileHover={{
         y: -4,
@@ -64,7 +72,10 @@ function FeatureCard({
       }}
     >
       <motion.span
-        className="feature-icon"
+        className={[
+          "inline-grid w-20 h-20 place-items-center mb-7 lg:mb-0 border border-bamboo/[0.35] rounded-lg text-gold bg-bamboo/[0.15]",
+          isEven ? "lg:order-2" : "",
+        ].join(" ")}
         whileHover={{
           rotate: [-5, 5, -3, 3, 0],
           scale: 1.1,
@@ -73,9 +84,9 @@ function FeatureCard({
       >
         <Icon />
       </motion.span>
-      <div className="feature-card-body">
-        <h3>{title}</h3>
-        <p>{text}</p>
+      <div className="flex flex-col gap-2.5">
+        <h3 className="mb-[14px] tracking-[0.04em]">{title}</h3>
+        <p className="text-muted text-[17px] m-0">{text}</p>
       </div>
     </motion.article>
   );
@@ -109,19 +120,30 @@ export function FeatureGrid() {
     <>
       <SwordSlash trigger={slashActive} variant="horizontal" />
 
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "32px", opacity: 0.15 }}>
-        <BambooDecor side="left" opacity={1} style={{ transform: "rotate(90deg)", height: "56px" }} />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "32px",
+          opacity: 0.15,
+        }}
+      >
+        <BambooDecor
+          side="left"
+          opacity={1}
+          style={{ transform: "rotate(90deg)", height: "56px" }}
+        />
       </div>
 
       <motion.div
-        className="feature-grid feature-grid--alt"
+        className="grid grid-cols-3 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 gap-[22px] lg:grid-cols-1 lg:gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
       >
-        {features.map((f) => (
-          <FeatureCard key={f.title} {...f} />
+        {features.map((f, i) => (
+          <FeatureCard key={f.title} {...f} index={i} />
         ))}
       </motion.div>
     </>

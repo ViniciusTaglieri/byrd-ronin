@@ -49,11 +49,13 @@ export function NavbarClient() {
       <SwordSlash trigger={slashActive} variant="medium" />
 
       <motion.header
-        className="navbar"
+        className="fixed z-40 top-0 left-1/2 -translate-x-1/2 grid grid-cols-[auto_1fr_auto] max-[980px]:grid-cols-[auto_auto] items-center gap-7 max-[640px]:gap-3 w-[min(1180px,calc(100%-28px))] max-[640px]:w-[calc(100%-18px)] min-h-[72px] mt-3.5 px-3.5 max-[640px]:p-2 py-2.5 border border-bamboo/30 rounded-lg backdrop-blur-[12px] overflow-hidden"
         style={{
-          background: scrolled ? "rgba(11,18,16,0.99)" : undefined,
+          background: scrolled
+            ? "rgba(11,18,16,0.99)"
+            : "linear-gradient(135deg,#0d1a0f 0%,#0b1210 100%)",
           boxShadow: scrolled
-            ? "0 4px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(107,143,94,0.12)"
+            ? "0 4px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(107,143,94,0.12)"
             : "0 24px 60px rgba(0,0,0,0.4)",
           transition: "background 300ms ease, box-shadow 300ms ease",
         }}
@@ -72,11 +74,20 @@ export function NavbarClient() {
           style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}
         />
 
-        <a className="brand" href="#top" aria-label="Byrd Ronin home">
-          <img src="/logo.png" alt="Byrd Ronin" width="192" height="108" />
+        <a href="#top" aria-label="Byrd Ronin home">
+          <img
+            src="/logo.png"
+            alt="Byrd Ronin"
+            width="192"
+            height="108"
+            className="w-[118px] max-[640px]:w-[94px] h-auto"
+          />
         </a>
 
-        <nav className="nav-links" aria-label="Main navigation">
+        <nav
+          className="flex justify-center gap-[26px] text-[#dceefe] font-display text-[18px] tracking-[0.08em] max-[980px]:hidden"
+          aria-label="Main navigation"
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <a key={href} href={href} className="nav-link">
               {label}
@@ -84,14 +95,15 @@ export function NavbarClient() {
           ))}
         </nav>
 
-        <div className="navbar-right">
+        <div className="flex items-center gap-3">
           <SteamButtonAnimated
             label="JOGAR AGORA"
             event="steam_cta_navbar_click"
+            className="max-[640px]:!min-h-[42px] max-[640px]:!px-[11px] max-[640px]:!py-[10px] max-[640px]:!text-[14px]"
           />
 
           <button
-            className="hamburger"
+            className="hidden max-[980px]:flex items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-md text-white bg-transparent cursor-pointer transition-[border-color,background] duration-[160ms] hover:border-blue-light hover:bg-[rgba(73,194,242,0.08)]"
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}
             onClick={handleMenuToggle}
@@ -123,7 +135,7 @@ export function NavbarClient() {
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-            className="mobile-menu"
+            className="fixed top-[100px] max-[640px]:top-[88px] left-1/2 -translate-x-1/2 z-[39] flex flex-col gap-1 w-[min(1180px,calc(100%-28px))] p-4 border border-bamboo/[0.35] rounded-lg bg-[rgba(13,26,15,0.97)] backdrop-blur-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.6),4px_4px_0_rgba(107,143,94,0.35)]"
             role="navigation"
             aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -16 }}
@@ -135,7 +147,7 @@ export function NavbarClient() {
               <motion.a
                 key={href}
                 href={href}
-                className="mobile-link"
+                className="px-4 py-[14px] rounded-md text-[#dceefe] font-display text-[20px] transition-[background,color] duration-[160ms] hover:bg-[rgba(73,194,242,0.1)] hover:text-blue-light"
                 onClick={handleLinkClick}
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -144,10 +156,11 @@ export function NavbarClient() {
                 {label}
               </motion.a>
             ))}
-            <div className="mobile-cta">
+            <div className="mt-2 pt-3 border-t border-white/10">
               <SteamButtonAnimated
                 label="JOGAR AGORA"
                 event="steam_cta_mobile_click"
+                className="w-full !justify-center"
               />
             </div>
           </motion.div>
