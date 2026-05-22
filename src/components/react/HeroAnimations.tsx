@@ -38,16 +38,14 @@ export function HeroCopy() {
         Available on Steam
       </motion.p>
 
-      <motion.h1 variants={itemVariants}>
-        Slice Through{" "}
-        <em className="text-gold italic">Chaos.</em>
-        {" "}Become the{" "}
+      <motion.h1 variants={itemVariants} className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-[0.86] max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]">
+        Slice Through <em className="text-gold italic">Chaos.</em> Become the{" "}
         <em className="text-gold italic">Ronin.</em>
       </motion.h1>
 
       <motion.p
         variants={itemVariants}
-        className="max-w-[610px] text-muted text-[19px] leading-[1.7]"
+        className="max-w-2xl text-muted text-lg leading-relaxed"
       >
         Byrd Ronin é um action roguelite onde cada corte, upgrade e onda de
         inimigos empurra sua run mais fundo no caos de bambu.
@@ -64,7 +62,7 @@ export function HeroCopy() {
           className="max-[640px]:w-full"
         />
         <motion.a
-          className="inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
+          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
           href="#trailer"
           data-event="trailer_play_click"
           whileHover={{ scale: 1.03, borderColor: "rgba(73,194,242,0.7)" }}

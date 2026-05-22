@@ -4,12 +4,12 @@ import { STEAM_URL } from "../../consts";
 import { SteamIcon } from "./SteamIcon";
 
 const buttonVariants = cva(
-  "inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-transparent rounded-md font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] relative overflow-hidden",
+  "inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-transparent rounded-md font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 relative overflow-hidden",
   {
     variants: {
       variant: {
         primary:
-          "text-white bg-gradient-to-b from-[#ff3b2e] to-red shadow-[0_8px_0_#870707,0_18px_36px_rgba(242,19,19,0.32)]",
+          "text-white bg-linear-to-b from-scarlet to-red shadow-[0_8px_0_#870707,0_18px_36px_rgba(242,19,19,0.32)]",
         secondary: "text-black bg-gold",
       },
     },
@@ -37,9 +37,7 @@ export function SteamButtonAnimated({
       target="_blank"
       rel="noreferrer"
       data-event={event}
-      className={[buttonVariants({ variant }), className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[buttonVariants({ variant }), className].filter(Boolean).join(" ")}
       initial="rest"
       whileHover="hover"
       whileTap="tap"
