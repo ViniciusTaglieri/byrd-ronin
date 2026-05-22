@@ -62,7 +62,7 @@ export function HeroCopy() {
           className="max-[640px]:w-full"
         />
         <motion.a
-          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
+          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/30 rounded-md text-white bg-white/5 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
           href="#trailer"
           data-event="trailer_play_click"
           whileHover={{ scale: 1.03, borderColor: "rgba(73,194,242,0.7)" }}
