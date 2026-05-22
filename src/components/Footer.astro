@@ -2,15 +2,17 @@
 import { STEAM_URL } from "../consts";
 ---
 
-<footer class="footer">
+<footer class="footer footer-animated">
   <div class="container footer-grid">
     <img src="/logo.png" alt="Byrd Ronin" width="180" height="101" loading="lazy" />
+
     <nav aria-label="Footer navigation">
       <a href="#status">Status</a>
       <a href="#trailer">Trailer</a>
       <a href="#features">Features</a>
       <a href="#gameplay">Gameplay</a>
     </nav>
+
     <div class="footer-meta">
       <a href={STEAM_URL} target="_blank" rel="noreferrer">Steam Page</a>
       <span>RDB's Studio</span>
@@ -18,3 +20,30 @@ import { STEAM_URL } from "../consts";
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-animated {
+    animation: footerFade 0.6s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+
+  @keyframes footerFade {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fallback para browsers sem animation-timeline */
+  @supports not (animation-timeline: view()) {
+    .footer-animated {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
