@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { STEAM_URL } from "../../consts";
+import { SteamIcon } from "./SteamIcon";
 
 interface Props {
   label?: string;
@@ -54,7 +55,7 @@ export function SteamButtonAnimated({
         },
       }}
     >
-      <span className="steam-mark">STEAM</span>
+      <SteamIcon size={18} />
       <span>{label}</span>
 
       {/* Shimmer overlay */}
