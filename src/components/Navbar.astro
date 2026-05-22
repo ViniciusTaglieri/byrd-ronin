@@ -1,16 +1,10 @@
 ---
-import SteamButton from "./SteamButton.astro";
+import { NavbarClient } from "./react/NavbarClient";
+import { ScrollProgressBar } from "./react/ScrollProgressBar";
 ---
 
-<header class="navbar">
-  <a class="brand" href="#top" aria-label="Byrd Ronin home">
-    <img src="/logo.png" alt="Byrd Ronin" width="192" height="108" />
-  </a>
-  <nav class="nav-links" aria-label="Main navigation">
-    <a href="#status">Status</a>
-    <a href="#trailer">Trailer</a>
-    <a href="#features">Features</a>
-    <a href="#gameplay">Gameplay</a>
-  </nav>
-  <SteamButton event="steam_cta_navbar_click" />
-</header>
+<!-- Barra de progresso de scroll -->
+<ScrollProgressBar client:load />
+
+<!-- Navbar controlada pelo React -->
+<NavbarClient client:load />
