@@ -1,0 +1,29 @@
+---
+import SteamButton from "./SteamButton.astro";
+---
+
+<section id="status" class="status-section">
+  <div class="container status-card">
+    <div>
+      <p class="section-kicker">Available on Steam</p>
+      <h2>Fast cuts, upgrades and bamboo-fueled chaos.</h2>
+      <p>
+        Byrd Ronin mistura acao 2D intensa com controles precisos e ritmo acelerado. Avance destruindo tudo ate alcancar a cerejeira que guarda seu juramento.
+      </p>
+    </div>
+    <div class="status-meta">
+      <div class="tag-list" aria-label="Steam tags">
+        <span>Action Roguelite</span>
+        <span>Hack and Slash</span>
+        <span>Difícil</span>
+        <span>2D</span>
+        <span>Um jogador</span>
+      </div>
+      <dl>
+        <div><dt>Studio</dt><dd>RDB's Studio</dd></div>
+        <div><dt>Release</dt><dd>8/abr./2026</dd></div>
+      </dl>
+      <SteamButton label="Open Steam Page" event="steam_cta_strip_click" />
+    </div>
+  </div>
+</section>

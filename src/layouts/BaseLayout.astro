@@ -1,0 +1,28 @@
+---
+const {
+  title = "Byrd Ronin - Action Roguelite on Steam",
+  description = "Slice through bamboo, survive enemy waves and master chaotic roguelite runs in Byrd Ronin. Wishlist now on Steam.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Fast cuts, upgrades, enemies and chaos. Wishlist Byrd Ronin on Steam." />
+    <meta property="og:image" content="/page_bg_raw_gpt.png" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Pixelify+Sans:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

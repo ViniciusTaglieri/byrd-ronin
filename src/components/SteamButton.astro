@@ -1,0 +1,14 @@
+---
+import { STEAM_URL } from "../consts";
+
+const {
+  label = "JOGAR AGORA",
+  variant = "primary",
+  event = "steam_cta_click",
+} = Astro.props;
+---
+
+<a class:list={["steam-button", variant]} href={STEAM_URL} target="_blank" rel="noreferrer" data-event={event}>
+  <span class="steam-mark">STEAM</span>
+  <span>{label}</span>
+</a>
