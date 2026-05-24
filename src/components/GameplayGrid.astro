@@ -2,8 +2,10 @@
 import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
-<section id="gameplay" class="bg-ink py-24 border-t border-bamboo/15">
+<section id="gameplay" class="bg-black py-24">
   <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
+
+    <!-- Header -->
     <div class="max-w-2xl mx-auto text-center mb-10">
       <p class="mb-3.5 text-bamboo font-display text-xl uppercase">
         Veja a Ação
@@ -12,6 +14,27 @@ import { GameplayGridClient } from "./react/GameplayGridClient";
         Beats de gameplay para decisões rápidas.
       </h2>
     </div>
+
+    <!-- Intro text block -->
+    <div class="max-w-3xl mx-auto text-center mb-16 flex flex-col gap-4">
+      <p class="text-muted text-base leading-relaxed">
+        O combate em Byrd Ronin é rápido, agressivo e recompensador.
+        Sobreviver significa atacar e contra-atacar no momento certo, desviar com precisão e manter o fluxo do combate que é tão importante quanto causar dano.
+      </p>
+      <p class="text-muted text-base leading-relaxed">
+        Seu combo cresce a medida que o caos se intensifica, seguir no controle é o único caminho, pois, sem ele é o mesmo que perder a run.
+      </p>
+    </div>
+
+    <!-- Clips -->
     <GameplayGridClient client:visible />
+
+    <!-- Closing statement -->
+    <div class="mt-16 pt-10 border-t border-bamboo/20 text-center">
+      <p class="font-display text-lg md:text-2xl text-bamboo italic">
+        Mesmo ao falhar, você volta mais forte — como um verdadeiro Ronin.
+      </p>
+    </div>
+
   </div>
 </section>
