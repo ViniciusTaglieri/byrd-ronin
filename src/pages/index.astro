@@ -2,10 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import HeroSection from "../components/HeroSection.astro";
-import StatusSection from "../components/StatusSection.astro";
+import SteamStatusBadge from "../components/SteamStatusBadge.astro";
 import TrailerSection from "../components/TrailerSection.astro";
 import FeaturesSection from "../components/FeaturesSection.astro";
 import GameplayGrid from "../components/GameplayGrid.astro";
+import RoninQuote from "../components/RoninQuote.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import Footer from "../components/Footer.astro";
 ---
@@ -13,11 +14,14 @@ import Footer from "../components/Footer.astro";
 <BaseLayout>
   <Navbar />
   <main>
-    <HeroSection />
-    <StatusSection />
+    <div class="relative">
+      <HeroSection />
+      <SteamStatusBadge />
+    </div>
     <TrailerSection />
     <FeaturesSection />
     <GameplayGrid />
+    <RoninQuote />
     <FinalCTA />
   </main>
   <Footer />
