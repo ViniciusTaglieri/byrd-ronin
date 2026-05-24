@@ -108,24 +108,6 @@ function ClipRow({ clip, index }: ClipRowProps) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      {/* Ghost number — posicionado acima da coluna de vídeo */}
-      <span
-        className="absolute font-display leading-none select-none pointer-events-none max-[768px]:hidden"
-        style={{
-          fontSize: "clamp(7rem, 18vw, 14rem)",
-          top: "-0.35em",
-          ...(isEven
-            ? { right: 0, textAlign: "right" }
-            : { left: 0 }),
-          color: "transparent",
-          WebkitTextStroke: "2px rgba(107,143,94,0.38)",
-          letterSpacing: "-0.04em",
-        }}
-        aria-hidden="true"
-      >
-        {number}
-      </span>
-
       {isEven ? (
         <>
           <div>{textCol}</div>
