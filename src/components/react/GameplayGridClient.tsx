@@ -116,17 +116,22 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   return (
     <motion.div
-      className="grid grid-cols-[5fr_7fr] max-[768px]:grid-cols-1 gap-12 items-center"
+      className={`grid max-[768px]:grid-cols-1 gap-12 items-center ${isEven ? "grid-cols-[5fr_7fr]" : "grid-cols-[7fr_5fr]"}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className={isEven ? "" : "max-[768px]:order-first order-last"}>
-        {isEven ? textCol : videoCol}
-      </div>
-      <div className={isEven ? "" : "max-[768px]:order-last order-first"}>
-        {isEven ? videoCol : textCol}
-      </div>
+      {isEven ? (
+        <>
+          <div>{textCol}</div>
+          <div>{videoCol}</div>
+        </>
+      ) : (
+        <>
+          <div>{videoCol}</div>
+          <div>{textCol}</div>
+        </>
+      )}
     </motion.div>
   );
 }
