@@ -2,32 +2,27 @@
 import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
-<section id="gameplay" class="bg-black py-24">
+<section id="gameplay" class="bg-black pt-24">
   <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
-
     <!-- Header -->
-    <div class="max-w-2xl mx-auto text-center mb-10">
-      <p class="mb-3.5 text-bamboo font-display text-xl uppercase">
-        Veja a Ação
-      </p>
-      <h2 class="font-display text-4xl md:text-6xl xl:text-7xl text-white leading-tight">
-        Beats de gameplay para decisões rápidas.
-      </h2>
-    </div>
-
-    <!-- Intro text block -->
-    <div class="max-w-3xl mx-auto text-center mb-16 flex flex-col gap-4">
-      <p class="text-muted text-base leading-relaxed">
-        O combate em Byrd Ronin é rápido, agressivo e recompensador.
-        Sobreviver significa atacar e contra-atacar no momento certo, desviar com precisão e manter o fluxo do combate que é tão importante quanto causar dano.
-      </p>
-      <p class="text-muted text-base leading-relaxed">
-        Seu combo cresce a medida que o caos se intensifica, seguir no controle é o único caminho, pois, sem ele é o mesmo que perder a run.
+    <div class="grid grid-cols-[1fr_1.4fr] max-[640px]:grid-cols-1 gap-8 items-end mb-14 pb-10 border-b border-bamboo/15">
+      <div>
+        <p class="mb-3 text-bamboo font-display text-xs uppercase tracking-[0.28em]">
+          Gameplay
+        </p>
+        <h2 class="font-display text-3xl md:text-4xl text-white leading-tight">
+          Rápido.<br />Agressivo.<br />
+          <em class="text-bamboo not-italic">Recompensador.</em>
+        </h2>
+      </div>
+      <p class="text-muted text-sm leading-relaxed max-[640px]:hidden">
+        Sobreviver significa atacar e contra-atacar no momento certo, manter o
+        fluxo do combate e seguir no controle — pois sem ele é o mesmo que
+        perder a run.
       </p>
     </div>
 
     <!-- Clips -->
     <GameplayGridClient client:visible />
-
   </div>
 </section>
