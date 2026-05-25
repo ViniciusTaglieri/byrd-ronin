@@ -1,15 +1,15 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import HeroSection from "../components/HeroSection.astro";
-import SteamStatusBadge from "../components/SteamStatusBadge.astro";
-import TrailerSection from "../components/TrailerSection.astro";
 import FeaturesSection from "../components/FeaturesSection.astro";
-import GameplayGrid from "../components/GameplayGrid.astro";
-import RoninQuote from "../components/RoninQuote.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import Footer from "../components/Footer.astro";
+import GameplayGrid from "../components/GameplayGrid.astro";
+import HeroSection from "../components/HeroSection.astro";
+import Navbar from "../components/Navbar.astro";
 import { SlashDivider } from "../components/react/SlashDivider";
+import RoninQuote from "../components/RoninQuote.astro";
+import SteamStatusBadge from "../components/SteamStatusBadge.astro";
+import TrailerSection from "../components/TrailerSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
@@ -24,7 +24,6 @@ import { SlashDivider } from "../components/react/SlashDivider";
     <FeaturesSection />
     <SlashDivider client:visible />
     <GameplayGrid />
-    <SlashDivider client:visible />
     <RoninQuote />
     <FinalCTA />
   </main>
