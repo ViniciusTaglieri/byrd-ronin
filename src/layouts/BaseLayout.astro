@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { GAME, STEAM_URL } from "../consts";
 import { FallingLeaves } from "../components/react/FallingLeaves";
+import { WideScreenDecor } from "../components/react/WideScreenDecor";
 
 const {
   title = "Byrd Ronin - Action Roguelite on Steam",
@@ -73,6 +74,7 @@ const schemaOrg = JSON.stringify({
     class="antialiased min-h-dvh text-white font-body bg-black"
   >
     <FallingLeaves mode="ambient" count={16} client:load />
+    <WideScreenDecor client:load />
     <slot />
 
     <!-- Analytics hook -->
