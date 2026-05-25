@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
+import { ease } from "../../lib/motion";
 
 const NAV_LINKS = [
-  { href: "#status", label: "Status" },
   { href: "#trailer", label: "Trailer" },
   { href: "#features", label: "Features" },
   { href: "#gameplay", label: "Gameplay" },
@@ -39,11 +39,8 @@ export function NavbarClient() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    const close = (e: MouseEvent) => {
-      const nav = document.getElementById("mobile-menu");
-      if (nav && !nav.contains(e.target as Node)) setMenuOpen(false);
-    };
-    setTimeout(() => document.addEventListener("click", close), 10);
+    const close = () => setMenuOpen(false);
+    document.addEventListener("click", close);
     return () => document.removeEventListener("click", close);
   }, [menuOpen]);
 
@@ -61,7 +58,7 @@ export function NavbarClient() {
         }}
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.5, delay: 0.2, ease: ease }}
       >
         {/* Main row */}
         <div className="grid grid-cols-[auto_1fr_auto] max-[980px]:grid-cols-[auto_auto] items-center gap-4 px-7 max-[640px]:px-5 py-4 max-[640px]:py-3">
@@ -101,7 +98,7 @@ export function NavbarClient() {
                         style={{ background: "rgba(107,143,94,0.13)" }}
                         transition={{
                           duration: 0.22,
-                          ease: [0.22, 1, 0.36, 1],
+                          ease: ease,
                         }}
                       />
                     )}
@@ -128,7 +125,8 @@ export function NavbarClient() {
               className="hidden max-[980px]:flex items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-sm text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((o) => !o)}
+              aria-controls="mobile-menu"
+              onClick={(e) => { e.stopPropagation(); setMenuOpen((o) => !o); }}
             >
               <svg
                 width="24"
@@ -190,7 +188,8 @@ export function NavbarClient() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.22, ease: ease }}
+            onClick={(e) => e.stopPropagation()}
           >
             {NAV_LINKS.map(({ href, label }, i) => (
               <motion.a
