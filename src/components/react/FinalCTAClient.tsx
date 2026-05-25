@@ -11,70 +11,99 @@ export function FinalCTAClient() {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-24px", "24px"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-28px", "28px"]);
 
   return (
-    <motion.section
-      ref={ref}
-      className="relative overflow-hidden bg-forest border-t border-bamboo/15"
-    >
-      <div className="grid grid-cols-2 max-[768px]:grid-cols-1">
-        {/* Coluna esquerda — imagem com parallax */}
-        <motion.div
-          className="bg-cover bg-center min-h-96 max-[768px]:min-h-52"
-          style={{
-            backgroundImage: "url('/final_cta_background 1.png')",
-            y: bgY,
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Coluna direita — conteúdo */}
-        <div className="flex flex-col justify-center gap-6 px-12 py-16 max-[768px]:px-6 max-[768px]:py-10">
-          <motion.p
-            className="text-blue-light font-display text-sm uppercase tracking-widest"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5, ease }}
-          >
-            Available on Steam
-          </motion.p>
-
-          <motion.h2
-            className="font-display text-4xl xl:text-5xl text-white leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, ease }}
-          >
-            Pronto para Entrar na Tempestade de Bambu?
-          </motion.h2>
-
-          <motion.p
-            className="text-muted text-base leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.55, delay: 0.15, ease }}
-          >
-            Runs rápidas, cortes afiados e caos crescente — cada rodada é
-            diferente. Domine o fluxo de combate e veja até onde você chega.
-          </motion.p>
-
+    <motion.section ref={ref} className="border-t border-bamboo/15 py-20 mb-16">
+      <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
+        <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
+          {/* Background image with parallax */}
           <motion.div
-            className="pt-2 border-t border-bamboo/15"
-            initial={{ opacity: 0, y: 20, scale: 0.92 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.55, delay: 0.3, ease }}
-          >
-            <SteamButtonAnimated
-              label="JOGAR AGORA"
-              variant="primary"
-              event="steam_cta_final_click"
-            />
-          </motion.div>
+            aria-hidden="true"
+            className="absolute bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/final_cta_background 1.png')",
+              top: -32,
+              left: 0,
+              right: 0,
+              bottom: -32,
+              y: bgY,
+            }}
+          />
+
+          {/* Desktop gradient: transparent left → dark right */}
+          <div
+            className="absolute inset-0 max-[768px]:hidden"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 20%, rgba(5,5,5,0.75) 52%, rgba(5,5,5,0.96) 100%)",
+            }}
+            aria-hidden="true"
+          />
+          {/* Mobile gradient: transparent top → dark bottom */}
+          <div
+            className="absolute inset-0 hidden max-[768px]:block"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(5,5,5,0.25) 0%, rgba(5,5,5,0.9) 55%)",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Content row */}
+          <div className="relative z-10 flex items-center min-h-120 max-[768px]:min-h-140">
+            {/* Spacer — expõe a imagem na esquerda */}
+            <div className="flex-1 max-[768px]:hidden" />
+
+            {/* Coluna de conteúdo */}
+            <div className="w-[48%] flex flex-col gap-6 px-12 py-16 max-[768px]:w-full max-[768px]:px-6 max-[768px]:py-10">
+              <motion.p
+                className="text-blue-light font-display text-sm uppercase tracking-widest"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.5, ease }}
+              >
+                Available on Steam
+              </motion.p>
+
+              <motion.h2
+                className="font-display text-4xl xl:text-5xl text-white leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, ease }}
+              >
+                Pronto para Entrar na Tempestade de Bambu?
+              </motion.h2>
+
+              <motion.p
+                className="text-muted text-base leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.55, delay: 0.15, ease }}
+              >
+                Runs rápidas, cortes afiados e caos crescente — cada rodada é
+                diferente. Domine o fluxo de combate e veja até onde você chega.
+              </motion.p>
+
+              <motion.div
+                className="pt-2 border-t border-bamboo/15"
+                initial={{ opacity: 0, y: 20, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.55, delay: 0.3, ease }}
+              >
+                <SteamButtonAnimated
+                  label="JOGAR AGORA"
+                  variant="primary"
+                  event="steam_cta_final_click"
+                  className="w-full min-h-16! text-xl! px-8!"
+                />
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.section>

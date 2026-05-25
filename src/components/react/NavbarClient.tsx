@@ -50,7 +50,7 @@ export function NavbarClient() {
   return (
     <>
       <motion.header
-        className="fixed z-40 top-0 left-1/2 -translate-x-1/2 w-[min(1180px,calc(100%-28px))] mt-3.5 rounded-xl overflow-hidden border border-bamboo/20"
+        className="fixed z-40 top-0 left-1/2 -translate-x-1/2 w-[min(1180px,calc(100%-28px))] mt-3.5 rounded overflow-hidden border border-bamboo/20"
         style={{
           background: scrolled ? "rgba(5,5,5,0.97)" : "rgba(5,5,5,0.86)",
           backdropFilter: "blur(18px)",
@@ -90,14 +90,14 @@ export function NavbarClient() {
                   )}
                   <a
                     href={href}
-                    className={`relative px-4 py-2 font-display text-[15px] tracking-wide rounded-md transition-colors duration-200 hover:text-bamboo group ${
+                    className={`relative px-4 py-2 font-display text-[15px] tracking-wide rounded-sm transition-colors duration-200 hover:text-bamboo group ${
                       isActive ? "text-bamboo" : "text-white/72"
                     }`}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="active-nav-bg"
-                        className="absolute inset-0 rounded-md"
+                        className="absolute inset-0 rounded-sm"
                         style={{ background: "rgba(107,143,94,0.13)" }}
                         transition={{
                           duration: 0.22,
@@ -125,7 +125,7 @@ export function NavbarClient() {
             />
 
             <button
-              className="hidden max-[980px]:flex items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-lg text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
+              className="hidden max-[980px]:flex items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-sm text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
@@ -184,7 +184,7 @@ export function NavbarClient() {
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-            className="fixed top-22 max-[640px]:top-20 left-1/2 -translate-x-1/2 z-39 flex flex-col gap-1 w-[min(1180px,calc(100%-28px))] p-4 border border-bamboo/25 rounded-xl bg-ink shadow-xl"
+            className="fixed top-22 max-[640px]:top-20 left-1/2 -translate-x-1/2 z-39 flex flex-col gap-1 w-[min(1180px,calc(100%-28px))] p-4 border border-bamboo/25 rounded bg-ink shadow-xl"
             role="navigation"
             aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -12 }}
@@ -196,7 +196,7 @@ export function NavbarClient() {
               <motion.a
                 key={href}
                 href={href}
-                className="flex items-center gap-3 px-4 py-3.5 rounded-lg text-white/80 font-display text-xl transition-colors duration-150 hover:bg-bamboo/10 hover:text-bamboo"
+                className="flex items-center gap-3 px-4 py-3.5 rounded-sm text-white/80 font-display text-xl transition-colors duration-150 hover:bg-bamboo/10 hover:text-bamboo"
                 onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
