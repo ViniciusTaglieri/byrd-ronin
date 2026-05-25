@@ -4,12 +4,17 @@ import { BambooDecor } from "./react/BambooDecor";
 import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
-<section id="gameplay" class="relative bg-black py-24">
+<section id="gameplay" class="relative py-24">
   <div
     class="absolute inset-0 bg-[linear-gradient(180deg,rgba(107,143,94,0.04)_0%,transparent_40%)] pointer-events-none"
     aria-hidden="true"
   >
   </div>
+  <!-- Scanline central -->
+  <div
+    class="absolute top-1/2 left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
+    aria-hidden="true"
+  />
   <BambooDecor
     side="right"
     opacity={0.11}
