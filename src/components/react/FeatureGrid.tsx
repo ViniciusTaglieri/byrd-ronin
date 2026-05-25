@@ -22,48 +22,74 @@ const features = [
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
 };
 
-const rowVariants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease } },
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
 };
+
+function CornerDecor() {
+  return (
+    <>
+      <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-bamboo/50 pointer-events-none" />
+      <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-bamboo/50 pointer-events-none" />
+      <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-bamboo/50 pointer-events-none" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-bamboo/50 pointer-events-none" />
+    </>
+  );
+}
+
+function FeatureCard({ icon, title, text }: (typeof features)[number]) {
+  return (
+    <motion.article
+      className="relative bg-panel border border-bamboo/15 p-7 flex flex-col items-center gap-5 cursor-default"
+      variants={cardVariants}
+      whileHover={{
+        y: -4,
+        borderColor: "rgba(107,143,94,0.55)",
+        boxShadow: "4px 4px 0 rgba(107,143,94,0.45)",
+      }}
+      transition={{ duration: 0.15 }}
+    >
+      <CornerDecor />
+
+      {/* Icon slot */}
+      <div className="flex items-center justify-center w-16 h-16 bg-black/40 border border-bamboo/15">
+        <img
+          src={icon}
+          alt=""
+          width="48"
+          height="48"
+          aria-hidden="true"
+          className="w-12 h-12 object-contain"
+          style={{ imageRendering: "pixelated" }}
+        />
+      </div>
+
+      <h3 className="font-display text-2xl text-white text-center leading-tight">
+        {title}
+      </h3>
+
+      <div className="w-10 h-px bg-bamboo/35" />
+
+      <p className="text-muted text-sm leading-relaxed text-center">{text}</p>
+    </motion.article>
+  );
+}
 
 export function FeatureGrid() {
   return (
     <motion.div
-      className="flex flex-col"
+      className="grid grid-cols-3 max-[768px]:grid-cols-1 gap-6"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
     >
-      {features.map((f, i) => (
-        <motion.article
-          key={f.title}
-          className={[
-            "grid grid-cols-[40px_1fr_2fr] max-[640px]:grid-cols-[40px_1fr] gap-x-6 gap-y-2 items-center",
-            "py-8 px-2 -mx-2 rounded-sm",
-            "cursor-default transition-colors duration-200 hover:bg-bamboo/[0.04]",
-            i < features.length - 1 ? "border-b border-bamboo/15" : "",
-          ].join(" ")}
-          variants={rowVariants}
-        >
-          <img
-            src={f.icon}
-            alt=""
-            width="40"
-            height="40"
-            aria-hidden="true"
-            className="w-10 h-10 object-contain"
-            style={{ imageRendering: "pixelated" }}
-          />
-          <h3 className="font-display text-xl text-white">{f.title}</h3>
-          <p className="text-muted text-base leading-relaxed max-[640px]:col-span-2 max-[640px]:col-start-2">
-            {f.text}
-          </p>
-        </motion.article>
+      {features.map((f) => (
+        <FeatureCard key={f.title} {...f} />
       ))}
     </motion.div>
   );
