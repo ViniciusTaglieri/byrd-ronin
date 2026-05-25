@@ -1,33 +1,79 @@
 ---
-import { TrailerPlayer } from "./react/TrailerPlayer";
 import { YOUTUBE_TRAILER_ID } from "../consts";
+import { TrailerPlayer } from "./react/TrailerPlayer";
 ---
 
-<section id="trailer" class="bg-forest py-24 border-t border-bamboo/15">
-  <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
-    <div class="grid grid-cols-[2fr_1fr] max-[980px]:grid-cols-1 gap-10 items-center">
-      <!-- Vídeo — ocupa 2/3 -->
-      <div>
-        <TrailerPlayer youtubeId={YOUTUBE_TRAILER_ID} client:visible />
-      </div>
+<section id="trailer" class="relative bg-forest overflow-hidden py-24 pt-20">
+  <!-- HUD scan lines -->
+  <div
+    class="absolute top-[32%] left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
+    aria-hidden="true"
+  />
+  <div
+    class="absolute top-[68%] left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
+    aria-hidden="true"
+  />
 
-      <!-- Texto complementar — ocupa 1/3 -->
-      <div class="flex flex-col gap-4">
-        <p class="text-bamboo font-display text-sm uppercase tracking-widest">
+  <!-- Vinheta inferior -->
+  <div
+    class="absolute bottom-0 left-0 right-0 h-40 [background:linear-gradient(0deg,rgba(5,5,5,0.55)_0%,transparent_100%)]"
+    aria-hidden="true"
+  />
+
+  <!-- Kanji decorativos -->
+  <div
+    class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 right-[-0.5vw] flex flex-col gap-1 font-display text-[clamp(3rem,4.5vw,5rem)] text-white/[0.025] leading-none"
+    aria-hidden="true"
+  >
+    <span>忍</span>
+    <span>侍</span>
+    <span>剣</span>
+    <span>道</span>
+    <span>竹</span>
+    <span>波</span>
+  </div>
+
+  <!-- Coordenadas HUD -->
+  <div
+    class="absolute bottom-6 right-6 font-display text-[9px] text-bamboo/20 tracking-[0.2em] pointer-events-none select-none hidden min-[1200px]:flex flex-col items-end gap-0.5"
+    aria-hidden="true"
+  >
+    <span>座標</span>
+    <span>00.44 · 12.81</span>
+  </div>
+
+  <div class="relative z-10 w-[min(1160px,calc(100%-40px))] mx-auto">
+    <div
+      class="grid grid-cols-[4fr_7fr] max-[980px]:grid-cols-1 gap-14 max-[980px]:gap-10 items-center"
+    >
+      <!-- Coluna de texto -->
+      <div class="flex flex-col gap-5 max-[980px]:order-2">
+        <p class="font-display text-xs uppercase tracking-[0.22em] text-bamboo/75">
           Assista ao Trailer
         </p>
-        <h3 class="font-display text-2xl text-white leading-tight">
-          Veja o ritmo da lâmina antes da sua primeira run.
-        </h3>
-        <p class="text-muted text-sm leading-relaxed">
-          Cortes rápidos, pressure constante e upgrades que mudam tudo a cada rodada.
+        <h2
+          class="font-display text-[clamp(2.8rem,5vw,4.5rem)] text-white leading-[0.88] [text-shadow:3px_3px_0_rgba(0,0,0,0.6)]"
+        >
+          Veja o ritmo<br />
+          da lâmina<br />
+          <em class="text-bamboo not-italic">em ação.</em>
+        </h2>
+        <p class="text-muted text-base leading-relaxed max-w-xs max-[980px]:max-w-none">
+          Cortes rápidos, pressure constante e upgrades que mudam tudo a cada
+          rodada. Cada run é uma nova chance de dominar o caos.
         </p>
         <a
-          class="text-bamboo font-display text-sm font-bold hover:underline self-start transition-colors duration-150"
+          class="self-start mt-2 flex items-center gap-2 text-bamboo font-display text-sm font-bold uppercase tracking-widest hover:text-white transition-colors duration-200 group"
           href="#gameplay"
         >
-          Ver mais gameplay →
+          Ver gameplay
+          <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </a>
+      </div>
+
+      <!-- Coluna do vídeo -->
+      <div class="max-[980px]:order-1">
+        <TrailerPlayer youtubeId={YOUTUBE_TRAILER_ID} client:visible />
       </div>
     </div>
   </div>

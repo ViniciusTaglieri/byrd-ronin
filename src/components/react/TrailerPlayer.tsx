@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 interface Props {
@@ -18,11 +18,8 @@ export function TrailerPlayer({ youtubeId }: Props) {
       transition={{ duration: 0.6, delay: 0.15, ease }}
     >
       <motion.div
-        className="relative w-full overflow-hidden border border-bamboo/35 rounded-xl bg-black shadow-[4px_4px_0_rgba(191,181,44,0.5),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
-        whileHover={{
-          boxShadow:
-            "10px 10px 0 rgba(191,181,44,0.9), 0 0 32px rgba(73,194,242,0.35), 0 32px 80px rgba(0,0,0,0.5)",
-        }}
+        className="relative w-full overflow-hidden border border-bamboo/35 rounded bg-black shadow-[4px_4px_0_rgba(191,181,44,0.25),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
+        whileHover={{ scale: 1.008 }}
         transition={{ duration: 0.25 }}
       >
         <AnimatePresence mode="wait">
@@ -51,11 +48,12 @@ export function TrailerPlayer({ youtubeId }: Props) {
             >
               <video
                 src="/trailer.mp4"
-                poster="/page_bg_raw_gpt.png"
+                poster="/hero-bg.png"
                 muted
                 loop
                 playsInline
                 autoPlay
+                controls
                 style={{
                   width: "100%",
                   aspectRatio: "16/9",
@@ -63,6 +61,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
                   display: "block",
                   filter: "saturate(1.2) brightness(0.65)",
                 }}
+                onClick={(e) => e.stopPropagation()}
               />
 
               {youtubeId && (
@@ -71,7 +70,11 @@ export function TrailerPlayer({ youtubeId }: Props) {
                   aria-label="Assistir trailer completo no YouTube"
                   onClick={() => setPlaying(true)}
                   animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   whileHover={{ scale: 1.2, backgroundColor: "#bfb52c" }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -88,7 +91,7 @@ export function TrailerPlayer({ youtubeId }: Props) {
                 </motion.button>
               )}
 
-              <span className="absolute right-4.5 bottom-4.5 left-4.5 px-3.5 py-3 border border-white/25 rounded-lg text-white bg-black/75 font-extrabold">
+              <span className="absolute right-4.5 bottom-4.5 left-4.5 px-3.5 py-3 border border-white/25 rounded-sm text-white bg-black/75 font-extrabold">
                 {youtubeId
                   ? "Clique para assistir o trailer completo"
                   : "Trailer de gameplay — Byrd Ronin"}
