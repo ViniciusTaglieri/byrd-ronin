@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 const features = [
   {
-    icon: "/features_upgrades.png",
+    icon: "/images/features_upgrades.png",
     title: "Upgrades",
     text: "Monte sua run com upgrades que mudam como você corta, sobrevive e domina cada onda.",
   },
   {
-    icon: "/features_inimigos.png",
+    icon: "/images/features_inimigos.png",
     title: "Inimigos",
     text: "Enfrente inimigos agressivos que forçam movimento, timing e decisões rápidas.",
   },
   {
-    icon: "/features_caos.png",
+    icon: "/images/features_caos.png",
     title: "Caos",
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
   },

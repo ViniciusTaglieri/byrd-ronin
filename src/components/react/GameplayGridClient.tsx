@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { GAMEPLAY_CLIPS, type GameplayClip } from "../../consts";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 const VIDEO_RATIO = "585 / 329";
 
@@ -58,6 +57,7 @@ function ClipRow({ clip, index }: ClipRowProps) {
         muted
         loop
         playsInline
+        aria-hidden="true"
         className="w-full h-full object-cover block"
         style={{
           background: "var(--color-black, #050505)",
@@ -110,13 +110,13 @@ function ClipRow({ clip, index }: ClipRowProps) {
     >
       {isEven ? (
         <>
-          <div>{textCol}</div>
-          <div>{videoCol}</div>
+          {textCol}
+          {videoCol}
         </>
       ) : (
         <>
-          <div>{videoCol}</div>
-          <div>{textCol}</div>
+          {videoCol}
+          {textCol}
         </>
       )}
     </motion.div>
@@ -125,7 +125,7 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
 export function GameplayGridClient() {
   return (
-    <div className="flex flex-col gap-0">
+    <div className="flex flex-col">
       {GAMEPLAY_CLIPS.map((clip, index) => (
         <div key={clip.src}>
           <ClipRow clip={clip} index={index} />

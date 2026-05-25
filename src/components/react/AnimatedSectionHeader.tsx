@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
+import { ease } from "../../lib/motion";
 
 interface Props {
   eyebrow: string;
   title: string;
   align?: "left" | "center";
 }
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants = {
   hidden: {},

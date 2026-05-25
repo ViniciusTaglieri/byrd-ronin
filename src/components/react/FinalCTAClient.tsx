@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { SteamButtonAnimated } from "./SteamButtonAnimated";
 import { ease } from "../../lib/motion";
+import { SteamButtonAnimated } from "./SteamButtonAnimated";
 
 export function FinalCTAClient() {
   const ref = useRef<HTMLElement>(null);
@@ -13,7 +13,7 @@ export function FinalCTAClient() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["-28px", "28px"]);
 
   return (
-    <motion.section ref={ref} className="border-t border-bamboo/15 py-20 mb-16">
+    <motion.section ref={ref} className="border-t border-bamboo/15 py-24">
       <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
         <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
           {/* Background image with parallax */}
@@ -21,7 +21,7 @@ export function FinalCTAClient() {
             aria-hidden="true"
             className="absolute bg-cover bg-center"
             style={{
-              backgroundImage: "url('/final_cta_background.png')",
+              backgroundImage: "url('/images/final_cta_background.png')",
               top: -32,
               left: 0,
               right: 0,
