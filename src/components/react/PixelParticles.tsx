@@ -48,7 +48,7 @@ export function PixelParticles({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Reduz partículas em mobile para performance
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.innerWidth < 640;
     const particleCount = count ?? (isMobile ? 25 : 60);
 
@@ -56,14 +56,19 @@ export function PixelParticles({
       if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      // Reinicializa as partículas com a nova dimensão
       particlesRef.current = Array.from({ length: particleCount }, () =>
         createParticle(canvas.width, canvas.height, colors, true)
       );
     }
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    }
+
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
 
     let frameCount = 0;
 
@@ -71,11 +76,8 @@ export function PixelParticles({
       if (!canvas || !ctx) return;
       animRef.current = requestAnimationFrame(draw);
 
-      // Pausa quando tab está inativa
       if (document.visibilityState === "hidden") return;
-
-      // prefers-reduced-motion: parar animação
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (reducedMotion) return;
 
       frameCount++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -116,7 +118,8 @@ export function PixelParticles({
 
     return () => {
       cancelAnimationFrame(animRef.current);
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, [count, colors]);
