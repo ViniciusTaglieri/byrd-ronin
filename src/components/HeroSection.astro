@@ -1,11 +1,10 @@
 ---
-import { FallingLeaves } from "./react/FallingLeaves";
 import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
 ---
 
 <section id="top" class="relative min-h-dvh pt-[142px]">
   <div
-    class="absolute inset-0 bg-[url('/page_bg_raw_gpt.png')] bg-center bg-cover"
+    class="absolute inset-0 bg-[url('/hero-bg.png')] bg-center bg-cover"
     aria-hidden="true"
   >
   </div>
@@ -16,7 +15,6 @@ import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
   </div>
 
   <HeroParticles client:load />
-  <FallingLeaves mode="ambient" count={12} client:load />
 
   <div
     class="w-[min(1160px,calc(100%_-_40px))] mx-auto relative grid grid-cols-[minmax(0,1fr)_minmax(340px,0.9fr)] max-[980px]:grid-cols-1 items-center gap-[22px]"
