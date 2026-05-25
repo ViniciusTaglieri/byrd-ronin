@@ -1,20 +1,23 @@
-import { motion } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
 import { STEAM_URL } from "../../consts";
 import { SteamIcon } from "./SteamIcon";
 
 const buttonVariants = cva(
-  "inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-transparent rounded-md font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 relative overflow-hidden",
+  "inline-flex items-center justify-center gap-2.5 border-2 border-transparent rounded-md font-display font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 relative overflow-hidden",
   {
     variants: {
       variant: {
         primary:
           "text-white bg-linear-to-b from-scarlet to-red shadow-[0_8px_0_#870707,0_18px_36px_rgba(242,19,19,0.32)]",
-        secondary: "text-black bg-gold",
+      },
+      size: {
+        md: "min-h-12 px-5 py-3 text-lg",
+        lg: "min-h-16 px-8 py-4 text-xl",
       },
     },
-    defaultVariants: { variant: "primary" },
-  }
+    defaultVariants: { variant: "primary", size: "md" },
+  },
 );
 
 interface Props extends VariantProps<typeof buttonVariants> {
@@ -26,6 +29,7 @@ interface Props extends VariantProps<typeof buttonVariants> {
 export function SteamButtonAnimated({
   label = "JOGAR AGORA",
   variant = "primary",
+  size = "md",
   event = "steam_cta_click",
   className,
 }: Props) {
@@ -35,9 +39,11 @@ export function SteamButtonAnimated({
     <motion.a
       href={STEAM_URL}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       data-event={event}
-      className={[buttonVariants({ variant }), className].filter(Boolean).join(" ")}
+      className={[buttonVariants({ variant, size }), className]
+        .filter(Boolean)
+        .join(" ")}
       initial="rest"
       whileHover="hover"
       whileTap="tap"
