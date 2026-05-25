@@ -9,6 +9,7 @@ import GameplayGrid from "../components/GameplayGrid.astro";
 import RoninQuote from "../components/RoninQuote.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import Footer from "../components/Footer.astro";
+import { SlashDivider } from "../components/react/SlashDivider";
 ---
 
 <BaseLayout>
@@ -19,8 +20,11 @@ import Footer from "../components/Footer.astro";
       <SteamStatusBadge />
     </div>
     <TrailerSection />
+    <SlashDivider client:visible />
     <FeaturesSection />
+    <SlashDivider client:visible />
     <GameplayGrid />
+    <SlashDivider client:visible />
     <RoninQuote />
     <FinalCTA />
   </main>

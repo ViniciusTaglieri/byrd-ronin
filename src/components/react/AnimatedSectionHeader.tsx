@@ -18,11 +18,15 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
-export function AnimatedSectionHeader({ eyebrow, title, align = "left" }: Props) {
+export function AnimatedSectionHeader({
+  eyebrow,
+  title,
+  align = "left",
+}: Props) {
   const isCenter = align === "center";
   return (
     <motion.div
-      className={`max-w-2xl mb-10 ${isCenter ? "mx-auto text-center" : ""}`}
+      className={`mb-10 ${isCenter ? "mx-auto text-center" : ""}`}
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

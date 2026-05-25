@@ -66,11 +66,11 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
     <div
       ref={wrapRef}
       style={{
-        position: "absolute",
+        position: "fixed",
         inset: 0,
         overflow: "hidden",
         pointerEvents: "none",
-        zIndex: 1,
+        zIndex: 2,
       }}
       aria-hidden="true"
     >

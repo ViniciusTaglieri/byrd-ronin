@@ -90,12 +90,6 @@ export function TrailerPlayer({ youtubeId }: Props) {
                   </svg>
                 </motion.button>
               )}
-
-              <span className="absolute right-4.5 bottom-4.5 left-4.5 px-3.5 py-3 border border-white/25 rounded-sm text-white bg-black/75 font-extrabold">
-                {youtubeId
-                  ? "Clique para assistir o trailer completo"
-                  : "Trailer de gameplay — Byrd Ronin"}
-              </span>
             </motion.div>
           )}
         </AnimatePresence>

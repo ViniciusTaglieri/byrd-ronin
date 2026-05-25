@@ -4,7 +4,11 @@ import { SteamButtonAnimated } from "./react/SteamButtonAnimated";
 import { StatusAnimations } from "./react/StatusAnimations";
 ---
 
-<section id="status" class="bg-ink py-24 border-t border-bamboo/20">
+<section id="status" class="relative bg-ink py-24 border-t border-bamboo/20 overflow-hidden">
+  <div
+    class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_31px,rgba(107,143,94,0.03)_31px,rgba(107,143,94,0.03)_32px)] pointer-events-none"
+    aria-hidden="true"
+  />
   <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
     <StatusAnimations client:visible>
       <div class="grid grid-cols-2 max-[980px]:grid-cols-1 gap-12">

@@ -1,10 +1,21 @@
 ---
 import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
 import { GameplayGridClient } from "./react/GameplayGridClient";
+import { BambooDecor } from "./react/BambooDecor";
 ---
 
-<section id="gameplay" class="bg-black pt-24">
-  <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
+<section id="gameplay" class="relative bg-black pt-24">
+  <div
+    class="absolute inset-0 bg-[linear-gradient(180deg,rgba(107,143,94,0.04)_0%,transparent_40%)] pointer-events-none"
+    aria-hidden="true"
+  />
+  <BambooDecor
+    side="right"
+    opacity={0.11}
+    className="hidden min-[1400px]:block absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+    client:visible
+  />
+  <div class="w-[min(1160px,calc(100%-40px))] mx-auto relative z-10">
     <AnimatedSectionHeader
       eyebrow="Veja a Ação"
       title="Corte. Avance. Repita."
