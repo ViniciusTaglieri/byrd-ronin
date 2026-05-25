@@ -16,8 +16,8 @@ export function TrailerPlayer() {
         transition={{ duration: 0.25 }}
       >
         <video
-          src="/trailer.mp4"
-          poster="/hero-bg.png"
+          src="/videos/trailer.mp4"
+          poster="/images/hero_bg.png"
           muted
           loop
           playsInline

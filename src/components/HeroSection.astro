@@ -2,9 +2,12 @@
 import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
 ---
 
-<section id="top" class="relative min-h-dvh pt-[142px] flex flex-col justify-center pb-12">
+<section
+  id="top"
+  class="relative min-h-dvh pt-35.5 flex flex-col justify-center pb-12"
+>
   <div
-    class="absolute inset-0 bg-[url('/hero-bg.png')] bg-center bg-cover"
+    class="absolute inset-0 bg-[url('/images/hero_bg.png')] bg-center bg-cover"
     aria-hidden="true"
   >
   </div>
@@ -17,7 +20,7 @@ import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
   <HeroParticles client:load />
 
   <div
-    class="w-[min(1160px,calc(100%-40px))] mx-auto relative grid grid-cols-[1fr_1fr] max-[980px]:grid-cols-1 items-center gap-10"
+    class="w-container-page mx-auto relative grid grid-cols-[1fr_1fr] max-[980px]:grid-cols-1 items-center gap-10"
   >
     <HeroCopy client:load />
     <HeroCharacter client:load />

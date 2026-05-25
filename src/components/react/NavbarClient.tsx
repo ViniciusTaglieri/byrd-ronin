@@ -65,7 +65,7 @@ export function NavbarClient() {
           {/* Logo */}
           <a href="#top" aria-label="Byrd Ronin home">
             <img
-              src="/logo.png"
+              src="/logos/logo_byrdronin.png"
               alt="Byrd Ronin"
               width="192"
               height="108"
