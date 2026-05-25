@@ -27,7 +27,61 @@ const containerVariants = {
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+  hovered: {
+    y: -4,
+    borderColor: "rgba(107,143,94,0.55)",
+    boxShadow: "4px 4px 0 rgba(107,143,94,0.45)",
+    transition: { duration: 0.15 },
+  },
 };
+
+const slashEase = [0.22, 1, 0.36, 1] as const;
+
+const slashVariants = {
+  hidden:  { pathLength: 0, opacity: 0 },
+  visible: { pathLength: 0, opacity: 0 },
+  hovered: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 0.18, ease: slashEase },
+  },
+};
+
+const shadowSlashVariants = {
+  hidden:  { pathLength: 0, opacity: 0 },
+  visible: { pathLength: 0, opacity: 0 },
+  hovered: {
+    pathLength: 1,
+    opacity: 0.3,
+    transition: { duration: 0.18, ease: slashEase },
+  },
+};
+
+function KatanaSlash() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      aria-hidden="true"
+    >
+      <motion.path
+        d="M 6,2 L 98,94"
+        stroke="rgba(73,194,242,0.2)"
+        strokeWidth="3"
+        fill="none"
+        variants={shadowSlashVariants}
+      />
+      <motion.path
+        d="M 2,2 L 98,98"
+        stroke="rgba(73,194,242,0.6)"
+        strokeWidth="1.5"
+        fill="none"
+        variants={slashVariants}
+      />
+    </svg>
+  );
+}
 
 function CornerDecor() {
   return (
@@ -43,19 +97,14 @@ function CornerDecor() {
 function FeatureCard({ icon, title, text }: (typeof features)[number]) {
   return (
     <motion.article
-      className="relative bg-panel border border-bamboo/15 p-7 flex flex-col items-center gap-5 cursor-default"
+      className="relative bg-panel border border-bamboo/15 p-7 flex flex-col items-center gap-5 cursor-default overflow-hidden"
       variants={cardVariants}
-      whileHover={{
-        y: -4,
-        borderColor: "rgba(107,143,94,0.55)",
-        boxShadow: "4px 4px 0 rgba(107,143,94,0.45)",
-      }}
-      transition={{ duration: 0.15 }}
+      whileHover="hovered"
     >
       <CornerDecor />
+      <KatanaSlash />
 
-      {/* Icon slot */}
-      <div className="flex items-center justify-center w-16 h-16 bg-black/40 border border-bamboo/15">
+      <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-black/40 border border-bamboo/15">
         <img
           src={icon}
           alt=""
@@ -67,13 +116,13 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
         />
       </div>
 
-      <h3 className="font-display text-2xl text-white text-center leading-tight">
+      <h3 className="relative z-10 font-display text-2xl text-white text-center leading-tight">
         {title}
       </h3>
 
-      <div className="w-10 h-px bg-bamboo/35" />
+      <div className="relative z-10 w-10 h-px bg-bamboo/35" />
 
-      <p className="text-muted text-sm leading-relaxed text-center">{text}</p>
+      <p className="relative z-10 text-muted text-sm leading-relaxed text-center">{text}</p>
     </motion.article>
   );
 }
