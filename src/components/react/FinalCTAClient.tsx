@@ -1,8 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 export function FinalCTAClient() {
   const ref = useRef<HTMLElement>(null);
@@ -22,7 +21,7 @@ export function FinalCTAClient() {
             aria-hidden="true"
             className="absolute bg-cover bg-center"
             style={{
-              backgroundImage: "url('/final_cta_background 1.png')",
+              backgroundImage: "url('/final_cta_background.png')",
               top: -32,
               left: 0,
               right: 0,
@@ -64,7 +63,7 @@ export function FinalCTAClient() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.5, ease }}
               >
-                Available on Steam
+                Disponível na Steam
               </motion.p>
 
               <motion.h2
@@ -98,8 +97,9 @@ export function FinalCTAClient() {
                 <SteamButtonAnimated
                   label="JOGAR AGORA"
                   variant="primary"
+                  size="lg"
                   event="steam_cta_final_click"
-                  className="w-full min-h-16! text-xl! px-8!"
+                  className="w-full"
                 />
               </motion.div>
             </div>

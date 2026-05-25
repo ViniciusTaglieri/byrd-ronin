@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { PixelParticles } from "./PixelParticles";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 const copyVariants = {
   hidden: {},
@@ -35,7 +34,7 @@ export function HeroCopy() {
         variants={itemVariants}
         className="mb-3.5 text-blue-light font-display text-xl uppercase"
       >
-        Available on Steam
+        Disponível na Steam
       </motion.p>
 
       <motion.h1
@@ -56,7 +55,7 @@ export function HeroCopy() {
 
       <motion.div
         variants={itemVariants}
-        className="flex flex-wrap gap-4 mt-8 mb-[18px]"
+        className="flex flex-wrap gap-4 mt-8 mb-4.5"
       >
         <SteamButtonAnimated
           label="JOGAR AGORA"
@@ -82,7 +81,7 @@ export function HeroCopy() {
 export function HeroCharacter() {
   return (
     <motion.div
-      className="relative min-h-[520px] max-[980px]:min-h-[360px] max-[640px]:min-h-[260px]"
+      className="relative min-h-130 max-[980px]:min-h-90 max-[640px]:min-h-65"
       aria-hidden="true"
       initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}

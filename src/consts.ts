@@ -15,6 +15,7 @@ export const GAME = {
     "Hack and Slash",
     "Difícil",
     "2D",
+    "Indie",
   ] as const,
   descriptionShort:
     "Byrd Ronin mistura ação 2D intensa com controles precisos e ritmo acelerado. Como um pássaro Ronin, avance destruindo tudo até alcançar a cerejeira que guarda seu juramento. Evolua a cada run, desbloqueie itens e habilidades, domine o fluxo do combate e sobreviva ao caos — este é o caminho do Ronin.",
