@@ -1,17 +1,15 @@
 ---
+import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
 import { FeatureGrid } from "./react/FeatureGrid";
 ---
 
 <section id="features" class="bg-[#070b07] py-24">
   <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
-    <div class="max-w-2xl mb-14">
-      <p class="mb-3.5 text-bamboo font-display text-xl uppercase">
-        Features
-      </p>
-      <h2 class="font-display text-4xl md:text-6xl xl:text-7xl text-white leading-tight">
-        Cada run pede timing mais afiado.
-      </h2>
-    </div>
+    <AnimatedSectionHeader
+      eyebrow="Features"
+      title="Domine cada run."
+      client:visible
+    />
     <FeatureGrid client:visible />
   </div>
 </section>
