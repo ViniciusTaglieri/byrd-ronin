@@ -1,7 +1,7 @@
 ---
-import "../styles/global.css";
-import { GAME, STEAM_URL } from "../consts";
 import { FallingLeaves } from "../components/react/FallingLeaves";
+import { GAME, STEAM_URL } from "../consts";
+import "../styles/global.css";
 
 const {
   title = "Byrd Ronin - Action Roguelite on Steam",
@@ -54,36 +54,19 @@ const schemaOrg = JSON.stringify({
     <meta name="twitter:image" content="https://byrdronin.com/og_image.png" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Pixelify+Sans:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload hero background for LCP -->
+    <link rel="preload" as="image" href="/hero-bg.png" />
+
 
     <title>{title}</title>
 
     <!-- Schema.org -->
     <script type="application/ld+json" is:inline set:html={schemaOrg} />
   </head>
-  <body
-    class="antialiased min-h-dvh text-white font-body bg-black"
-  >
+  <body class="antialiased min-h-dvh text-white font-body bg-black">
     <FallingLeaves mode="ambient" count={16} client:load />
     <slot />
-
-    <!-- Analytics hook -->
-    <script>
-      document.addEventListener("click", (e) => {
-        const el = (e.target as HTMLElement).closest("[data-event]");
-        if (!el) return;
-        const event = el.getAttribute("data-event");
-        // TODO: substituir por gtag / plausible / umami
-        console.log("[analytics]", event);
-      });
-    </script>
   </body>
 </html>

@@ -1,2 +1,5 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/pixelify-sans/600.css";
+@import "@fontsource/pixelify-sans/700.css";
 @import "tailwindcss";
 @config "../../tailwind.config.js";
