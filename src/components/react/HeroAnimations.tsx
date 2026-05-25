@@ -38,9 +38,12 @@ export function HeroCopy() {
         Available on Steam
       </motion.p>
 
-      <motion.h1 variants={itemVariants} className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-[0.86] max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]">
-        Slice Through <em className="text-gold italic">Chaos.</em> Become the{" "}
-        <em className="text-gold italic">Ronin.</em>
+      <motion.h1
+        variants={itemVariants}
+        className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-[0.86] max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]"
+      >
+        Slice Through <em className="text-scarlet italic">Chaos.</em> Become the{" "}
+        <em className="text-scarlet italic">Ronin.</em>
       </motion.h1>
 
       <motion.p
@@ -79,18 +82,18 @@ export function HeroCopy() {
 export function HeroCharacter() {
   return (
     <motion.div
-      className="relative min-h-[470px] max-[980px]:min-h-[340px] max-[640px]:min-h-[270px]"
+      className="relative min-h-[520px] max-[980px]:min-h-[360px] max-[640px]:min-h-[260px]"
       aria-hidden="true"
-      initial={{ opacity: 0, x: 80 }}
+      initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.75, delay: 0.25, ease }}
     >
       <motion.img
-        src="/personagem.png"
+        src="/hero-character.png"
         alt=""
         width="1536"
         height="864"
-        className="absolute right-[-170px] bottom-[-70px] w-[min(850px,68vw)] max-w-none drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[980px]:right-[-90px] max-[980px]:bottom-[-80px] max-[980px]:w-[min(700px,105vw)] max-[640px]:opacity-35 max-[640px]:top-0 max-[640px]:right-[-84px] max-[640px]:bottom-auto max-[640px]:w-[430px]"
+        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[640px]:opacity-35"
         animate={{ y: [0, -14, 0] }}
         transition={{
           duration: 3.2,
