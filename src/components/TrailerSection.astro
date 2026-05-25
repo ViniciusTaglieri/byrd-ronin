@@ -3,12 +3,7 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
 ---
 
 <section id="trailer" class="relative overflow-hidden py-24 pt-20">
-  <!-- Dot grid background -->
-  <div
-    class="absolute inset-0 bg-[radial-gradient(circle,rgba(107,143,94,0.07)_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none"
-    aria-hidden="true"
-  >
-  </div>
+  <div class="dot-grid dot-grid-gold" aria-hidden="true"></div>
   <!-- HUD scan lines -->
   <div
     class="absolute top-[32%] left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
@@ -86,3 +81,16 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
     </div>
   </div>
 </section>
+
+<script>
+  const section = document.getElementById("trailer");
+  const dotGrid = section?.querySelector(".dot-grid");
+  if (section && dotGrid) {
+    const observer = new IntersectionObserver(
+      ([entry]) => dotGrid.classList.toggle("is-visible", entry.isIntersecting),
+      { threshold: 0.15 }
+    );
+    observer.observe(section);
+    document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
+  }
+</script>

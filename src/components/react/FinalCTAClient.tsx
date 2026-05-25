@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ease } from "../../lib/motion";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
 
 export function FinalCTAClient() {
   const ref = useRef<HTMLElement>(null);
+  const dotGridRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -12,8 +13,23 @@ export function FinalCTAClient() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-28px", "28px"]);
 
+  useEffect(() => {
+    const dotGrid = dotGridRef.current;
+    const section = ref.current;
+    if (!dotGrid || !section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => dotGrid.classList.toggle("is-visible", entry.isIntersecting),
+      { threshold: 0.15 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <motion.section ref={ref} className="border-t border-bamboo/15 py-24">
+    <motion.section ref={ref} className="relative border-t border-bamboo/15 py-24">
+      <div ref={dotGridRef} className="dot-grid dot-grid-red" aria-hidden="true" />
+
       <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
         <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
           {/* Background image with parallax */}
