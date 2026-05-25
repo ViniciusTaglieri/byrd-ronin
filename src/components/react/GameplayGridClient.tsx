@@ -103,7 +103,7 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   return (
     <motion.div
-      className={`relative grid max-[768px]:grid-cols-1 gap-12 items-center ${isEven ? "grid-cols-[5fr_7fr]" : "grid-cols-[7fr_5fr]"}`}
+      className={`relative grid max-[768px]:grid-cols-1 gap-12 items-center ${isEven ? "grid-cols-[3fr_5fr]" : "grid-cols-[5fr_3fr]"}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

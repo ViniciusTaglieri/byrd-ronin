@@ -1,28 +1,16 @@
 ---
+import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
 import { GameplayGridClient } from "./react/GameplayGridClient";
 ---
 
 <section id="gameplay" class="bg-black pt-24">
   <div class="w-[min(1160px,calc(100%-40px))] mx-auto">
-    <!-- Header -->
-    <div class="grid grid-cols-[1fr_1.4fr] max-[640px]:grid-cols-1 gap-8 items-end mb-14 pb-10 border-b border-bamboo/15">
-      <div>
-        <p class="mb-3 text-bamboo font-display text-xs uppercase tracking-[0.28em]">
-          Gameplay
-        </p>
-        <h2 class="font-display text-3xl md:text-4xl text-white leading-tight">
-          Rápido.<br />Agressivo.<br />
-          <em class="text-bamboo not-italic">Recompensador.</em>
-        </h2>
-      </div>
-      <p class="text-muted text-sm leading-relaxed max-[640px]:hidden">
-        Sobreviver significa atacar e contra-atacar no momento certo, manter o
-        fluxo do combate e seguir no controle — pois sem ele é o mesmo que
-        perder a run.
-      </p>
-    </div>
-
-    <!-- Clips -->
+    <AnimatedSectionHeader
+      eyebrow="Veja a Ação"
+      title="Corte. Avance. Repita."
+      align="center"
+      client:visible
+    />
     <GameplayGridClient client:visible />
   </div>
 </section>
