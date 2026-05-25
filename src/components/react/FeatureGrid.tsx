@@ -38,7 +38,7 @@ const cardVariants = {
 const slashEase = [0.22, 1, 0.36, 1] as const;
 
 const slashVariants = {
-  hidden:  { pathLength: 0, opacity: 0 },
+  hidden: { pathLength: 0, opacity: 0 },
   visible: { pathLength: 0, opacity: 0 },
   hovered: {
     pathLength: 1,
@@ -48,7 +48,7 @@ const slashVariants = {
 };
 
 const shadowSlashVariants = {
-  hidden:  { pathLength: 0, opacity: 0 },
+  hidden: { pathLength: 0, opacity: 0 },
   visible: { pathLength: 0, opacity: 0 },
   hovered: {
     pathLength: 1,
@@ -56,32 +56,6 @@ const shadowSlashVariants = {
     transition: { duration: 0.18, ease: slashEase },
   },
 };
-
-function KatanaSlash() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      aria-hidden="true"
-    >
-      <motion.path
-        d="M 6,2 L 98,94"
-        stroke="rgba(73,194,242,0.2)"
-        strokeWidth="3"
-        fill="none"
-        variants={shadowSlashVariants}
-      />
-      <motion.path
-        d="M 2,2 L 98,98"
-        stroke="rgba(73,194,242,0.6)"
-        strokeWidth="1.5"
-        fill="none"
-        variants={slashVariants}
-      />
-    </svg>
-  );
-}
 
 function CornerDecor() {
   return (
@@ -102,7 +76,6 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
       whileHover="hovered"
     >
       <CornerDecor />
-      <KatanaSlash />
 
       <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-black/40 border border-bamboo/15">
         <img
@@ -122,7 +95,9 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
 
       <div className="relative z-10 w-10 h-px bg-bamboo/35" />
 
-      <p className="relative z-10 text-muted text-sm leading-relaxed text-center">{text}</p>
+      <p className="relative z-10 text-muted text-sm leading-relaxed text-center">
+        {text}
+      </p>
     </motion.article>
   );
 }

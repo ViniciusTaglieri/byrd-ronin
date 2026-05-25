@@ -9,7 +9,6 @@ const {
 } = Astro.props;
 
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
-const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC;
 
 const schemaOrg = JSON.stringify({
   "@context": "https://schema.org",
@@ -77,7 +76,12 @@ const schemaOrg = JSON.stringify({
     <!-- Umami Analytics -->
     {
       umamiId && (
-        <script is:inline defer src={umamiSrc} data-website-id={umamiId} />
+        <script
+          is:inline
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={umamiId}
+        />
       )
     }
 
