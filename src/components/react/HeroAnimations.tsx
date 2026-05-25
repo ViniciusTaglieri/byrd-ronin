@@ -26,7 +26,7 @@ const itemVariants = {
 export function HeroCopy() {
   return (
     <motion.div
-      className="max-w-[650px] min-[981px]:max-h-[45vh] min-[981px]:overflow-visible"
+      className="w-full"
       variants={copyVariants}
       initial="hidden"
       animate="visible"
