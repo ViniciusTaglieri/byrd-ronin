@@ -51,7 +51,10 @@ const schemaOrg = JSON.stringify({
       property="og:description"
       content="Action roguelite 2D com combate preciso e progressão intensa. Disponível agora na Steam."
     />
-    <meta property="og:image" content="https://byrdronin.com/images/og_image.png" />
+    <meta
+      property="og:image"
+      content="https://byrdronin.com/images/og_image.png"
+    />
     <meta property="og:url" content="https://byrdronin.com" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -60,7 +63,10 @@ const schemaOrg = JSON.stringify({
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://byrdronin.com/images/og_image.png" />
+    <meta
+      name="twitter:image"
+      content="https://byrdronin.com/images/og_image.png"
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.ico" />
@@ -69,16 +75,23 @@ const schemaOrg = JSON.stringify({
     <link rel="preload" as="image" href="/images/hero_bg.png" />
 
     <!-- Umami Analytics -->
-    {umamiId && (
-      <script is:inline defer src={umamiSrc} data-website-id={umamiId} />
-    )}
+    {
+      umamiId && (
+        <script is:inline defer src={umamiSrc} data-website-id={umamiId} />
+      )
+    }
 
     <title>{title}</title>
 
     <!-- Schema.org -->
     <script type="application/ld+json" is:inline set:html={schemaOrg} />
   </head>
-  <body class="antialiased min-h-dvh text-white font-body bg-[linear-gradient(to_bottom,#6b8f5e_0%,#0d1a0f_20%,#050505_55%,#050505_100%)]">
+  <body
+    class="antialiased min-h-dvh text-white font-body
+    bg-linear-to-b
+    from-forest
+    to-black"
+  >
     <script is:inline>
       document.addEventListener("click", function (e) {
         var el = e.target.closest("[data-event]");
