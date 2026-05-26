@@ -1,12 +1,11 @@
 ---
-import { FAQSection } from "../components/react/FAQSection";
-import { SlashDivider } from "../components/react/SlashDivider";
 import FeaturesSection from "../components/FeaturesSection.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import Footer from "../components/Footer.astro";
 import GameplayGrid from "../components/GameplayGrid.astro";
 import HeroSection from "../components/HeroSection.astro";
 import Navbar from "../components/Navbar.astro";
+import { FAQSection } from "../components/react/FAQSection";
 import RoninQuote from "../components/RoninQuote.astro";
 import SteamWidget from "../components/SteamWidget.astro";
 import TrailerSection from "../components/TrailerSection.astro";
@@ -20,10 +19,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <HeroSection />
       <SteamWidget />
     </div>
-    <SlashDivider client:visible />
     <TrailerSection />
     <FeaturesSection />
-    <SlashDivider client:visible />
     <GameplayGrid />
     <RoninQuote />
     <FinalCTA />

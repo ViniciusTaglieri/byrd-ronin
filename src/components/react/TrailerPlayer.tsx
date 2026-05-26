@@ -16,7 +16,7 @@ export function TrailerPlayer() {
       >
         <video
           src="/videos/trailer.mp4"
-          poster="/images/hero_bg.png"
+          poster="/images/og_image.png"
           preload="none"
           playsInline
           controls
