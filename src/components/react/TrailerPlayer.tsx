@@ -1,7 +1,16 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRef, useState } from "react";
 import { ease } from "../../lib/motion";
 
 export function TrailerPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  function handlePlay() {
+    videoRef.current?.play();
+    setPlaying(true);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -15,6 +24,7 @@ export function TrailerPlayer() {
         transition={{ duration: 0.25 }}
       >
         <video
+          ref={videoRef}
           src="/videos/trailer.mp4"
           poster="/images/og_image.png"
           preload="none"
@@ -28,6 +38,37 @@ export function TrailerPlayer() {
             filter: "saturate(1.1) brightness(0.92)",
           }}
         />
+
+        <AnimatePresence>
+          {!playing && (
+            <motion.button
+              className="absolute inset-0 flex items-center justify-center w-full cursor-pointer"
+              onClick={handlePlay}
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              aria-label="Reproduzir trailer"
+            >
+              <div className="absolute inset-0 bg-black/25" />
+
+              <motion.div
+                className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/60 bg-white/10 backdrop-blur-sm"
+                whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
+                transition={{ duration: 0.18 }}
+              >
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  aria-hidden="true"
+                  style={{ marginLeft: 3 }}
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </motion.div>
+            </motion.button>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );
