@@ -13,23 +13,14 @@ const clipVariants = {
   },
 };
 
-const textVariants = {
-  hidden: { opacity: 0, x: -24 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.55, ease, delay: 0.1 },
-  },
-};
-
-const textVariantsRight = {
-  hidden: { opacity: 0, x: 24 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.55, ease, delay: 0.1 },
-  },
-};
+function makeTextVariants(dir: 1 | -1) {
+  return {
+    hidden: { opacity: 0, x: -24 * dir },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease, delay: 0.1 } },
+  };
+}
+const textVariants = makeTextVariants(1);
+const textVariantsRight = makeTextVariants(-1);
 
 interface ClipRowProps {
   clip: GameplayClip;
@@ -44,10 +35,13 @@ function ClipRow({ clip, index }: ClipRowProps) {
     <motion.div
       className="relative overflow-hidden rounded-xl"
       variants={clipVariants}
-      style={{ aspectRatio: VIDEO_RATIO }}
+      style={{
+        aspectRatio: VIDEO_RATIO,
+        boxShadow: "8px 8px 0 rgba(107,143,94,0.15)",
+      }}
     >
       {/* HUD badge overlay */}
-      <div className="absolute top-3 left-3 z-10 font-display text-[9px] tracking-[0.3em] uppercase bg-black/60 text-bamboo px-2.5 py-1 rounded backdrop-blur-sm">
+      <div className="absolute top-3 left-3 z-10 font-display text-3xs tracking-ui-wide uppercase bg-black/60 text-bamboo px-2.5 py-1 rounded backdrop-blur-sm">
         {number} — {clip.eyebrow}
       </div>
 
@@ -81,12 +75,12 @@ function ClipRow({ clip, index }: ClipRowProps) {
       variants={isEven ? textVariants : textVariantsRight}
     >
       {/* Eyebrow */}
-      <p className="relative font-display text-xs uppercase tracking-[0.28em] text-bamboo/70">
+      <p className="relative font-display text-xs uppercase tracking-widest text-bamboo/90">
         {clip.eyebrow}
       </p>
 
       {/* Title */}
-      <h3 className="relative font-display text-[clamp(1.6rem,3vw,2.4rem)] text-white leading-tight">
+      <h3 className="relative font-display text-[clamp(1.8rem,3vw,2.8rem)] text-white leading-tight">
         {clip.title}
       </h3>
 
