@@ -1,4 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useCanvasAnimation } from "../../../lib/useCanvasAnimation";
+
+interface ShurikenColor {
+  fill: string;
+  glow: string;
+}
 
 interface Shuriken {
   x: number;
@@ -8,18 +14,21 @@ interface Shuriken {
   vx: number;
   rotation: number;
   opacity: number;
-  color: string;
+  color: ShurikenColor;
 }
 
-const COLORS = ["rgba(73,194,242,0.18)", "rgba(191,181,44,0.12)"];
-const COUNT = 7;
+const COLORS: ShurikenColor[] = [
+  { fill: "rgba(73,194,242,0.35)", glow: "#49c2f2" },
+  { fill: "rgba(191,181,44,0.30)", glow: "#bfb52c" },
+];
+const COUNT = 8;
 
 function drawStar(
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
   size: number,
-  rotation: number
+  rotation: number,
 ) {
   const points = 4;
   const outerR = size;
@@ -37,51 +46,27 @@ function createShuriken(width: number, height: number, randomY = false): Shurike
   return {
     x: Math.random() * width,
     y: randomY ? Math.random() * height : height + Math.random() * 60,
-    size: Math.floor(4 + Math.random() * 7),
-    speed: 0.3 + Math.random() * 0.5,
-    vx: (Math.random() - 0.5) * 0.3,
+    size: Math.floor(3 + Math.random() * 5),
+    speed: 0.2 + Math.random() * 0.2,
+    vx: (Math.random() - 0.5) * 0.2,
     rotation: Math.random() * Math.PI * 2,
-    opacity: 0.5 + Math.random() * 0.5,
+    opacity: 0.25 + Math.random() * 0.2,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
   };
 }
 
 export function ShurikenParticles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>(0);
   const particlesRef = useRef<Shuriken[]>([]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    function resize() {
-      if (!canvas) return;
+  const canvasRef = useCanvasAnimation((canvas, ctx) => ({
+    resize() {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       particlesRef.current = Array.from({ length: COUNT }, () =>
-        createShuriken(canvas.width, canvas.height, true)
+        createShuriken(canvas.width, canvas.height, true),
       );
-    }
-
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    function onResize() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 150);
-    }
-
-    resize();
-    window.addEventListener("resize", onResize);
-
-    function draw() {
-      if (!canvas || !ctx) return;
-      animRef.current = requestAnimationFrame(draw);
-      if (document.visibilityState === "hidden") return;
-
+    },
+    draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particlesRef.current) {
@@ -89,35 +74,34 @@ export function ShurikenParticles() {
         p.x += p.vx;
         p.rotation += 0.012 * p.speed;
 
+        const fadeZone = canvas.height * 0.2;
+        const fadeFactor = p.y < fadeZone ? Math.max(0, p.y / fadeZone) : 1;
+        const alpha = p.opacity * fadeFactor;
+
+        if (alpha <= 0) {
+          p.y = canvas.height + Math.random() * 40;
+          p.x = Math.random() * canvas.width;
+          p.rotation = Math.random() * Math.PI * 2;
+          continue;
+        }
+
         ctx.save();
-        ctx.globalAlpha = p.opacity;
-        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.shadowColor = p.color.glow;
+        ctx.shadowBlur = p.size * 1.5;
+        ctx.fillStyle = p.color.fill;
         drawStar(ctx, Math.round(p.x), Math.round(p.y), p.size, p.rotation);
         ctx.fill();
         ctx.restore();
 
-        if (p.y < -p.size * 2) {
+        if (p.y < -p.size) {
           p.y = canvas.height + Math.random() * 40;
           p.x = Math.random() * canvas.width;
           p.rotation = Math.random() * Math.PI * 2;
         }
       }
-    }
-
-    draw();
-
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") draw();
-    };
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    return () => {
-      cancelAnimationFrame(animRef.current);
-      clearTimeout(resizeTimer);
-      window.removeEventListener("resize", onResize);
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  }, []);
+    },
+  }));
 
   return (
     <canvas

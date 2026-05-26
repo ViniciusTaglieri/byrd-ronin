@@ -56,7 +56,7 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
           obs.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     obs.observe(parent);
     return () => obs.disconnect();
@@ -66,11 +66,13 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
     <div
       ref={wrapRef}
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         overflow: "hidden",
         pointerEvents: "none",
         zIndex: 2,
+        maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
       }}
       aria-hidden="true"
     >

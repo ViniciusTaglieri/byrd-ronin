@@ -1,31 +1,41 @@
 import { useEffect, useRef } from "react";
 
-interface Leaf {
+interface Particle {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-  phase: number;
+  size: number;
+  speed: number;
   opacity: number;
+  opacityOffset: number;
+  color: string;
 }
 
-const COUNT = 12;
+interface Props {
+  count?: number;
+  colors?: string[];
+  className?: string;
+}
 
-function createLeaf(width: number, height: number, randomY = false): Leaf {
+function createParticle(width: number, height: number, colors: string[], randomY = false): Particle {
   return {
     x: Math.random() * width,
-    y: randomY ? Math.random() * height : -(Math.random() * 60),
-    vx: (Math.random() - 0.5) * 0.6,
-    vy: 0.5 + Math.random() * 0.7,
-    phase: Math.random() * Math.PI * 2,
-    opacity: 0.1 + Math.random() * 0.15,
+    y: randomY ? Math.random() * height : height + Math.random() * 60,
+    size: Math.random() < 0.5 ? 2 : 4,
+    speed: 0.3 + Math.random() * 0.5,
+    opacity: 0.15 + Math.random() * 0.3,
+    opacityOffset: Math.random() * Math.PI * 2,
+    color: colors[Math.floor(Math.random() * colors.length)],
   };
 }
 
-export function LeafParticles() {
+export function PixelParticles({
+  count,
+  colors = ["#49c2f2", "#bfb52c", "#f8fafc"],
+  className,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
-  const particlesRef = useRef<Leaf[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,16 +43,16 @@ export function LeafParticles() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let t = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth < 640;
+    const particleCount = count ?? (isMobile ? 25 : 60);
 
     function resize() {
       if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      particlesRef.current = Array.from({ length: COUNT }, () =>
-        createLeaf(canvas.width, canvas.height, true)
+      particlesRef.current = Array.from({ length: particleCount }, () =>
+        createParticle(canvas.width, canvas.height, colors, true),
       );
     }
 
@@ -55,32 +65,33 @@ export function LeafParticles() {
     resize();
     window.addEventListener("resize", onResize);
 
+    let frameCount = 0;
+
     function draw() {
       if (!canvas || !ctx) return;
       animRef.current = requestAnimationFrame(draw);
       if (document.visibilityState === "hidden") return;
+      if (reducedMotion) return;
 
-      t += 0.016;
+      frameCount++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(107,143,94,1)";
 
       for (const p of particlesRef.current) {
-        p.y += p.vy;
-        p.x += p.vx + Math.sin(t * 0.8 + p.phase) * 0.4;
+        p.y -= p.speed;
+        const pulse = Math.sin(frameCount * 0.02 + p.opacityOffset) * 0.08;
+        const alpha = Math.max(0, Math.min(1, p.opacity + pulse));
 
-        ctx.save();
-        ctx.globalAlpha = p.opacity;
-        ctx.translate(Math.round(p.x), Math.round(p.y));
-        ctx.rotate(Math.PI / 4);
-        ctx.fillRect(0, 0, 3, 1);
-        ctx.restore();
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
 
-        if (p.y > canvas.height + 10 || p.x < -10 || p.x > canvas.width + 10) {
-          p.y = -(Math.random() * 40);
+        if (p.y < -10) {
+          p.y = canvas.height + Math.random() * 40;
           p.x = Math.random() * canvas.width;
-          p.phase = Math.random() * Math.PI * 2;
         }
       }
+
+      ctx.globalAlpha = 1;
     }
 
     draw();
@@ -96,12 +107,12 @@ export function LeafParticles() {
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, []);
+  }, [count, colors]);
 
   return (
     <canvas
       ref={canvasRef}
-      aria-hidden="true"
+      className={className}
       style={{
         position: "absolute",
         inset: 0,
@@ -110,6 +121,7 @@ export function LeafParticles() {
         pointerEvents: "none",
         zIndex: 1,
       }}
+      aria-hidden="true"
     />
   );
 }

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { PixelParticles } from "./PixelParticles";
-import { SteamButtonAnimated } from "./SteamButtonAnimated";
 import { ease } from "../../lib/motion";
+import { PixelParticles } from "./particles/PixelParticles";
+import { SteamButtonAnimated } from "./SteamButtonAnimated";
 
 const copyVariants = {
   hidden: {},
@@ -39,7 +39,7 @@ export function HeroCopy() {
 
       <motion.h1
         variants={itemVariants}
-        className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-[0.86] max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]"
+        className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-tighter max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]"
       >
         Slice Through <em className="text-scarlet italic">Chaos.</em> Become the{" "}
         <em className="text-scarlet italic">Ronin.</em>
@@ -47,7 +47,7 @@ export function HeroCopy() {
 
       <motion.p
         variants={itemVariants}
-        className="max-w-2xl text-muted text-lg leading-relaxed"
+        className="max-w-2xl text-muted text-xl leading-relaxed"
       >
         Byrd Ronin é um action roguelite onde cada corte, upgrade e onda de
         inimigos empurra sua run mais fundo no caos de bambu.
@@ -92,7 +92,7 @@ export function HeroCharacter() {
         alt=""
         width="1536"
         height="864"
-        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[640px]:opacity-35"
+        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[640px]:opacity-35 z-10"
         animate={{ y: [0, -14, 0] }}
         transition={{
           duration: 3.2,
