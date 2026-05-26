@@ -52,12 +52,15 @@ export function TrailerPlayer() {
 
               <motion.div
                 className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/60 bg-white/10 backdrop-blur-sm"
-                whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
+                whileHover={{
+                  scale: 1.12,
+                  backgroundColor: "rgba(255,255,255,0.22)",
+                }}
                 transition={{ duration: 0.18 }}
               >
                 <svg
-                  width="30"
-                  height="30"
+                  width="50"
+                  height="50"
                   viewBox="0 0 24 24"
                   fill="white"
                   aria-hidden="true"
