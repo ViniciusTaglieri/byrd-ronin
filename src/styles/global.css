@@ -4,42 +4,26 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
-/* ─── Animated dot grid ──────────────────────────────────────────────── */
-.dot-grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.4;
-  background-size: 22px 22px;
-  will-change: opacity, background-size;
-}
-
-.dot-grid.is-visible {
-  animation: dotPulse 4s ease-in-out infinite;
-}
-
-@keyframes dotPulse {
-  0%   { opacity: 0.4; background-size: 22px 22px; }
-  50%  { opacity: 1;   background-size: 24px 24px; }
-  100% { opacity: 0.4; background-size: 22px 22px; }
-}
-
-.dot-grid-bamboo {
-  background-image: radial-gradient(circle, rgba(107,143,94,0.09) 1px, transparent 1px);
-}
-.dot-grid-blue {
-  background-image: radial-gradient(circle, rgba(7,136,217,0.09) 1px, transparent 1px);
-}
-.dot-grid-gold {
-  background-image: radial-gradient(circle, rgba(191,181,44,0.09) 1px, transparent 1px);
-}
-.dot-grid-red {
-  background-image: radial-gradient(circle, rgba(242,19,19,0.09) 1px, transparent 1px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dot-grid.is-visible {
-    animation: none;
-    opacity: 0.6;
+@keyframes accordion-down {
+  from {
+    height: 0;
   }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.25s ease-out;
+}
+@utility animate-accordion-up {
+  animation: accordion-up 0.22s ease-in;
 }

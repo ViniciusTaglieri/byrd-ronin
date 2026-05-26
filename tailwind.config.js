@@ -4,6 +4,26 @@ export default {
     extend: {
       width: {
         "container-page": "min(1160px, calc(100% - 40px))",
+        "container-narrow": "min(860px, calc(100% - 40px))",
+      },
+      maxWidth: {
+        "container-page": "min(1160px, calc(100% - 40px))",
+      },
+      fontSize: {
+        "3xs": ["0.5625rem", { lineHeight: "0.875rem" }], // 9px
+        "2xs": ["0.625rem", { lineHeight: "1rem" }],      // 10px
+      },
+      letterSpacing: {
+        "ui-tight":   "0.06em",
+        "ui-label":   "0.18em",
+        "ui-hint":    "0.2em",
+        "ui-caption": "0.22em",
+        "ui-hud":     "0.28em",
+        "ui-wide":    "0.3em",
+        "ui-hero":    "0.4em",
+      },
+      lineHeight: {
+        tighter: "0.88",
       },
       colors: {
         red: "#f21313",
