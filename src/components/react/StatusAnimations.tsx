@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 interface Props {
   children: ReactNode;

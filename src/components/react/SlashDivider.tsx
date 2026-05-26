@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ease } from "../../lib/motion";
 
 interface Props {
   className?: string;
@@ -8,7 +9,7 @@ export function SlashDivider({ className = "" }: Props) {
   return (
     <div className={`relative flex items-center justify-center py-2 overflow-hidden ${className}`} aria-hidden="true">
       <motion.div
-        className="relative flex items-center gap-3 w-full max-w-[min(1160px,calc(100%-40px))] mx-auto px-5"
+        className="relative flex items-center gap-3 w-full max-w-container-page mx-auto px-5"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.5 }}
@@ -19,7 +20,7 @@ export function SlashDivider({ className = "" }: Props) {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease }}
           style={{ originX: 0 }}
         />
 
@@ -38,7 +39,7 @@ export function SlashDivider({ className = "" }: Props) {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease }}
           style={{ originX: 1 }}
         />
       </motion.div>
