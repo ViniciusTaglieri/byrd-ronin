@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { ease } from "../../lib/motion";
 
 export function TrailerPlayer() {
   return (
@@ -18,17 +17,15 @@ export function TrailerPlayer() {
         <video
           src="/videos/trailer.mp4"
           poster="/images/hero_bg.png"
-          muted
-          loop
+          preload="none"
           playsInline
-          autoPlay
           controls
           style={{
             width: "100%",
             aspectRatio: "16/9",
             objectFit: "cover",
             display: "block",
-            filter: "saturate(1.2) brightness(0.65)",
+            filter: "saturate(1.1) brightness(0.92)",
           }}
         />
       </motion.div>
