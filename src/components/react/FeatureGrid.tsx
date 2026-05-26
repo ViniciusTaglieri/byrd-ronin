@@ -30,40 +30,19 @@ const cardVariants = {
   hovered: {
     y: -4,
     borderColor: "rgba(107,143,94,0.55)",
-    boxShadow: "4px 4px 0 rgba(107,143,94,0.45)",
+    backgroundColor: "rgba(107,143,94,0.06)",
+    boxShadow: "6px 6px 0 rgba(107,143,94,0.50)",
     transition: { duration: 0.15 },
-  },
-};
-
-const slashEase = [0.22, 1, 0.36, 1] as const;
-
-const slashVariants = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: { pathLength: 0, opacity: 0 },
-  hovered: {
-    pathLength: 1,
-    opacity: 1,
-    transition: { duration: 0.18, ease: slashEase },
-  },
-};
-
-const shadowSlashVariants = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: { pathLength: 0, opacity: 0 },
-  hovered: {
-    pathLength: 1,
-    opacity: 0.3,
-    transition: { duration: 0.18, ease: slashEase },
   },
 };
 
 function CornerDecor() {
   return (
     <>
-      <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-bamboo/50 pointer-events-none" />
-      <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-bamboo/50 pointer-events-none" />
-      <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-bamboo/50 pointer-events-none" />
-      <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-bamboo/50 pointer-events-none" />
+      <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
     </>
   );
 }
@@ -71,29 +50,33 @@ function CornerDecor() {
 function FeatureCard({ icon, title, text }: (typeof features)[number]) {
   return (
     <motion.article
-      className="relative bg-panel border border-bamboo/15 p-7 flex flex-col items-center gap-5 cursor-default overflow-hidden"
+      className="group relative border border-bamboo/15 p-9 flex flex-col items-center gap-5 cursor-default overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(107,143,94,0.04) 100%)",
+      }}
       variants={cardVariants}
       whileHover="hovered"
     >
       <CornerDecor />
 
-      <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-black/40 border border-bamboo/15">
+      <div className="relative z-10 flex items-center justify-center w-20 h-20 bg-black/40 border border-bamboo/15">
         <img
           src={icon}
           alt=""
-          width="48"
-          height="48"
+          width="64"
+          height="64"
           aria-hidden="true"
-          className="w-12 h-12 object-contain"
+          className="w-16 h-16 object-contain"
           style={{ imageRendering: "pixelated" }}
         />
       </div>
 
-      <h3 className="relative z-10 font-display text-2xl text-white text-center leading-tight">
+      <h3 className="relative z-10 font-display text-3xl text-white text-center leading-tight">
         {title}
       </h3>
 
-      <div className="relative z-10 w-10 h-px bg-bamboo/35" />
+      <div className="relative z-10 w-14 h-px bg-bamboo/50" />
 
       <p className="relative z-10 text-muted text-sm leading-relaxed text-center">
         {text}
