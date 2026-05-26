@@ -87,7 +87,7 @@ export function NavbarClient() {
                   )}
                   <a
                     href={href}
-                    className={`relative px-4 py-2 font-display text-[15px] tracking-wide rounded-sm transition-colors duration-200 hover:text-bamboo group ${
+                    className={`relative px-4 py-2 font-display text-sm tracking-wide rounded-sm transition-colors duration-200 hover:text-bamboo group ${
                       isActive ? "text-bamboo" : "text-white/72"
                     }`}
                   >

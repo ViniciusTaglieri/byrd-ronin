@@ -32,13 +32,13 @@ export function AnimatedSectionHeader({
       viewport={{ once: true, amount: 0.5 }}
     >
       <motion.p
-        className="mb-3.5 text-bamboo font-display text-xl uppercase"
+        className="mb-3.5 text-bamboo font-display text-base uppercase tracking-widest"
         variants={itemVariants}
       >
         {eyebrow}
       </motion.p>
       <motion.h2
-        className="font-display text-4xl md:text-6xl xl:text-7xl text-white leading-tight"
+        className="font-display text-3xl md:text-5xl xl:text-6xl text-white leading-tight"
         variants={itemVariants}
       >
         {title}
