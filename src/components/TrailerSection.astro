@@ -2,20 +2,7 @@
 import { TrailerPlayer } from "./react/TrailerPlayer";
 ---
 
-<section id="trailer" class="relative overflow-hidden py-24 pt-20">
-  <div class="dot-grid dot-grid-gold" aria-hidden="true"></div>
-  <!-- HUD scan lines -->
-  <div
-    class="absolute top-[32%] left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
-    aria-hidden="true"
-  >
-  </div>
-  <div
-    class="absolute top-[68%] left-0 right-0 h-px bg-bamboo/8 pointer-events-none"
-    aria-hidden="true"
-  >
-  </div>
-
+<section id="trailer" class="relative overflow-hidden pt-36 pb-20">
   <!-- Kanji decorativos -->
   <div
     class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 right-[-0.5vw] flex flex-col gap-1 font-display text-[clamp(3rem,4.5vw,5rem)] text-white/2.5 leading-none"
@@ -31,33 +18,33 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
 
   <!-- Coordenadas HUD -->
   <div
-    class="absolute bottom-6 right-6 font-display text-[9px] text-bamboo/20 tracking-[0.2em] pointer-events-none select-none hidden min-[1200px]:flex flex-col items-end gap-0.5"
+    class="absolute bottom-6 right-6 font-display text-3xs text-bamboo/20 tracking-ui-hint pointer-events-none select-none hidden min-[1200px]:flex flex-col items-end gap-0.5"
     aria-hidden="true"
   >
     <span>座標</span>
     <span>00.44 · 12.81</span>
   </div>
 
-  <div class="relative z-10 w-[min(1160px,calc(100%-40px))] mx-auto">
+  <div class="relative z-10 w-container-page mx-auto">
     <div
       class="grid grid-cols-[4fr_7fr] max-[980px]:grid-cols-1 gap-14 max-[980px]:gap-10 items-center"
     >
       <!-- Coluna de texto -->
       <div class="flex flex-col gap-5 max-[980px]:order-2">
         <p
-          class="font-display text-xs uppercase tracking-[0.22em] text-bamboo/75"
+          class="font-display text-xs uppercase tracking-ui-caption text-bamboo/75"
         >
           Assista ao Trailer
         </p>
         <h2
-          class="font-display text-[clamp(2.8rem,5vw,4.5rem)] text-white leading-[0.88] [text-shadow:3px_3px_0_rgba(0,0,0,0.6)]"
+          class="font-display text-[clamp(2.8rem,5vw,4.5rem)] text-white leading-tighter [text-shadow:3px_3px_0_rgba(0,0,0,0.6)]"
         >
           Veja o ritmo<br />
           da lâmina<br />
           <em class="text-bamboo not-italic">em ação.</em>
         </h2>
         <p
-          class="text-muted text-base leading-relaxed max-w-xs max-[980px]:max-w-none"
+          class="text-muted text-lg leading-relaxed max-w-xs max-[980px]:max-w-none"
         >
           Cortes rápidos, pressão constante e upgrades que mudam tudo a cada
           rodada. Cada run é uma nova chance de dominar o caos.
@@ -81,16 +68,3 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
     </div>
   </div>
 </section>
-
-<script>
-  const section = document.getElementById("trailer");
-  const dotGrid = section?.querySelector(".dot-grid");
-  if (section && dotGrid) {
-    const observer = new IntersectionObserver(
-      ([entry]) => dotGrid.classList.toggle("is-visible", entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    observer.observe(section);
-    document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
-  }
-</script>

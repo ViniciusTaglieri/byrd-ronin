@@ -2,14 +2,9 @@
 import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
 import { BambooDecor } from "./react/BambooDecor";
 import { GameplayGridClient } from "./react/GameplayGridClient";
-import { LeafParticles } from "./react/LeafParticles";
 ---
 
-<section id="gameplay" class="relative py-24">
-  <div class="dot-grid dot-grid-blue" aria-hidden="true"></div>
-
-  <LeafParticles client:visible />
-
+<section id="gameplay" class="relative py-20">
   <BambooDecor
     side="right"
     opacity={0.11}
@@ -26,16 +21,3 @@ import { LeafParticles } from "./react/LeafParticles";
     <GameplayGridClient client:visible />
   </div>
 </section>
-
-<script>
-  const section = document.getElementById("gameplay");
-  const dotGrid = section?.querySelector(".dot-grid");
-  if (section && dotGrid) {
-    const observer = new IntersectionObserver(
-      ([entry]) => dotGrid.classList.toggle("is-visible", entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    observer.observe(section);
-    document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
-  }
-</script>

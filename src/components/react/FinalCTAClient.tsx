@@ -1,11 +1,15 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ease } from "../../lib/motion";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
 
+const BG_75 = "rgba(5,5,5,0.75)";
+const BG_96 = "rgba(5,5,5,0.96)";
+const BG_25 = "rgba(5,5,5,0.25)";
+const BG_90 = "rgba(5,5,5,0.9)";
+
 export function FinalCTAClient() {
   const ref = useRef<HTMLElement>(null);
-  const dotGridRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -13,23 +17,11 @@ export function FinalCTAClient() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-28px", "28px"]);
 
-  useEffect(() => {
-    const dotGrid = dotGridRef.current;
-    const section = ref.current;
-    if (!dotGrid || !section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => dotGrid.classList.toggle("is-visible", entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <motion.section ref={ref} className="relative border-t border-bamboo/15 py-24">
-      <div ref={dotGridRef} className="dot-grid dot-grid-red" aria-hidden="true" />
-
+    <motion.section
+      ref={ref}
+      className="relative border-t border-bamboo/15 py-20"
+    >
       <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
         <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
           {/* Background image with parallax */}
@@ -50,8 +42,7 @@ export function FinalCTAClient() {
           <div
             className="absolute inset-0 max-[768px]:hidden"
             style={{
-              background:
-                "linear-gradient(to right, transparent 20%, rgba(5,5,5,0.75) 52%, rgba(5,5,5,0.96) 100%)",
+              background: `linear-gradient(to right, transparent 20%, ${BG_75} 52%, ${BG_96} 100%)`,
             }}
             aria-hidden="true"
           />
@@ -59,8 +50,7 @@ export function FinalCTAClient() {
           <div
             className="absolute inset-0 hidden max-[768px]:block"
             style={{
-              background:
-                "linear-gradient(to bottom, rgba(5,5,5,0.25) 0%, rgba(5,5,5,0.9) 55%)",
+              background: `linear-gradient(to bottom, ${BG_25} 0%, ${BG_90} 55%)`,
             }}
             aria-hidden="true"
           />
@@ -93,7 +83,7 @@ export function FinalCTAClient() {
               </motion.h2>
 
               <motion.p
-                className="text-muted text-base leading-relaxed"
+                className="text-muted text-lg leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
