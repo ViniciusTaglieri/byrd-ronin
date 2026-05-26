@@ -16,12 +16,7 @@ interface Props {
   className?: string;
 }
 
-function createParticle(
-  width: number,
-  height: number,
-  colors: string[],
-  randomY = false
-): Particle {
+function createParticle(width: number, height: number, colors: string[], randomY = false): Particle {
   return {
     x: Math.random() * width,
     y: randomY ? Math.random() * height : height + Math.random() * 60,
@@ -48,7 +43,7 @@ export function PixelParticles({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Reduz partículas em mobile para performance
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.innerWidth < 640;
     const particleCount = count ?? (isMobile ? 25 : 60);
 
@@ -56,48 +51,40 @@ export function PixelParticles({
       if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      // Reinicializa as partículas com a nova dimensão
       particlesRef.current = Array.from({ length: particleCount }, () =>
-        createParticle(canvas.width, canvas.height, colors, true)
+        createParticle(canvas.width, canvas.height, colors, true),
       );
     }
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    }
+
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
 
     let frameCount = 0;
 
     function draw() {
       if (!canvas || !ctx) return;
       animRef.current = requestAnimationFrame(draw);
-
-      // Pausa quando tab está inativa
       if (document.visibilityState === "hidden") return;
-
-      // prefers-reduced-motion: parar animação
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (reducedMotion) return;
 
       frameCount++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particlesRef.current) {
         p.y -= p.speed;
-
-        // Opacidade pulsante
-        const pulse =
-          Math.sin(frameCount * 0.02 + p.opacityOffset) * 0.08;
+        const pulse = Math.sin(frameCount * 0.02 + p.opacityOffset) * 0.08;
         const alpha = Math.max(0, Math.min(1, p.opacity + pulse));
 
         ctx.fillStyle = p.color;
         ctx.globalAlpha = alpha;
-        ctx.fillRect(
-          Math.round(p.x),
-          Math.round(p.y),
-          p.size,
-          p.size
-        );
+        ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
 
-        // Reset ao sair pelo topo
         if (p.y < -10) {
           p.y = canvas.height + Math.random() * 40;
           p.x = Math.random() * canvas.width;
@@ -116,7 +103,8 @@ export function PixelParticles({
 
     return () => {
       cancelAnimationFrame(animRef.current);
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, [count, colors]);

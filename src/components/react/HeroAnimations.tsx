@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { PixelParticles } from "./PixelParticles";
+import { ease } from "../../lib/motion";
+import { PixelParticles } from "./particles/PixelParticles";
 import { SteamButtonAnimated } from "./SteamButtonAnimated";
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const copyVariants = {
   hidden: {},
@@ -26,7 +25,7 @@ const itemVariants = {
 export function HeroCopy() {
   return (
     <motion.div
-      className="max-w-[650px] min-[981px]:max-h-[45vh] min-[981px]:overflow-visible"
+      className="w-full"
       variants={copyVariants}
       initial="hidden"
       animate="visible"
@@ -35,19 +34,20 @@ export function HeroCopy() {
         variants={itemVariants}
         className="mb-3.5 text-blue-light font-display text-xl uppercase"
       >
-        Available on Steam
+        Disponível na Steam
       </motion.p>
 
-      <motion.h1 variants={itemVariants}>
-        Slice Through{" "}
-        <em className="text-gold italic">Chaos.</em>
-        {" "}Become the{" "}
-        <em className="text-gold italic">Ronin.</em>
+      <motion.h1
+        variants={itemVariants}
+        className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-tighter max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]"
+      >
+        Slice Through <em className="text-scarlet italic">Chaos.</em> Become the{" "}
+        <em className="text-scarlet italic">Ronin.</em>
       </motion.h1>
 
       <motion.p
         variants={itemVariants}
-        className="max-w-[610px] text-muted text-[19px] leading-[1.7]"
+        className="max-w-2xl text-muted text-xl leading-relaxed"
       >
         Byrd Ronin é um action roguelite onde cada corte, upgrade e onda de
         inimigos empurra sua run mais fundo no caos de bambu.
@@ -55,7 +55,7 @@ export function HeroCopy() {
 
       <motion.div
         variants={itemVariants}
-        className="flex flex-wrap gap-4 mt-8 mb-[18px]"
+        className="flex flex-wrap gap-4 mt-8 mb-4.5"
       >
         <SteamButtonAnimated
           label="JOGAR AGORA"
@@ -64,7 +64,7 @@ export function HeroCopy() {
           className="max-[640px]:w-full"
         />
         <motion.a
-          className="inline-flex min-h-[48px] items-center justify-center gap-[10px] px-5 py-[13px] border-2 border-white/40 rounded-md text-white bg-black/30 font-display text-[18px] font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-[160ms] hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
+          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/30 rounded-md text-white bg-white/5 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
           href="#trailer"
           data-event="trailer_play_click"
           whileHover={{ scale: 1.03, borderColor: "rgba(73,194,242,0.7)" }}
@@ -81,18 +81,18 @@ export function HeroCopy() {
 export function HeroCharacter() {
   return (
     <motion.div
-      className="relative min-h-[470px] max-[980px]:min-h-[340px] max-[640px]:min-h-[270px]"
+      className="relative min-h-130 max-[980px]:min-h-90 max-[640px]:min-h-65"
       aria-hidden="true"
-      initial={{ opacity: 0, x: 80 }}
+      initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.75, delay: 0.25, ease }}
     >
       <motion.img
-        src="/personagem.png"
+        src={`${import.meta.env.BASE_URL}images/hero_character.png`}
         alt=""
         width="1536"
         height="864"
-        className="absolute right-[-170px] bottom-[-70px] w-[min(850px,68vw)] max-w-none drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[980px]:right-[-90px] max-[980px]:bottom-[-80px] max-[980px]:w-[min(700px,105vw)] max-[640px]:opacity-35 max-[640px]:top-0 max-[640px]:right-[-84px] max-[640px]:bottom-auto max-[640px]:w-[430px]"
+        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[640px]:opacity-35 z-10"
         animate={{ y: [0, -14, 0] }}
         transition={{
           duration: 3.2,

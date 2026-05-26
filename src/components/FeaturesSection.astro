@@ -1,18 +1,22 @@
 ---
+import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
 import { FeatureGrid } from "./react/FeatureGrid";
+import { ShurikenParticles } from "./react/particles/ShurikenParticles";
 ---
 
 <section
   id="features"
-  class="section-pad [background:linear-gradient(180deg,#091c2c,#050505)]"
+  class="relative py-20"
+  style="background-image: repeating-linear-gradient(0deg, rgba(107,143,94,0.07) 0px, rgba(107,143,94,0.07) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, rgba(107,143,94,0.07) 0px, rgba(107,143,94,0.07) 1px, transparent 1px, transparent 40px);"
 >
-  <div class="w-[min(1160px,calc(100%_-_40px))] mx-auto">
-    <div class="max-w-[760px] mb-[42px]">
-      <p class="mb-3.5 text-blue-light font-display text-xl uppercase">
-        Features
-      </p>
-      <h2>Cada run pede timing mais afiado.</h2>
-    </div>
+  <ShurikenParticles client:visible />
+
+  <div class="w-container-page mx-auto relative z-10">
+    <AnimatedSectionHeader
+      eyebrow="Features"
+      title="Domine cada run."
+      client:visible
+    />
     <FeatureGrid client:visible />
   </div>
 </section>

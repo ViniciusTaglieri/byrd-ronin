@@ -25,11 +25,11 @@ function makeLeaves(count: number): Leaf[] {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
     shape: (i % 3) as 0 | 1 | 2,
-    size: 9 + Math.random() * 9,
+    size: 12 + Math.random() * 10,
     left: Math.random() * 98,
     duration: 9 + Math.random() * 10,
     delay: Math.random() * 14,
-    opacity: 0.4 + Math.random() * 0.3,
+    opacity: 0.55 + Math.random() * 0.3,
   }));
 }
 
@@ -56,7 +56,7 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
           obs.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     obs.observe(parent);
     return () => obs.disconnect();
@@ -70,7 +70,9 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
         inset: 0,
         overflow: "hidden",
         pointerEvents: "none",
-        zIndex: 1,
+        zIndex: 2,
+        maskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 90%)",
       }}
       aria-hidden="true"
     >
@@ -112,7 +114,8 @@ export function FallingLeaves({ mode = "ambient", count = 15 }: Props) {
                 top: "-20px",
                 left: `${leaf.left}%`,
                 opacity: leaf.opacity,
-                color: "var(--bamboo, #6b8f5e)",
+                color: "#c4e8a8",
+                filter: "drop-shadow(0 0 4px rgba(180, 230, 140, 0.45))",
                 animation: `${animName} ${leaf.duration}s ${leaf.delay}s infinite linear`,
                 willChange: "transform",
               }}

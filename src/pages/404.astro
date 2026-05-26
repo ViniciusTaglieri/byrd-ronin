@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
+---
+
+<BaseLayout
+  title="404 — Run Encerrada | Byrd Ronin"
+  description="Esta página não existe — mas sua próxima run sim. Volte ao início ou jogue Byrd Ronin na Steam."
+>
+  <div class="relative min-h-dvh flex flex-col">
+    <!-- Background -->
+    <div
+      class="absolute inset-0 bg-center bg-cover"
+      style={`background-image: url('${import.meta.env.BASE_URL}images/hero_bg.png'); opacity: 0.18`}
+      aria-hidden="true"
+    />
+    <div
+      class="absolute inset-0 bg-linear-to-b from-black/70 to-black"
+      aria-hidden="true"
+    />
+
+    <!-- Logo header -->
+    <header class="relative z-10 px-8 py-6 max-[640px]:px-5">
+      <a href={import.meta.env.BASE_URL} aria-label="Byrd Ronin — home">
+        <img
+          src={`${import.meta.env.BASE_URL}logos/logo_byrdronin.png`}
+          alt="Byrd Ronin"
+          width="192"
+          height="108"
+          class="w-28 max-[640px]:w-20 h-auto"
+        />
+      </a>
+    </header>
+
+    <!-- Content -->
+    <main
+      class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 gap-5 pb-16"
+    >
+      <!-- Eyebrow HUD -->
+      <p class="font-display text-bamboo text-xs uppercase tracking-[0.35em]">
+        [ RUN ENCERRADA ]
+      </p>
+
+      <!-- 404 -->
+      <h1
+        class="font-display text-scarlet leading-none select-none"
+        style="font-size: clamp(96px, 20vw, 200px); text-shadow: 6px 6px 0 rgba(0,0,0,0.7), 0 0 80px rgba(255,59,46,0.25);"
+      >
+        404
+      </h1>
+
+      <!-- Mensagem -->
+      <p class="font-display text-white text-xl max-[640px]:text-lg">
+        Você caiu no caos errado.
+      </p>
+      <p class="text-muted text-sm leading-relaxed max-w-xs">
+        Esta página não existe — mas sua próxima run sim.
+      </p>
+
+      <!-- Ações -->
+      <div class="flex flex-wrap gap-4 justify-center mt-4">
+        <a
+          href={import.meta.env.BASE_URL}
+          class="inline-flex min-h-12 items-center gap-2 px-6 py-3 border-2 border-bamboo/50 rounded-sm text-bamboo font-display text-sm uppercase tracking-wide hover:border-bamboo hover:bg-bamboo/10 transition-all duration-150"
+        >
+          ← Voltar ao início
+        </a>
+        <SteamButtonAnimated
+          label="JOGAR AGORA"
+          event="steam_cta_404_click"
+          client:load
+        />
+      </div>
+    </main>
+  </div>
+</BaseLayout>

@@ -1,151 +1,102 @@
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import { UpgradeIcon, EnemyIcon, ChaosIcon } from "./FeatureIcons";
-import { SwordSlash } from "./SwordSlash";
-import { BambooDecor } from "./BambooDecor";
+import { ease } from "../../lib/motion";
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
-const features: Array<{ Icon: () => React.ReactElement; title: string; text: string }> = [
+const features = [
   {
-    Icon: UpgradeIcon,
+    icon: `${import.meta.env.BASE_URL}images/features_upgrades.png`,
     title: "Upgrades",
     text: "Monte sua run com upgrades que mudam como você corta, sobrevive e domina cada onda.",
   },
   {
-    Icon: EnemyIcon,
+    icon: `${import.meta.env.BASE_URL}images/features_inimigos.png`,
     title: "Inimigos",
     text: "Enfrente inimigos agressivos que forçam movimento, timing e decisões rápidas.",
   },
   {
-    Icon: ChaosIcon,
+    icon: `${import.meta.env.BASE_URL}images/features_caos.png`,
     title: "Caos",
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
   },
-];
+] as const;
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.15,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease },
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+  hovered: {
+    y: -4,
+    borderColor: "rgba(107,143,94,0.55)",
+    backgroundColor: "rgba(107,143,94,0.06)",
+    boxShadow: "6px 6px 0 rgba(107,143,94,0.50)",
+    transition: { duration: 0.15 },
   },
 };
 
-function FeatureCard({
-  Icon,
-  title,
-  text,
-  index,
-}: {
-  Icon: () => React.ReactElement;
-  title: string;
-  text: string;
-  index: number;
-}) {
-  const isEven = index % 2 === 1;
+function CornerDecor() {
+  return (
+    <>
+      <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+      <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-bamboo/70 pointer-events-none transition-colors duration-150 group-hover:border-bamboo" />
+    </>
+  );
+}
 
+function FeatureCard({ icon, title, text }: (typeof features)[number]) {
   return (
     <motion.article
-      className={[
-        "border border-bamboo/20 rounded-lg bg-[rgba(13,26,15,0.5)] min-h-[310px] p-[26px]",
-        "lg:grid lg:gap-8 lg:items-start lg:min-h-0 lg:p-8",
-        isEven ? "lg:grid-cols-[1fr_auto]" : "lg:grid-cols-[auto_1fr]",
-      ].join(" ")}
-      variants={cardVariants}
-      whileHover={{
-        y: -4,
-        borderColor: "rgba(107,143,94,0.55)",
-        boxShadow: "4px 4px 0 rgba(107,143,94,0.45), 0 24px 48px rgba(0,0,0,0.4)",
-        transition: { duration: 0.2 },
+      className="group relative border border-bamboo/15 p-9 flex flex-col items-center gap-5 cursor-default overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(107,143,94,0.04) 100%)",
       }}
+      variants={cardVariants}
+      whileHover="hovered"
     >
-      <motion.span
-        className={[
-          "inline-grid w-20 h-20 place-items-center mb-7 lg:mb-0 border border-bamboo/[0.35] rounded-lg text-gold bg-bamboo/[0.15]",
-          isEven ? "lg:order-2" : "",
-        ].join(" ")}
-        whileHover={{
-          rotate: [-5, 5, -3, 3, 0],
-          scale: 1.1,
-          transition: { duration: 0.4 },
-        }}
-      >
-        <Icon />
-      </motion.span>
-      <div className="flex flex-col gap-2.5">
-        <h3 className="mb-[14px] tracking-[0.04em]">{title}</h3>
-        <p className="text-muted text-[17px] m-0">{text}</p>
+      <CornerDecor />
+
+      <div className="relative z-10 flex items-center justify-center w-20 h-20 bg-black/40 border border-bamboo/15">
+        <img
+          src={icon}
+          alt=""
+          width="64"
+          height="64"
+          aria-hidden="true"
+          className="w-16 h-16 object-contain"
+          style={{ imageRendering: "pixelated" }}
+        />
       </div>
+
+      <h3 className="relative z-10 font-display text-3xl text-white text-center leading-tight">
+        {title}
+      </h3>
+
+      <div className="relative z-10 w-14 h-px bg-bamboo/50" />
+
+      <p className="relative z-10 text-muted text-sm leading-relaxed text-center">
+        {text}
+      </p>
     </motion.article>
   );
 }
 
 export function FeatureGrid() {
-  const [slashActive, setSlashActive] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-
-  useEffect(() => {
-    if (hasTriggered) return;
-    const section = document.getElementById("features");
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasTriggered) {
-          setSlashActive(true);
-          setHasTriggered(true);
-          setTimeout(() => setSlashActive(false), 700);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [hasTriggered]);
-
   return (
-    <>
-      <SwordSlash trigger={slashActive} variant="horizontal" />
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "32px",
-          opacity: 0.15,
-        }}
-      >
-        <BambooDecor
-          side="left"
-          opacity={1}
-          style={{ transform: "rotate(90deg)", height: "56px" }}
-        />
-      </div>
-
-      <motion.div
-        className="grid grid-cols-3 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 gap-[22px] lg:grid-cols-1 lg:gap-8"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-      >
-        {features.map((f, i) => (
-          <FeatureCard key={f.title} {...f} index={i} />
-        ))}
-      </motion.div>
-    </>
+    <motion.div
+      className="grid grid-cols-3 max-[768px]:grid-cols-1 gap-6"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+    >
+      {features.map((f) => (
+        <FeatureCard key={f.title} {...f} />
+      ))}
+    </motion.div>
   );
 }

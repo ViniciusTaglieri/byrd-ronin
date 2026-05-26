@@ -1,22 +1,29 @@
 ---
-import "../styles/global.css";
 import { GAME, STEAM_URL } from "../consts";
+import "../styles/global.css";
 
 const {
-  title = "Byrd Ronin - Action Roguelite on Steam",
-  description = "Slice through bamboo, survive enemy waves and master chaotic roguelite runs in Byrd Ronin. Available now on Steam.",
+  title = "Byrd Ronin — Roguelite Hack and Slash 2D | Steam",
+  description = "Corte bambus, enfrente ondas de inimigos e domine runs caóticas. Byrd Ronin é um roguelite hack and slash 2D no Steam — combate preciso, upgrades intensos, caos garantido.",
 } = Astro.props;
+
+const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 
 const schemaOrg = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "VideoGame",
   name: GAME.title,
   description: GAME.descriptionShort,
+  inLanguage: "pt-BR",
+  applicationCategory: "Game",
+  keywords:
+    "roguelite, hack and slash, jogo indie, 2D, Steam, ação, roguelike, jogo brasileiro",
   publisher: { "@type": "Organization", name: GAME.publisher },
   developer: { "@type": "Organization", name: GAME.developer },
   genre: ["Action", "Roguelite", "Hack and Slash", "Indie"],
   operatingSystem: "Windows",
   url: STEAM_URL,
+  audience: { "@type": "Audience", audienceType: "gamers" },
   offers: {
     "@type": "Offer",
     price: "9.99",
@@ -27,22 +34,26 @@ const schemaOrg = JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#050505" />
-    <link rel="canonical" href="https://byrdronin.com" />
+    <link rel="canonical" href="https://taglieri.me/byrd-ronin" />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta
       property="og:description"
-      content="Fast cuts, upgrades, enemies and chaos. Byrd Ronin now on Steam."
+      content="Action roguelite 2D com combate preciso e progressão intensa. Disponível agora na Steam."
     />
-    <meta property="og:image" content="https://byrdronin.com/og_image.png" />
-    <meta property="og:url" content="https://byrdronin.com" />
+    <meta
+      property="og:image"
+      content="https://taglieri.me/byrd-ronin/images/og_image.png"
+    />
+    <meta property="og:url" content="https://taglieri.me/byrd-ronin" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
 
@@ -50,18 +61,28 @@ const schemaOrg = JSON.stringify({
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://byrdronin.com/og_image.png" />
+    <meta
+      name="twitter:image"
+      content="https://taglieri.me/byrd-ronin/images/og_image.png"
+    />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Pixelify+Sans:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload hero background for LCP -->
+    <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}images/hero_bg.png`} />
+
+    <!-- Umami Analytics -->
+    {
+      umamiId && (
+        <script
+          is:inline
+          defer
+          src={import.meta.env.PUBLIC_UMAMI_SRC ?? "https://cloud.umami.is/script.js"}
+          data-website-id={umamiId}
+        />
+      )
+    }
 
     <title>{title}</title>
 
@@ -69,19 +90,18 @@ const schemaOrg = JSON.stringify({
     <script type="application/ld+json" is:inline set:html={schemaOrg} />
   </head>
   <body
-    class="antialiased min-h-dvh text-white font-body bg-black"
+    class="antialiased min-h-dvh text-white font-body
+    bg-linear-to-b
+    from-forest
+    to-black"
   >
-    <slot />
-
-    <!-- Analytics hook -->
-    <script>
-      document.addEventListener("click", (e) => {
-        const el = (e.target as HTMLElement).closest("[data-event]");
+    <script is:inline>
+      document.addEventListener("click", function (e) {
+        var el = e.target.closest("[data-event]");
         if (!el) return;
-        const event = el.getAttribute("data-event");
-        // TODO: substituir por gtag / plausible / umami
-        console.log("[analytics]", event);
+        if (window.umami) window.umami.track(el.getAttribute("data-event"));
       });
     </script>
+    <slot />
   </body>
 </html>

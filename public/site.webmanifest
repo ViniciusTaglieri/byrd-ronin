@@ -1,0 +1,16 @@
+{
+  "name": "Byrd Ronin",
+  "short_name": "Byrd Ronin",
+  "description": "Action roguelite hack and slash 2D. Disponível na Steam.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

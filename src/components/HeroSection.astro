@@ -1,31 +1,31 @@
 ---
-import { HeroCopy, HeroCharacter, HeroParticles } from "./react/HeroAnimations";
-import { FallingLeaves } from "./react/FallingLeaves";
-import { SectionWave } from "./react/SectionWave";
+import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
+import { FallingLeaves } from "./react/particles/FallingLeaves";
 ---
 
 <section
   id="top"
-  class="relative min-h-[760px] overflow-hidden pt-[142px] pb-[70px] max-[980px]:min-h-0 max-[980px]:pt-[124px]"
+  class="relative min-h-dvh pt-35.5 flex flex-col justify-center pb-12 overflow-hidden"
 >
   <div
-    class="absolute inset-0 bg-[url('/page_bg_raw_gpt.png')] bg-center bg-cover"
+    class="absolute inset-0 bg-center bg-cover"
+    style={`background-image: url('${import.meta.env.BASE_URL}images/hero_bg.png')`}
     aria-hidden="true"
-  ></div>
+  >
+  </div>
   <div
-    class="absolute inset-0 [background:linear-gradient(90deg,rgba(5,5,5,0.92)_0%,rgba(5,5,5,0.68)_42%,rgba(5,5,5,0.2)_100%),linear-gradient(180deg,rgba(5,5,5,0.2)_0%,rgba(5,5,5,0.88)_100%)]"
+    class="absolute inset-0 [background:linear-gradient(90deg,rgba(5,5,5,0.95)_0%,rgba(5,5,5,0.60)_40%,rgba(5,5,5,0.15)_100%),linear-gradient(180deg,rgba(5,5,5,0.15)_0%,rgba(5,5,5,0.85)_100%)]"
     aria-hidden="true"
-  ></div>
+  >
+  </div>
 
   <HeroParticles client:load />
-  <FallingLeaves mode="ambient" count={12} client:load />
+  <FallingLeaves client:load />
 
   <div
-    class="w-[min(1160px,calc(100%_-_40px))] mx-auto relative grid grid-cols-[minmax(0,1fr)_minmax(340px,0.9fr)] max-[980px]:grid-cols-1 items-center gap-[22px]"
+    class="w-container-page mx-auto relative grid grid-cols-[1fr_1fr] max-[980px]:grid-cols-1 items-center gap-10"
   >
     <HeroCopy client:load />
     <HeroCharacter client:load />
   </div>
-
-  <SectionWave position="bottom" color="#0b1210" client:load />
 </section>

@@ -1,14 +1,15 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { ease } from "../../lib/motion";
 
-interface Props {
-  youtubeId?: string;
-}
-
-const ease = [0.22, 1, 0.36, 1] as const;
-
-export function TrailerPlayer({ youtubeId }: Props) {
+export function TrailerPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+
+  function handlePlay() {
+    videoRef.current?.play();
+    setPlaying(true);
+  }
 
   return (
     <motion.div
@@ -18,89 +19,57 @@ export function TrailerPlayer({ youtubeId }: Props) {
       transition={{ duration: 0.6, delay: 0.15, ease }}
     >
       <motion.div
-        className="relative w-full overflow-hidden border border-bamboo/[0.35] rounded-lg bg-black shadow-[4px_4px_0_rgba(191,181,44,0.5),0_32px_80px_rgba(0,0,0,0.48)] cursor-pointer"
-        whileHover={{
-          boxShadow:
-            "10px 10px 0 rgba(191,181,44,0.9), 0 0 32px rgba(73,194,242,0.35), 0 32px 80px rgba(0,0,0,0.5)",
-        }}
+        className="relative w-full overflow-hidden border border-bamboo/35 rounded bg-black shadow-[4px_4px_0_rgba(191,181,44,0.25),0_32px_80px_rgba(0,0,0,0.48)]"
+        whileHover={{ scale: 1.008 }}
         transition={{ duration: 0.25 }}
       >
-        <AnimatePresence mode="wait">
-          {playing && youtubeId ? (
-            <motion.iframe
-              key="youtube"
-              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
-              title="Byrd Ronin Trailer"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{
-                width: "100%",
-                aspectRatio: "16/9",
-                border: "none",
-                display: "block",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-          ) : (
-            <motion.div
-              key="thumb"
-              style={{ position: "relative", cursor: "pointer" }}
-              onClick={() => youtubeId && setPlaying(true)}
+        <video
+          ref={videoRef}
+          src={`${import.meta.env.BASE_URL}videos/trailer.mp4`}
+          poster={`${import.meta.env.BASE_URL}images/og_image.png`}
+          preload="none"
+          playsInline
+          controls
+          style={{
+            width: "100%",
+            aspectRatio: "16/9",
+            objectFit: "cover",
+            display: "block",
+            filter: "saturate(1.1) brightness(0.92)",
+          }}
+        />
+
+        <AnimatePresence>
+          {!playing && (
+            <motion.button
+              className="absolute inset-0 flex items-center justify-center w-full cursor-pointer"
+              onClick={handlePlay}
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              aria-label="Reproduzir trailer"
             >
-              <video
-                src="/trailer.mp4"
-                poster="/page_bg_raw_gpt.png"
-                muted
-                loop
-                playsInline
-                autoPlay
-                style={{
-                  width: "100%",
-                  aspectRatio: "16/9",
-                  objectFit: "cover",
-                  display: "block",
-                  filter: "saturate(1.2) brightness(0.65)",
+              <div className="absolute inset-0 bg-black/25" />
+
+              <motion.div
+                className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/60 bg-white/10 backdrop-blur-sm"
+                whileHover={{
+                  scale: 1.12,
+                  backgroundColor: "rgba(255,255,255,0.22)",
                 }}
-              />
-
-              {youtubeId && (
-                <motion.button
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88px] h-[88px] flex items-center justify-center border-4 border-white rounded-full bg-red shadow-[0_12px_0_#870707] cursor-pointer"
-                  aria-label="Assistir trailer completo no YouTube"
-                  onClick={() => setPlaying(true)}
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  whileHover={{
-                    scale: 1.2,
-                    backgroundColor: "#bfb52c",
-                  }}
-                  whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.18 }}
+              >
+                <svg
+                  width="50"
+                  height="50"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  aria-hidden="true"
+                  style={{ marginLeft: 3 }}
                 >
-                  <svg
-                    width="26"
-                    height="36"
-                    viewBox="0 0 26 36"
-                    fill="white"
-                    aria-hidden="true"
-                    style={{ marginLeft: "4px" }}
-                  >
-                    <polygon points="0,0 26,18 0,36" />
-                  </svg>
-                </motion.button>
-              )}
-
-              <span className="absolute right-[18px] bottom-[18px] left-[18px] px-[14px] py-3 border border-white/[0.24] rounded-md text-white bg-black/[0.74] font-extrabold">
-                {youtubeId
-                  ? "Clique para assistir o trailer completo"
-                  : "Trailer de gameplay — Byrd Ronin"}
-              </span>
-            </motion.div>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </motion.div>
+            </motion.button>
           )}
         </AnimatePresence>
       </motion.div>
