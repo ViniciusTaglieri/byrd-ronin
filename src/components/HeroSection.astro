@@ -1,10 +1,11 @@
 ---
 import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
+import { FallingLeaves } from "./react/particles/FallingLeaves";
 ---
 
 <section
   id="top"
-  class="relative min-h-dvh pt-35.5 flex flex-col justify-center pb-12"
+  class="relative min-h-dvh pt-35.5 flex flex-col justify-center pb-12 overflow-hidden"
 >
   <div
     class="absolute inset-0 bg-[url('/images/hero_bg.png')] bg-center bg-cover"
@@ -18,6 +19,7 @@ import { HeroCharacter, HeroCopy, HeroParticles } from "./react/HeroAnimations";
   </div>
 
   <HeroParticles client:load />
+  <FallingLeaves client:load />
 
   <div
     class="w-container-page mx-auto relative grid grid-cols-[1fr_1fr] max-[980px]:grid-cols-1 items-center gap-10"

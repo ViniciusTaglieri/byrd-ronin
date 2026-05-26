@@ -1,5 +1,4 @@
 ---
-import { FallingLeaves } from "../components/react/FallingLeaves";
 import { GAME, STEAM_URL } from "../consts";
 import "../styles/global.css";
 
@@ -103,7 +102,6 @@ const schemaOrg = JSON.stringify({
         if (window.umami) window.umami.track(el.getAttribute("data-event"));
       });
     </script>
-    <FallingLeaves mode="ambient" count={16} client:load />
     <slot />
   </body>
 </html>
