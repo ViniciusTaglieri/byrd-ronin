@@ -29,7 +29,7 @@ export function FinalCTAClient() {
             aria-hidden="true"
             className="absolute bg-cover bg-center"
             style={{
-              backgroundImage: "url('/images/final_cta_background.png')",
+              backgroundImage: `url('${import.meta.env.BASE_URL}images/final_cta_background.png')`,
               top: -32,
               left: 0,
               right: 0,

@@ -3,17 +3,17 @@ import { ease } from "../../lib/motion";
 
 const features = [
   {
-    icon: "/images/features_upgrades.png",
+    icon: `${import.meta.env.BASE_URL}images/features_upgrades.png`,
     title: "Upgrades",
     text: "Monte sua run com upgrades que mudam como você corta, sobrevive e domina cada onda.",
   },
   {
-    icon: "/images/features_inimigos.png",
+    icon: `${import.meta.env.BASE_URL}images/features_inimigos.png`,
     title: "Inimigos",
     text: "Enfrente inimigos agressivos que forçam movimento, timing e decisões rápidas.",
   },
   {
-    icon: "/images/features_caos.png",
+    icon: `${import.meta.env.BASE_URL}images/features_caos.png`,
     title: "Caos",
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
   },

@@ -34,7 +34,7 @@ export interface GameplayClip {
 // Vídeos nativos: 1170×658px (ratio 585:329 ≈ 16:9)
 export const GAMEPLAY_CLIPS: GameplayClip[] = [
   {
-    src: "/videos/gameplay1.webm",
+    src: `${import.meta.env.BASE_URL}videos/gameplay1.webm`,
     title: "Cortes em alta velocidade",
     context:
       "Cada swing elimina bambus e inimigos ao mesmo tempo — o ritmo não para.",
@@ -43,7 +43,7 @@ export const GAMEPLAY_CLIPS: GameplayClip[] = [
       "Mobilidade é parte central da experiência. Dash, posicionamento e timing definem como você atravessa o campo de batalha e lida com o perigo constante.\n\nCada escolha muda o ritmo da luta — avançar, recuar ou insistir pode ser a diferença entre sobreviver ou cair.",
   },
   {
-    src: "/videos/gameplay2.webm",
+    src: `${import.meta.env.BASE_URL}videos/gameplay2.webm`,
     title: "Sobrevivendo à pressão inimiga",
     context:
       "Inimigos avançam de todos os lados. Timing e posicionamento são tudo.",

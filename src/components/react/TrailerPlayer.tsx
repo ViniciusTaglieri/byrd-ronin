@@ -25,8 +25,8 @@ export function TrailerPlayer() {
       >
         <video
           ref={videoRef}
-          src="/videos/trailer.mp4"
-          poster="/images/og_image.png"
+          src={`${import.meta.env.BASE_URL}videos/trailer.mp4`}
+          poster={`${import.meta.env.BASE_URL}images/og_image.png`}
           preload="none"
           playsInline
           controls

@@ -10,8 +10,8 @@ import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
   <div class="relative min-h-dvh flex flex-col">
     <!-- Background -->
     <div
-      class="absolute inset-0 bg-[url('/images/hero_bg.png')] bg-center bg-cover"
-      style="opacity: 0.18"
+      class="absolute inset-0 bg-center bg-cover"
+      style={`background-image: url('${import.meta.env.BASE_URL}images/hero_bg.png'); opacity: 0.18`}
       aria-hidden="true"
     />
     <div
@@ -21,9 +21,9 @@ import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
 
     <!-- Logo header -->
     <header class="relative z-10 px-8 py-6 max-[640px]:px-5">
-      <a href="/" aria-label="Byrd Ronin — home">
+      <a href={import.meta.env.BASE_URL} aria-label="Byrd Ronin — home">
         <img
-          src="/logos/logo_byrdronin.png"
+          src={`${import.meta.env.BASE_URL}logos/logo_byrdronin.png`}
           alt="Byrd Ronin"
           width="192"
           height="108"
@@ -60,7 +60,7 @@ import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
       <!-- Ações -->
       <div class="flex flex-wrap gap-4 justify-center mt-4">
         <a
-          href="/"
+          href={import.meta.env.BASE_URL}
           class="inline-flex min-h-12 items-center gap-2 px-6 py-3 border-2 border-bamboo/50 rounded-sm text-bamboo font-display text-sm uppercase tracking-wide hover:border-bamboo hover:bg-bamboo/10 transition-all duration-150"
         >
           ← Voltar ao início

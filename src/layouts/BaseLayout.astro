@@ -40,8 +40,8 @@ const schemaOrg = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#050505" />
-    <link rel="canonical" href="https://byrdronin.com" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://taglieri.me/byrd-ronin" />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -51,9 +51,9 @@ const schemaOrg = JSON.stringify({
     />
     <meta
       property="og:image"
-      content="https://byrdronin.com/images/og_image.png"
+      content="https://taglieri.me/byrd-ronin/images/og_image.png"
     />
-    <meta property="og:url" content="https://byrdronin.com" />
+    <meta property="og:url" content="https://taglieri.me/byrd-ronin" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
 
@@ -63,14 +63,14 @@ const schemaOrg = JSON.stringify({
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content="https://byrdronin.com/images/og_image.png"
+      content="https://taglieri.me/byrd-ronin/images/og_image.png"
     />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 
     <!-- Preload hero background for LCP -->
-    <link rel="preload" as="image" href="/images/hero_bg.png" />
+    <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}images/hero_bg.png`} />
 
     <!-- Umami Analytics -->
     {
@@ -78,7 +78,7 @@ const schemaOrg = JSON.stringify({
         <script
           is:inline
           defer
-          src="https://cloud.umami.is/script.js"
+          src={import.meta.env.PUBLIC_UMAMI_SRC ?? "https://cloud.umami.is/script.js"}
           data-website-id={umamiId}
         />
       )

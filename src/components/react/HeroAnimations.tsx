@@ -88,7 +88,7 @@ export function HeroCharacter() {
       transition={{ duration: 0.75, delay: 0.25, ease }}
     >
       <motion.img
-        src="/images/hero_character.png"
+        src={`${import.meta.env.BASE_URL}images/hero_character.png`}
         alt=""
         width="1536"
         height="864"

@@ -4,7 +4,8 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://byrdronin.com",
+  site: "https://taglieri.me",
+  base: "/byrd-ronin/",
 
   vite: {
     plugins: [tailwindcss()],
