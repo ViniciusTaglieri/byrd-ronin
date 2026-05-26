@@ -21,6 +21,12 @@ export function FinalCTAClient() {
     <motion.section
       ref={ref}
       className="relative border-t border-bamboo/15 py-20"
+      style={{
+        backgroundImage: [
+          "repeating-linear-gradient(0deg, rgba(107,143,94,0.07) 0px, rgba(107,143,94,0.07) 1px, transparent 1px, transparent 40px)",
+          "repeating-linear-gradient(90deg, rgba(107,143,94,0.07) 0px, rgba(107,143,94,0.07) 1px, transparent 1px, transparent 40px)",
+        ].join(", "),
+      }}
     >
       <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
         <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
