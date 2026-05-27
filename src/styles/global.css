@@ -4,6 +4,21 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+html {
+  overflow-x: clip;
+  /* Garante que o overscroll (rubber-band iOS) mostre a cor do app */
+  background-color: #050505;
+}
+
+body {
+  overflow-x: clip;
+  /* Respeita as safe areas em modo standalone/fullscreen */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
 @keyframes accordion-down {
   from {
     height: 0;
