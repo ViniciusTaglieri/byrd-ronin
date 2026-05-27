@@ -104,25 +104,49 @@ function FeatureCarousel() {
   }
 
   return (
-    <div ref={containerRef} className="overflow-hidden">
-      <motion.div
-        className="flex"
-        drag="x"
-        style={{ x }}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.08}
-        onDragEnd={handleDragEnd}
-        whileTap={{ cursor: "grabbing" }}
-      >
-        {features.map((f) => (
-          <div key={f.title} className="w-full shrink-0">
-            <FeatureCard {...f} />
-          </div>
-        ))}
-      </motion.div>
+    <div className="flex flex-col gap-5">
+      {/* Carousel track + side arrows */}
+      <div className="flex items-center gap-3">
+        <button
+          aria-label="Item anterior"
+          onClick={() => snapTo(active - 1)}
+          disabled={active === 0}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo disabled:opacity-25 disabled:cursor-default"
+        >
+          ←
+        </button>
 
+        <div ref={containerRef} className="flex-1 overflow-hidden">
+          <motion.div
+            className="flex"
+            drag="x"
+            style={{ x }}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.08}
+            onDragEnd={handleDragEnd}
+            whileTap={{ cursor: "grabbing" }}
+          >
+            {features.map((f) => (
+              <div key={f.title} className="w-full shrink-0">
+                <FeatureCard {...f} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <button
+          aria-label="Próximo item"
+          onClick={() => snapTo(active + 1)}
+          disabled={active === features.length - 1}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo disabled:opacity-25 disabled:cursor-default"
+        >
+          →
+        </button>
+      </div>
+
+      {/* Dots */}
       <div
-        className="flex justify-center gap-2.5 mt-6"
+        className="flex justify-center gap-2.5"
         role="tablist"
         aria-label="Feature navigation"
       >

@@ -124,11 +124,12 @@ export function NavbarClient() {
 
           {/* Col 3: CTA (desktop only) + hamburger (tablet/mobile only) */}
           <div className="flex items-center gap-3 justify-self-end">
-            <SteamButtonAnimated
-              label="JOGAR AGORA"
-              event="steam_cta_navbar_click"
-              className="hidden lg:flex"
-            />
+            <div className="hidden lg:flex">
+              <SteamButtonAnimated
+                label="JOGAR AGORA"
+                event="steam_cta_navbar_click"
+              />
+            </div>
 
             <button
               className="flex lg:hidden items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-sm text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
