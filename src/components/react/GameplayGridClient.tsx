@@ -33,7 +33,7 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   const videoCol = (
     <motion.div
-      className="relative overflow-hidden rounded-xl phablet:order-last"
+      className="relative overflow-hidden rounded-xl order-last md:order-0"
       variants={clipVariants}
       style={{
         aspectRatio: VIDEO_RATIO,
@@ -69,7 +69,7 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   const textCol = (
     <motion.div
-      className="relative flex flex-col gap-4 phablet:order-first"
+      className="relative flex flex-col gap-4 order-first md:order-0"
       variants={isEven ? textVariants : textVariantsRight}
     >
       <p className="relative font-display text-xs uppercase tracking-widest text-bamboo/90">
@@ -92,8 +92,8 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   return (
     <motion.div
-      className={`relative grid phablet:grid-cols-1 gap-12 items-center ${
-        isEven ? "grid-cols-gameplay-even" : "grid-cols-gameplay-odd"
+      className={`relative grid grid-cols-1 gap-12 items-center ${
+        isEven ? "md:grid-cols-gameplay-even" : "md:grid-cols-gameplay-odd"
       }`}
       initial="hidden"
       whileInView="visible"

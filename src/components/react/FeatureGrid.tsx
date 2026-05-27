@@ -153,7 +153,7 @@ export function FeatureGrid() {
     <>
       {/* Desktop grid — oculto no phablet */}
       <motion.div
-        className="grid grid-cols-3 gap-6 phablet:hidden"
+        className="hidden md:grid md:grid-cols-3 md:gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -165,7 +165,7 @@ export function FeatureGrid() {
       </motion.div>
 
       {/* Mobile carousel — oculto no desktop */}
-      <div className="hidden phablet:block">
+      <div className="block md:hidden">
         <FeatureCarousel />
       </div>
     </>

@@ -3,10 +3,14 @@ export default {
   theme: {
     extend: {
       screens: {
+        // Max-width — overrides para telas pequenas (mobile-only)
         mobile:  { max: "640px" },
         phablet: { max: "768px" },
         tablet:  { max: "980px" },
-        wide:    { min: "1200px" },
+        // Min-width — mobile-first (layout progressivo)
+        // sm: "640px" e md: "768px" já existem no padrão Tailwind
+        lg:   "980px",    // sobrescreve padrão 1024px para nosso breakpoint desktop
+        wide: "1200px",   // desktop largo
       },
       width: {
         "container-page":  "min(1160px, calc(100% - 40px))",

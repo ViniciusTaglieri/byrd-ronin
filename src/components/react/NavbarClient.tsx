@@ -77,7 +77,7 @@ export function NavbarClient() {
           <div className="flex items-center">
             {/* Desktop: nav links right-aligned */}
             <nav
-              className="w-full flex items-center justify-end tablet:hidden"
+              className="w-full hidden lg:flex items-center justify-end"
               aria-label="Main navigation"
             >
               {NAV_LINKS.map(({ href, label }, i) => {
@@ -113,7 +113,7 @@ export function NavbarClient() {
             </nav>
 
             {/* Tablet/Mobile: CTA centered */}
-            <div className="w-full hidden tablet:flex justify-center">
+            <div className="w-full flex lg:hidden justify-center">
               <SteamButtonAnimated
                 label="JOGAR AGORA"
                 event="steam_cta_navbar_click"
@@ -127,11 +127,11 @@ export function NavbarClient() {
             <SteamButtonAnimated
               label="JOGAR AGORA"
               event="steam_cta_navbar_click"
-              className="tablet:hidden"
+              className="hidden lg:flex"
             />
 
             <button
-              className="hidden tablet:flex items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-sm text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
+              className="flex lg:hidden items-center justify-center w-11 h-11 p-2 border-2 border-white/20 rounded-sm text-white bg-transparent cursor-pointer transition-colors duration-150 hover:border-bamboo hover:bg-bamboo/10"
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
