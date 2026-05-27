@@ -22,12 +22,12 @@ export function FinalCTAClient() {
       ref={ref}
       className="relative border-t border-bamboo/15 py-20"
     >
-      <div className="w-[min(1200px,calc(100%-48px))] mx-auto">
-        <div className="relative overflow-hidden rounded min-h-120 max-[768px]:min-h-140">
+      <div className="w-cta-section mx-auto">
+        <div className="relative overflow-hidden rounded min-h-120 phablet:min-h-140">
           {/* Background image with parallax */}
           <motion.div
             aria-hidden="true"
-            className="absolute bg-cover bg-center"
+            className="absolute bg-cover bg-center phablet:bg-left"
             style={{
               backgroundImage: `url('${import.meta.env.BASE_URL}images/final_cta_background.png')`,
               top: -32,
@@ -40,7 +40,7 @@ export function FinalCTAClient() {
 
           {/* Desktop gradient: transparent left → dark right */}
           <div
-            className="absolute inset-0 max-[768px]:hidden"
+            className="absolute inset-0 phablet:hidden"
             style={{
               background: `linear-gradient(to right, transparent 20%, ${BG_75} 52%, ${BG_96} 100%)`,
             }}
@@ -48,7 +48,7 @@ export function FinalCTAClient() {
           />
           {/* Mobile gradient: transparent top → dark bottom */}
           <div
-            className="absolute inset-0 hidden max-[768px]:block"
+            className="absolute inset-0 hidden phablet:block"
             style={{
               background: `linear-gradient(to bottom, ${BG_25} 0%, ${BG_90} 55%)`,
             }}
@@ -56,12 +56,12 @@ export function FinalCTAClient() {
           />
 
           {/* Content row */}
-          <div className="relative z-10 flex items-center min-h-120 max-[768px]:min-h-140">
+          <div className="relative z-10 flex items-center min-h-120 phablet:min-h-140">
             {/* Spacer — expõe a imagem na esquerda */}
-            <div className="flex-1 max-[768px]:hidden" />
+            <div className="flex-1 phablet:hidden" />
 
             {/* Coluna de conteúdo */}
-            <div className="w-[48%] flex flex-col gap-6 px-12 py-16 max-[768px]:w-full max-[768px]:px-6 max-[768px]:py-10">
+            <div className="w-cta-col flex flex-col gap-6 px-12 py-16 phablet:w-full phablet:px-6 phablet:py-10">
               <motion.p
                 className="text-blue-light font-display text-sm uppercase tracking-widest"
                 initial={{ opacity: 0, y: 20 }}

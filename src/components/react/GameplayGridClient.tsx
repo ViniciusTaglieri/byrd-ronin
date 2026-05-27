@@ -33,14 +33,13 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   const videoCol = (
     <motion.div
-      className="relative overflow-hidden rounded-xl"
+      className="relative overflow-hidden rounded-xl phablet:order-last"
       variants={clipVariants}
       style={{
         aspectRatio: VIDEO_RATIO,
         boxShadow: "8px 8px 0 rgba(107,143,94,0.15)",
       }}
     >
-      {/* HUD badge overlay */}
       <div className="absolute top-3 left-3 z-10 font-display text-3xs tracking-ui-wide uppercase bg-black/60 text-bamboo px-2.5 py-1 rounded backdrop-blur-sm">
         {number} — {clip.eyebrow}
       </div>
@@ -61,7 +60,6 @@ function ClipRow({ clip, index }: ClipRowProps) {
         transition={{ duration: 0.4, ease }}
       />
 
-      {/* Bottom gradient */}
       <div
         className="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-black/50 to-transparent pointer-events-none"
         aria-hidden="true"
@@ -71,20 +69,17 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   const textCol = (
     <motion.div
-      className="relative flex flex-col gap-4"
+      className="relative flex flex-col gap-4 phablet:order-first"
       variants={isEven ? textVariants : textVariantsRight}
     >
-      {/* Eyebrow */}
       <p className="relative font-display text-xs uppercase tracking-widest text-bamboo/90">
         {clip.eyebrow}
       </p>
 
-      {/* Title */}
-      <h3 className="relative font-display text-[clamp(1.8rem,3vw,2.8rem)] text-white leading-tight">
+      <h3 className="relative font-display text-section-md text-white leading-tight">
         {clip.title}
       </h3>
 
-      {/* Description */}
       <div className="relative flex flex-col gap-3">
         {clip.description.split("\n\n").map((para, i) => (
           <p key={i} className="text-muted text-sm leading-relaxed">
@@ -97,7 +92,9 @@ function ClipRow({ clip, index }: ClipRowProps) {
 
   return (
     <motion.div
-      className={`relative grid max-[768px]:grid-cols-1 gap-12 items-center ${isEven ? "grid-cols-[3fr_5fr]" : "grid-cols-[5fr_3fr]"}`}
+      className={`relative grid phablet:grid-cols-1 gap-12 items-center ${
+        isEven ? "grid-cols-gameplay-even" : "grid-cols-gameplay-odd"
+      }`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
