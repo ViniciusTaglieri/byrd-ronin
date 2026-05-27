@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "text-white bg-linear-to-b from-scarlet to-red shadow-[0_8px_0_#870707,0_18px_36px_rgba(242,19,19,0.32)]",
+          "text-white bg-linear-to-b from-scarlet to-red shadow-steam-btn",
       },
       size: {
         md: "min-h-12 px-5 py-3 text-lg",

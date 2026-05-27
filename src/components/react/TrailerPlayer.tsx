@@ -19,7 +19,7 @@ export function TrailerPlayer() {
       transition={{ duration: 0.6, delay: 0.15, ease }}
     >
       <motion.div
-        className="relative w-full overflow-hidden border border-bamboo/35 rounded bg-black shadow-[4px_4px_0_rgba(191,181,44,0.25),0_32px_80px_rgba(0,0,0,0.48)]"
+        className="relative w-full overflow-hidden border border-bamboo/35 rounded bg-black shadow-video"
         whileHover={{ scale: 1.008 }}
         transition={{ duration: 0.25 }}
       >

@@ -5,7 +5,7 @@
 <section class="relative py-20 border-t border-bamboo/10 overflow-hidden">
   <!-- Ghost kanjis — esquerda -->
   <div
-    class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 left-[-0.5vw] flex-col gap-1 font-display text-[clamp(3rem,4.5vw,5rem)] text-white/3 leading-none hidden min-[1200px]:flex"
+    class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 left-[-0.5vw] flex-col gap-1 font-display text-deco-kanji text-white/3 leading-none hidden wide:flex"
     aria-hidden="true"
   >
     <span>心</span>
@@ -24,13 +24,12 @@
   <div class="w-container-narrow mx-auto text-center relative">
     <!-- Aspas decorativas abertura -->
     <span
-      class="absolute -top-4 left-0 font-display leading-none text-bamboo/20 select-none pointer-events-none"
-      style="font-size: clamp(5rem, 14vw, 9rem); line-height: 1;"
+      class="absolute -top-4 left-0 font-display leading-none text-bamboo/20 select-none pointer-events-none text-deco-quote"
       aria-hidden="true">"</span
     >
 
-    <!-- Linha decorativa superior -->
-    <div class="flex items-center gap-4 mb-10 justify-center">
+    <!-- Linha decorativa superior — mobile:mt-8 cria espaço abaixo das aspas -->
+    <div class="flex items-center gap-4 mb-10 justify-center mobile:mt-8">
       <div class="h-px w-12 bg-bamboo/30"></div>
       <span
         class="font-display text-sm tracking-ui-hero uppercase text-bamboo/50"
@@ -41,7 +40,7 @@
 
     <blockquote class="relative z-10">
       <p
-        class="font-display text-[clamp(1.6rem,4vw,3rem)] text-white leading-[1.15] tracking-tight"
+        class="font-display text-quote text-white tracking-tight"
       >
         Mesmo ao falhar,<br />
         você volta mais forte —<br />
@@ -51,8 +50,7 @@
 
     <!-- Aspas decorativas fechamento -->
     <span
-      class="absolute -bottom-10 right-0 font-display leading-none text-bamboo/20 select-none pointer-events-none"
-      style="font-size: clamp(5rem, 14vw, 9rem); line-height: 1;"
+      class="absolute -bottom-10 right-0 font-display leading-none text-bamboo/20 select-none pointer-events-none text-deco-quote"
       aria-hidden="true">"</span
     >
 

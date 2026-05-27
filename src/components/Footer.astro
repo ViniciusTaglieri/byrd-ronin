@@ -12,7 +12,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@RDBsStudios";
 <footer class="border-t border-bamboo/20 bg-black/80 py-12">
   <div class="w-container-page mx-auto">
     <div
-      class="grid grid-cols-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 gap-10 items-start"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10 items-start px-4 md:px-0"
     >
       <!-- Col 1: Identity -->
       <div class="flex flex-col gap-4 items-center justify-center">
@@ -32,7 +32,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@RDBsStudios";
 
       <!-- Col 2: Site Map -->
       <nav
-        class="flex flex-col gap-1 max-[980px]:mt-2"
+        class="flex flex-col gap-1 tablet:mt-2 mobile:items-center mobile:text-center"
         aria-label="Footer navigation"
       >
         <p
@@ -61,7 +61,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@RDBsStudios";
       </nav>
 
       <!-- Col 3: Studio & Social -->
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 mobile:items-center">
         <p
           class="text-2xs font-display tracking-ui-label uppercase text-bamboo/50 mb-2"
         >
@@ -168,7 +168,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@RDBsStudios";
   <!-- Copyright -->
   <div class="border-t border-bamboo/10 mt-10 pt-6">
     <div
-      class="w-container-page mx-auto flex items-center justify-center max-[640px]:flex-col max-[640px]:gap-2"
+      class="w-container-page mx-auto flex items-center justify-center mobile:flex-col mobile:gap-2"
     >
       <p class="m-0 text-2xs text-muted/35 font-body">
         © {new Date().getFullYear()}

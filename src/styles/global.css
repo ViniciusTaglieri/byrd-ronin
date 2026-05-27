@@ -27,3 +27,15 @@
 @utility animate-accordion-up {
   animation: accordion-up 0.22s ease-in;
 }
+
+@utility text-shadow-hero {
+  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.74);
+}
+
+@utility text-shadow-section {
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
+}
+
+@utility text-shadow-404 {
+  text-shadow: 6px 6px 0 rgba(0, 0, 0, 0.7), 0 0 80px rgba(255, 59, 46, 0.25);
+}

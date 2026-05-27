@@ -39,7 +39,7 @@ export function HeroCopy() {
 
       <motion.h1
         variants={itemVariants}
-        className="font-display text-[clamp(54px,7vw,96px)] max-[640px]:text-[clamp(46px,18vw,68px)] leading-tighter max-w-205 [text-shadow:5px_5px_0_rgba(0,0,0,0.74)]"
+        className="font-display text-hero mobile:text-hero-mobile max-w-205 text-shadow-hero"
       >
         Slice Through <em className="text-scarlet italic">Chaos.</em> Become the{" "}
         <em className="text-scarlet italic">Ronin.</em>
@@ -61,10 +61,10 @@ export function HeroCopy() {
           label="JOGAR AGORA"
           variant="primary"
           event="steam_cta_hero_click"
-          className="max-[640px]:w-full"
+          className="mobile:w-full"
         />
         <motion.a
-          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/30 rounded-md text-white bg-white/5 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 max-[640px]:w-full max-[640px]:justify-center"
+          className="inline-flex min-h-12 items-center justify-center gap-2.5 px-5 py-3 border-2 border-white/30 rounded-md text-white bg-white/5 font-display text-lg font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 hover:-translate-y-0.5 mobile:w-full mobile:justify-center"
           href="#trailer"
           data-event="trailer_play_click"
           whileHover={{ scale: 1.03, borderColor: "rgba(73,194,242,0.7)" }}
@@ -81,7 +81,7 @@ export function HeroCopy() {
 export function HeroCharacter() {
   return (
     <motion.div
-      className="relative min-h-130 max-[980px]:min-h-90 max-[640px]:min-h-65"
+      className="relative min-h-130 tablet:min-h-90 mobile:min-h-65"
       aria-hidden="true"
       initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
@@ -92,7 +92,7 @@ export function HeroCharacter() {
         alt=""
         width="1536"
         height="864"
-        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_36px_48px_rgba(0,0,0,0.5)] max-[640px]:opacity-35 z-10"
+        className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-character z-10"
         animate={{ y: [0, -14, 0] }}
         transition={{
           duration: 3.2,

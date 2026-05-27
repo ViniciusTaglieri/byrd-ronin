@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue, type PanInfo } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 import { ease } from "../../lib/motion";
 
 const features = [
@@ -18,11 +19,6 @@ const features = [
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
   },
 ] as const;
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
-};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -85,18 +81,154 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
   );
 }
 
+function FeatureCarousel() {
+  const TOTAL = features.length;
+  // Slide order: [clone-of-last, ...real items, clone-of-first]
+  const slides = [features[TOTAL - 1], ...features, features[0]];
+
+  // Start at index 1 (first real item)
+  const [current, setCurrent] = useState(1);
+  const x = useMotionValue(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animating = useRef(false);
+
+  // Position x at the first real item after mount (index 1)
+  useLayoutEffect(() => {
+    const w = containerRef.current?.offsetWidth ?? 0;
+    if (w > 0) x.set(-(1 * w));
+  }, []);
+
+  function getWidth() {
+    return containerRef.current?.offsetWidth ?? 320;
+  }
+
+  function goTo(index: number) {
+    if (animating.current) return;
+    animating.current = true;
+    const w = getWidth();
+
+    animate(x, -(index * w), {
+      duration: 0.35,
+      ease,
+      onComplete: () => {
+        // Silently jump from clone to the real item
+        if (index === 0) {
+          x.set(-(TOTAL * w));
+          setCurrent(TOTAL);
+        } else if (index === TOTAL + 1) {
+          x.set(-w);
+          setCurrent(1);
+        } else {
+          setCurrent(index);
+        }
+        animating.current = false;
+      },
+    });
+  }
+
+  function handleDragEnd(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
+    const threshold = getWidth() * 0.25;
+    if (info.offset.x < -threshold) goTo(current + 1);
+    else if (info.offset.x > threshold) goTo(current - 1);
+    else {
+      // snap back without the animation guard
+      animate(x, -(current * getWidth()), { duration: 0.25, ease });
+    }
+  }
+
+  // Dot index is 0-based (maps clones back to real items)
+  const dotActive =
+    current === 0 ? TOTAL - 1 :
+    current === TOTAL + 1 ? 0 :
+    current - 1;
+
+  return (
+    <div className="flex flex-col gap-5">
+      {/* Carousel track + side arrows */}
+      <div className="flex items-center gap-3">
+        <button
+          aria-label="Item anterior"
+          onClick={() => goTo(current - 1)}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo"
+        >
+          ←
+        </button>
+
+        <div ref={containerRef} className="flex-1 overflow-hidden">
+          <motion.div
+            className="flex"
+            drag="x"
+            style={{ x }}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.08}
+            onDragEnd={handleDragEnd}
+            whileTap={{ cursor: "grabbing" }}
+          >
+            {slides.map((f, i) => (
+              <div key={`${f.title}-${i}`} className="w-full shrink-0">
+                <FeatureCard {...f} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <button
+          aria-label="Próximo item"
+          onClick={() => goTo(current + 1)}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo"
+        >
+          →
+        </button>
+      </div>
+
+      {/* Dots */}
+      <div
+        className="flex justify-center gap-2.5"
+        role="tablist"
+        aria-label="Feature navigation"
+      >
+        {features.map((f, i) => (
+          <button
+            key={f.title}
+            role="tab"
+            aria-selected={i === dotActive}
+            aria-label={f.title}
+            onClick={() => goTo(i + 1)}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+              i === dotActive ? "bg-bamboo" : "bg-bamboo/30"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
+};
+
 export function FeatureGrid() {
   return (
-    <motion.div
-      className="grid grid-cols-3 max-[768px]:grid-cols-1 gap-6"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-    >
-      {features.map((f) => (
-        <FeatureCard key={f.title} {...f} />
-      ))}
-    </motion.div>
+    <>
+      {/* Desktop grid — oculto no phablet */}
+      <motion.div
+        className="hidden md:grid md:grid-cols-3 md:gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {features.map((f) => (
+          <FeatureCard key={f.title} {...f} />
+        ))}
+      </motion.div>
+
+      {/* Mobile carousel — oculto no desktop */}
+      <div className="block md:hidden">
+        <FeatureCarousel />
+      </div>
+    </>
   );
 }
