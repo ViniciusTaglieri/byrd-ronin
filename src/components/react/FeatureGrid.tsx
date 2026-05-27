@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue, type PanInfo } from "framer-motion";
+import { useRef, useState } from "react";
 import { ease } from "../../lib/motion";
 
 const features = [
@@ -18,11 +19,6 @@ const features = [
     text: "Corte bambus, esquive da pressão e mantenha o momentum enquanto a tela vira caos controlado.",
   },
 ] as const;
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
-};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -85,18 +81,93 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
   );
 }
 
+function FeatureCarousel() {
+  const [active, setActive] = useState(0);
+  const x = useMotionValue(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  function getWidth() {
+    return containerRef.current?.offsetWidth ?? 320;
+  }
+
+  function snapTo(index: number) {
+    const clamped = Math.max(0, Math.min(features.length - 1, index));
+    animate(x, -(clamped * getWidth()), { duration: 0.35, ease });
+    setActive(clamped);
+  }
+
+  function handleDragEnd(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
+    const threshold = getWidth() * 0.25;
+    if (info.offset.x < -threshold && active < features.length - 1) snapTo(active + 1);
+    else if (info.offset.x > threshold && active > 0) snapTo(active - 1);
+    else snapTo(active);
+  }
+
+  return (
+    <div ref={containerRef} className="overflow-hidden">
+      <motion.div
+        className="flex"
+        drag="x"
+        style={{ x }}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.08}
+        onDragEnd={handleDragEnd}
+        whileTap={{ cursor: "grabbing" }}
+      >
+        {features.map((f) => (
+          <div key={f.title} className="w-full shrink-0">
+            <FeatureCard {...f} />
+          </div>
+        ))}
+      </motion.div>
+
+      <div
+        className="flex justify-center gap-2.5 mt-6"
+        role="tablist"
+        aria-label="Feature navigation"
+      >
+        {features.map((f, i) => (
+          <button
+            key={f.title}
+            role="tab"
+            aria-selected={i === active}
+            aria-label={f.title}
+            onClick={() => snapTo(i)}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+              i === active ? "bg-bamboo" : "bg-bamboo/30"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
+};
+
 export function FeatureGrid() {
   return (
-    <motion.div
-      className="grid grid-cols-3 max-[768px]:grid-cols-1 gap-6"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-    >
-      {features.map((f) => (
-        <FeatureCard key={f.title} {...f} />
-      ))}
-    </motion.div>
+    <>
+      {/* Desktop grid — oculto no phablet */}
+      <motion.div
+        className="grid grid-cols-3 gap-6 phablet:hidden"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {features.map((f) => (
+          <FeatureCard key={f.title} {...f} />
+        ))}
+      </motion.div>
+
+      {/* Mobile carousel — oculto no desktop */}
+      <div className="hidden phablet:block">
+        <FeatureCarousel />
+      </div>
+    </>
   );
 }
