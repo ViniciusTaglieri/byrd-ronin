@@ -20,14 +20,14 @@ import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
     />
 
     <!-- Logo header -->
-    <header class="relative z-10 px-8 py-6 max-[640px]:px-5">
+    <header class="relative z-10 px-8 py-6 mobile:px-5">
       <a href={import.meta.env.BASE_URL} aria-label="Byrd Ronin — home">
         <img
           src={`${import.meta.env.BASE_URL}logos/logo_byrdronin.png`}
           alt="Byrd Ronin"
           width="192"
           height="108"
-          class="w-28 max-[640px]:w-20 h-auto"
+          class="w-28 mobile:w-20 h-auto"
         />
       </a>
     </header>
@@ -43,14 +43,13 @@ import { SteamButtonAnimated } from "../components/react/SteamButtonAnimated";
 
       <!-- 404 -->
       <h1
-        class="font-display text-scarlet leading-none select-none"
-        style="font-size: clamp(96px, 20vw, 200px); text-shadow: 6px 6px 0 rgba(0,0,0,0.7), 0 0 80px rgba(255,59,46,0.25);"
+        class="font-display text-scarlet leading-none select-none text-display-404 text-shadow-404"
       >
         404
       </h1>
 
       <!-- Mensagem -->
-      <p class="font-display text-white text-xl max-[640px]:text-lg">
+      <p class="font-display text-white text-xl mobile:text-lg">
         Você caiu no caos errado.
       </p>
       <p class="text-muted text-sm leading-relaxed max-w-xs">
