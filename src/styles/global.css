@@ -1,0 +1,29 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/pixelify-sans/600.css";
+@import "@fontsource/pixelify-sans/700.css";
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.25s ease-out;
+}
+@utility animate-accordion-up {
+  animation: accordion-up 0.22s ease-in;
+}

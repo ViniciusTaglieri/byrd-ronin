@@ -1,0 +1,179 @@
+---
+import { GAME } from "../consts";
+import { SteamButtonAnimated } from "./react/SteamButtonAnimated";
+
+const STEAM_DEVELOPER_URL =
+  "https://store.steampowered.com/search/?developer=RDB%27s+Studio";
+const ITCHIO_URL = "https://rdbs-studio.itch.io/";
+const INSTAGRAM_URL = "https://www.instagram.com/birdyronin/";
+const YOUTUBE_URL = "https://www.youtube.com/@BirdyRonin";
+---
+
+<footer class="border-t border-bamboo/20 bg-black/80 py-12">
+  <div class="w-container-page mx-auto">
+    <div
+      class="grid grid-cols-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 gap-10 items-start"
+    >
+      <!-- Col 1: Identity -->
+      <div class="flex flex-col gap-4 items-center justify-center">
+        <img
+          src={`${import.meta.env.BASE_URL}logos/logo_byrdronin.png`}
+          alt="Byrd Ronin"
+          class="w-full max-w-48 h-auto"
+          loading="lazy"
+        />
+        <img
+          src={`${import.meta.env.BASE_URL}logos/logo_rdbstudios.png`}
+          alt="RDB's Studio"
+          class="w-full max-w-40 h-auto"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Col 2: Site Map -->
+      <nav
+        class="flex flex-col gap-1 max-[980px]:mt-2"
+        aria-label="Footer navigation"
+      >
+        <p
+          class="text-2xs font-display tracking-ui-label uppercase text-bamboo/50 mb-2"
+        >
+          Navegação
+        </p>
+        {
+          (
+            [
+              ["#top", "Início"],
+              ["#trailer", "Trailer"],
+              ["#features", "Features"],
+              ["#gameplay", "Gameplay"],
+            ] as const
+          ).map(([href, label]) => (
+            <a
+              href={href}
+              class="group flex items-center gap-2 py-1 text-muted font-display text-base tracking-ui-tight hover:text-bamboo transition-colors duration-200"
+            >
+              <span class="w-3 h-px bg-muted/30 group-hover:bg-bamboo/60 group-hover:w-5 transition-all duration-200 inline-block" />
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Col 3: Studio & Social -->
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-2xs font-display tracking-ui-label uppercase text-bamboo/50 mb-2"
+        >
+          Redes
+        </p>
+        <!-- Instagram -->
+        <a
+          href={INSTAGRAM_URL}
+          class="py-1 inline-flex items-center gap-3 text-muted font-display text-base tracking-ui-tight hover:text-bamboo"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}icons/instagram_icon.svg`}
+            width="20"
+            height="20"
+            alt=""
+            aria-hidden="true"
+            class="w-5 h-5 object-contain shrink-0"
+          />
+          <span class="font-display text-sm tracking-wide">Instagram</span>
+        </a>
+
+        <!-- YouTube -->
+        <a
+          href={YOUTUBE_URL}
+          class="py-1 inline-flex items-center gap-3 text-muted font-display text-base tracking-ui-tight hover:text-bamboo"
+          aria-label="YouTube"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}icons/youtube_icon.svg`}
+            width="20"
+            height="20"
+            alt=""
+            aria-hidden="true"
+            class="w-5 h-5 object-contain shrink-0"
+          />
+          <span class="font-display text-sm tracking-wide">YouTube</span>
+        </a>
+
+        <!-- Steam Developer -->
+        <a
+          href={STEAM_DEVELOPER_URL}
+          class="py-1 inline-flex items-center gap-3 text-muted font-display text-base tracking-ui-tight hover:text-bamboo"
+          aria-label="Steam — Página do desenvolvedor"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}icons/steam_icon.svg`}
+            width="20"
+            height="20"
+            alt=""
+            aria-hidden="true"
+            class="w-5 h-5 object-contain shrink-0"
+          />
+          <span class="font-display text-sm tracking-wide">Steam</span>
+        </a>
+
+        <!-- itch.io -->
+        <a
+          href={ITCHIO_URL}
+          class="py-1 inline-flex items-center gap-3 text-muted font-display text-base tracking-ui-tight hover:text-bamboo"
+          aria-label="itch.io"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}icons/itchio_icon.svg`}
+            width="20"
+            height="20"
+            alt=""
+            aria-hidden="true"
+            class="w-5 h-5 object-contain shrink-0"
+          />
+          <span class="font-display text-sm tracking-wide">itch.io</span>
+        </a>
+      </div>
+
+      <!-- Col 4: CTA -->
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <p
+            class="text-2xs font-display tracking-ui-label uppercase text-bamboo/50"
+          >
+            Jogar
+          </p>
+          <p class="text-muted/75 text-base leading-snug font-body">
+            Comece sua jornada como o pássaro Ronin. Disponível agora na Steam
+          </p>
+        </div>
+        <SteamButtonAnimated
+          label="JOGAR AGORA"
+          event="steam_cta_footer_click"
+          client:visible
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="border-t border-bamboo/10 mt-10 pt-6">
+    <div
+      class="w-container-page mx-auto flex items-center justify-center max-[640px]:flex-col max-[640px]:gap-2"
+    >
+      <p class="m-0 text-2xs text-muted/35 font-body">
+        © {new Date().getFullYear()}
+        {GAME.title} · {GAME.developer}. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

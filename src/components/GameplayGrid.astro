@@ -1,0 +1,20 @@
+---
+import { AnimatedSectionHeader } from "./react/AnimatedSectionHeader";
+import { GameplayGridClient } from "./react/GameplayGridClient";
+---
+
+<section
+  id="gameplay"
+  class="relative py-20"
+  style="background-image: repeating-linear-gradient(45deg, rgba(107,143,94,0.05) 0px, rgba(107,143,94,0.05) 1px, transparent 1px, transparent 6px);"
+>
+  <div class="w-container-page mx-auto relative z-10">
+    <AnimatedSectionHeader
+      eyebrow="Veja a Ação"
+      title="Corte. Avance. Repita."
+      align="center"
+      client:visible
+    />
+    <GameplayGridClient client:visible />
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import FeaturesSection from "../components/FeaturesSection.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import Footer from "../components/Footer.astro";
+import GameplayGrid from "../components/GameplayGrid.astro";
+import HeroSection from "../components/HeroSection.astro";
+import Navbar from "../components/Navbar.astro";
+import { FAQSection } from "../components/react/FAQSection";
+import RoninQuote from "../components/RoninQuote.astro";
+import SteamWidget from "../components/SteamWidget.astro";
+import TrailerSection from "../components/TrailerSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Navbar />
+  <main>
+    <div class="relative">
+      <HeroSection />
+      <SteamWidget />
+    </div>
+    <TrailerSection />
+    <FeaturesSection />
+    <GameplayGrid />
+    <RoninQuote />
+    <FinalCTA />
+    <FAQSection client:visible />
+  </main>
+  <Footer />
+</BaseLayout>
