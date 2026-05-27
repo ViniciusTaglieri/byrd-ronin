@@ -5,7 +5,7 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
 <section id="trailer" class="relative overflow-hidden pt-36 pb-20">
   <!-- Kanji decorativos -->
   <div
-    class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 right-[-0.5vw] flex flex-col gap-1 font-display text-[clamp(3rem,4.5vw,5rem)] text-white/2.5 leading-none"
+    class="absolute select-none pointer-events-none top-1/2 -translate-y-1/2 right-[-0.5vw] flex flex-col gap-1 font-display text-deco-kanji text-white/2.5 leading-none"
     aria-hidden="true"
   >
     <span>忍</span>
@@ -18,7 +18,7 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
 
   <!-- Coordenadas HUD -->
   <div
-    class="absolute bottom-6 right-6 font-display text-3xs text-bamboo/20 tracking-ui-hint pointer-events-none select-none hidden min-[1200px]:flex flex-col items-end gap-0.5"
+    class="absolute bottom-6 right-6 font-display text-3xs text-bamboo/20 tracking-ui-hint pointer-events-none select-none hidden wide:flex flex-col items-end gap-0.5"
     aria-hidden="true"
   >
     <span>座標</span>
@@ -27,24 +27,24 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
 
   <div class="relative z-10 w-container-page mx-auto">
     <div
-      class="grid grid-cols-[4fr_7fr] max-[980px]:grid-cols-1 gap-14 max-[980px]:gap-10 items-center"
+      class="grid grid-cols-trailer tablet:grid-cols-1 gap-14 tablet:gap-10 items-center"
     >
-      <!-- Coluna de texto -->
-      <div class="flex flex-col gap-5 max-[980px]:order-2">
+      <!-- Coluna de texto — primeiro no HTML = primeiro no mobile -->
+      <div class="flex flex-col gap-5">
         <p
           class="font-display text-xs uppercase tracking-ui-caption text-bamboo/75"
         >
           Assista ao Trailer
         </p>
         <h2
-          class="font-display text-[clamp(2.8rem,5vw,4.5rem)] text-white leading-tighter [text-shadow:3px_3px_0_rgba(0,0,0,0.6)]"
+          class="font-display text-section-xl text-white text-shadow-section"
         >
           Veja o ritmo<br />
           da lâmina<br />
           <em class="text-bamboo not-italic">em ação.</em>
         </h2>
         <p
-          class="text-muted text-lg leading-relaxed max-w-xs max-[980px]:max-w-none"
+          class="text-muted text-lg leading-relaxed max-w-xs tablet:max-w-none"
         >
           Cortes rápidos, pressão constante e upgrades que mudam tudo a cada
           rodada. Cada run é uma nova chance de dominar o caos.
@@ -61,8 +61,8 @@ import { TrailerPlayer } from "./react/TrailerPlayer";
         </a>
       </div>
 
-      <!-- Coluna do vídeo -->
-      <div class="max-[980px]:order-1">
+      <!-- Coluna do vídeo — segundo no HTML = segundo no mobile -->
+      <div>
         <TrailerPlayer client:visible />
       </div>
     </div>
