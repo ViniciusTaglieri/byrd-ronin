@@ -1,5 +1,5 @@
 import { animate, motion, useMotionValue, type PanInfo } from "framer-motion";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { ease } from "../../lib/motion";
 
 const features = [
@@ -82,26 +82,65 @@ function FeatureCard({ icon, title, text }: (typeof features)[number]) {
 }
 
 function FeatureCarousel() {
-  const [active, setActive] = useState(0);
+  const TOTAL = features.length;
+  // Slide order: [clone-of-last, ...real items, clone-of-first]
+  const slides = [features[TOTAL - 1], ...features, features[0]];
+
+  // Start at index 1 (first real item)
+  const [current, setCurrent] = useState(1);
   const x = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const animating = useRef(false);
+
+  // Position x at the first real item after mount (index 1)
+  useLayoutEffect(() => {
+    const w = containerRef.current?.offsetWidth ?? 0;
+    if (w > 0) x.set(-(1 * w));
+  }, []);
 
   function getWidth() {
     return containerRef.current?.offsetWidth ?? 320;
   }
 
-  function snapTo(index: number) {
-    const clamped = Math.max(0, Math.min(features.length - 1, index));
-    animate(x, -(clamped * getWidth()), { duration: 0.35, ease });
-    setActive(clamped);
+  function goTo(index: number) {
+    if (animating.current) return;
+    animating.current = true;
+    const w = getWidth();
+
+    animate(x, -(index * w), {
+      duration: 0.35,
+      ease,
+      onComplete: () => {
+        // Silently jump from clone to the real item
+        if (index === 0) {
+          x.set(-(TOTAL * w));
+          setCurrent(TOTAL);
+        } else if (index === TOTAL + 1) {
+          x.set(-w);
+          setCurrent(1);
+        } else {
+          setCurrent(index);
+        }
+        animating.current = false;
+      },
+    });
   }
 
   function handleDragEnd(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
     const threshold = getWidth() * 0.25;
-    if (info.offset.x < -threshold && active < features.length - 1) snapTo(active + 1);
-    else if (info.offset.x > threshold && active > 0) snapTo(active - 1);
-    else snapTo(active);
+    if (info.offset.x < -threshold) goTo(current + 1);
+    else if (info.offset.x > threshold) goTo(current - 1);
+    else {
+      // snap back without the animation guard
+      animate(x, -(current * getWidth()), { duration: 0.25, ease });
+    }
   }
+
+  // Dot index is 0-based (maps clones back to real items)
+  const dotActive =
+    current === 0 ? TOTAL - 1 :
+    current === TOTAL + 1 ? 0 :
+    current - 1;
 
   return (
     <div className="flex flex-col gap-5">
@@ -109,9 +148,8 @@ function FeatureCarousel() {
       <div className="flex items-center gap-3">
         <button
           aria-label="Item anterior"
-          onClick={() => snapTo(active - 1)}
-          disabled={active === 0}
-          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo disabled:opacity-25 disabled:cursor-default"
+          onClick={() => goTo(current - 1)}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo"
         >
           ←
         </button>
@@ -126,8 +164,8 @@ function FeatureCarousel() {
             onDragEnd={handleDragEnd}
             whileTap={{ cursor: "grabbing" }}
           >
-            {features.map((f) => (
-              <div key={f.title} className="w-full shrink-0">
+            {slides.map((f, i) => (
+              <div key={`${f.title}-${i}`} className="w-full shrink-0">
                 <FeatureCard {...f} />
               </div>
             ))}
@@ -136,9 +174,8 @@ function FeatureCarousel() {
 
         <button
           aria-label="Próximo item"
-          onClick={() => snapTo(active + 1)}
-          disabled={active === features.length - 1}
-          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo disabled:opacity-25 disabled:cursor-default"
+          onClick={() => goTo(current + 1)}
+          className="shrink-0 flex items-center justify-center w-9 h-9 border border-bamboo/30 rounded-sm text-bamboo/60 transition-colors duration-150 hover:border-bamboo hover:text-bamboo"
         >
           →
         </button>
@@ -154,11 +191,11 @@ function FeatureCarousel() {
           <button
             key={f.title}
             role="tab"
-            aria-selected={i === active}
+            aria-selected={i === dotActive}
             aria-label={f.title}
-            onClick={() => snapTo(i)}
+            onClick={() => goTo(i + 1)}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              i === active ? "bg-bamboo" : "bg-bamboo/30"
+              i === dotActive ? "bg-bamboo" : "bg-bamboo/30"
             }`}
           />
         ))}
