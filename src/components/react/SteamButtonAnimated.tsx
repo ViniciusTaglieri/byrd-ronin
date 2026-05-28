@@ -4,7 +4,7 @@ import { STEAM_URL } from "../../consts";
 import { SteamIcon } from "./SteamIcon";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2.5 border-2 border-transparent rounded-md font-display font-bold leading-none uppercase transition-[transform,box-shadow,background] duration-150 relative overflow-hidden",
+  "inline-flex items-center justify-center gap-2.5 border-2 border-transparent rounded-md font-display font-bold leading-none uppercase whitespace-nowrap transition-[transform,box-shadow,background] duration-150 relative overflow-hidden",
   {
     variants: {
       variant: {

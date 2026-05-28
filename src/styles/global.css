@@ -4,6 +4,19 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+:root {
+  /* Safe-area offsets para elementos fixed (navbar, menus) */
+  --sat: env(safe-area-inset-top, 0px);
+  --nav-top: calc(var(--sat) + 14px);    /* mt-3.5 = 14px */
+  --menu-top: calc(var(--sat) + 88px);   /* top-22 = 88px */
+}
+
+@media (max-width: 640px) {
+  :root {
+    --menu-top: calc(var(--sat) + 80px); /* mobile:top-20 = 80px */
+  }
+}
+
 html {
   overflow-x: clip;
   /* Garante que o overscroll (rubber-band iOS) mostre a cor do app */

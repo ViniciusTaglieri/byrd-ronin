@@ -47,10 +47,12 @@ export function NavbarClient() {
   return (
     <>
       <motion.header
-        className="fixed z-40 top-0 left-1/2 -translate-x-1/2 w-navbar mt-3.5 rounded overflow-hidden border border-bamboo/20"
+        className="fixed z-40 left-1/2 -translate-x-1/2 w-navbar rounded overflow-hidden border border-bamboo/20"
         style={{
+          top: "var(--nav-top)",
           background: scrolled ? "rgba(5,5,5,0.97)" : "rgba(5,5,5,0.86)",
           backdropFilter: "blur(18px)",
+          WebkitBackdropFilter: "blur(18px)",
           boxShadow: scrolled
             ? "0 4px 28px rgba(0,0,0,0.55), 0 1px 0 rgba(107,143,94,0.15)"
             : "0 8px 36px rgba(0,0,0,0.35)",
@@ -164,7 +166,8 @@ export function NavbarClient() {
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-            className="fixed top-22 mobile:top-20 left-1/2 -translate-x-1/2 z-menu flex flex-col gap-1 w-navbar p-4 border border-bamboo/25 rounded bg-black shadow-xl"
+            className="fixed left-1/2 -translate-x-1/2 z-menu flex flex-col gap-1 w-navbar p-4 border border-bamboo/25 rounded bg-black shadow-xl"
+            style={{ top: "var(--menu-top)" }}
             role="navigation"
             aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -12 }}
