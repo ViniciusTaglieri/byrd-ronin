@@ -1,15 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ease } from "../../lib/motion";
 
-export function TrailerPlayer() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+const YOUTUBE_ID = "Dl2vowH1bf4";
+const EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
 
-  function handlePlay() {
-    videoRef.current?.play();
-    setPlaying(true);
-  }
+export function TrailerPlayer() {
+  const [playing, setPlaying] = useState(false);
 
   return (
     <motion.div
@@ -20,30 +17,37 @@ export function TrailerPlayer() {
     >
       <motion.div
         className="relative w-full overflow-hidden border border-bamboo/35 rounded bg-black shadow-video"
-        whileHover={{ scale: 1.008 }}
+        whileHover={!playing ? { scale: 1.008 } : {}}
         transition={{ duration: 0.25 }}
+        style={{ aspectRatio: "16/9" }}
       >
-        <video
-          ref={videoRef}
-          src={`${import.meta.env.BASE_URL}videos/trailer.mp4`}
-          poster={`${import.meta.env.BASE_URL}images/og_image.png`}
-          preload="none"
-          playsInline
-          controls
-          style={{
-            width: "100%",
-            aspectRatio: "16/9",
-            objectFit: "cover",
-            display: "block",
-            filter: "saturate(1.1) brightness(0.92)",
-          }}
-        />
+        {playing ? (
+          <iframe
+            src={EMBED_URL}
+            title="Byrd Ronin — Trailer"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+          />
+        ) : (
+          <img
+            src={`${import.meta.env.BASE_URL}images/og_image.png`}
+            alt="Byrd Ronin trailer"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              filter: "saturate(1.1) brightness(0.92)",
+            }}
+          />
+        )}
 
         <AnimatePresence>
           {!playing && (
             <motion.button
               className="absolute inset-0 flex items-center justify-center w-full cursor-pointer"
-              onClick={handlePlay}
+              onClick={() => setPlaying(true)}
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
               aria-label="Reproduzir trailer"
@@ -52,10 +56,7 @@ export function TrailerPlayer() {
 
               <motion.div
                 className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/60 bg-white/10 backdrop-blur-sm"
-                whileHover={{
-                  scale: 1.12,
-                  backgroundColor: "rgba(255,255,255,0.22)",
-                }}
+                whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
                 transition={{ duration: 0.18 }}
               >
                 <svg
