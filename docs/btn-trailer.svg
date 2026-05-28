@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64">
+  <!-- Ghost button -->
+  <rect x="12" y="8" width="236" height="48" rx="6" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.28" stroke-width="2"/>
+  <!-- Play triangle -->
+  <polygon points="48,26 48,46 62,36" fill="white" fill-opacity="0.85"/>
+  <text x="70" y="32" font-family="'Courier New',Courier,monospace" font-size="12" font-weight="bold" fill="white" letter-spacing="1.8" dominant-baseline="middle">ASSISTIR TRAILER</text>
+</svg>
